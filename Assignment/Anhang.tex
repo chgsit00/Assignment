@@ -1,0 +1,765 @@
+\subsection{Point class listing}
+\label{subsec: point-test-listing}
+\begin{lstlisting}
+package workshop;
+
+import java.awt.geom.AffineTransform;
+import java.util.Locale;
+import java.util.Objects;
+
+public class Point {
+	private double x;
+	private double y;
+	
+	public Point() {
+		this.x = 0.0;
+		this.y = 0.0;
+	}
+	
+	public Point(double x, double y) {
+		assert (!Double.isNaN(x) && !Double.isNaN(y));
+		this.x = x;
+		this.y = y;
+	}
+	
+	public double getX() {
+		return x;
+	}
+	
+	public void setX(double x) {
+		assert (!Double.isNaN(x));
+		this.x = x;
+	}
+	
+	public double getY() {
+		return y;
+	}
+	
+	public void setY(double y) {
+		assert (!Double.isNaN(y));
+		this.y = y;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		// Easiest case
+		if (o == this) {
+			return true;
+		}
+		// if the given object isn't a point, there is no need for further
+		// operations
+		if (o instanceof Point) {
+			Point p = (Point) o;
+			// Make use of the hashCode method
+			if (p.hashCode() == this.hashCode()) {
+				return true;
+			}
+			return (p.x == this.x && p.y == this.y);
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		// Hash should represent the point's coordinates
+		// So two points with the same coordinates should generate the same
+		// hash-value
+		return Objects.hash(this.x, this.y);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("( ");
+		stringBuilder.append(String.format(Locale.ROOT, "%+2.4E", this.x));
+		stringBuilder.append(", ");
+		stringBuilder.append(String.format(Locale.ROOT, "%+2.4E", this.y));
+		stringBuilder.append(" )");
+		return stringBuilder.toString();
+	}
+	
+	public double norm() {
+		// Pythagoras
+		return Math.sqrt(this.x * this.x + this.y * this.y);
+	}
+	
+	public void rotate(double theta) throws AngleOutOfRangeException {
+		// theta must be an number
+		if (Double.isNaN(theta) || theta < -180.0 || theta > 180.0) {
+			throw new AngleOutOfRangeException();
+		}
+		double[] pt = {this.x, this.y};
+		AffineTransform.getRotateInstance(Math.toRadians(theta), 0, 0)
+		.transform(pt, 0, pt, 0, 1);
+		double newX = pt[0];
+		double newY = pt[1];
+		this.x = newX;
+		this.y = newY;
+	}
+	
+	public void displace(Point p) {
+		if(p == null){
+			return;
+		}
+		this.x += p.x;
+		this.y += p.y;
+	}
+}
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+\subsection{LineTest class listing}
+\label{subsec: line-class-listing}
+
+\begin{lstlisting}
+package workshop;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class LineTest {
+	
+	//-----------------------------------------------
+	// generates some points for different tests
+	//-----------------------------------------------
+	
+	private Point[] getPointsExampleData() {
+		Point[] points = new Point[3];
+		points[0] = new Point(2.4, -2.4);
+		points[1] = new Point(-0.2, 8.9);
+		points[2] = new Point(-4.4, -2.4);
+		return points;
+	}
+	
+	//-----------------------------------------------
+	// Constructor Tests
+	//-----------------------------------------------
+	
+	@Test
+	public void testDefaultConstructor() {
+		Line line = new Line();
+		assertTrue(line.length() == 0);
+	}
+	
+	@Test
+	public void testAlternateConstructor() {
+		Point[] points = getPointsExampleData();
+		Line line = new Line(points);
+		assertEquals(3, line.length());
+	}
+	
+	@Test
+	public void testAlternateConstructorWithOneNullObject() {
+		Point[] points = getPointsExampleData();
+		points[0] = null;
+		Line line = new Line(points);
+		assertEquals(2, line.length());
+	}
+	
+	@Test
+	public void testConstructorWithNull() {
+		Line line = new Line(null);
+		assertTrue(line.length() == 0);
+	}
+	
+	//-----------------------------------------------
+	// length() and add() Tests
+	//-----------------------------------------------
+	
+	@Test
+	public void testAdd() {
+		Line line = new Line();
+		line.add(new Point());
+		assertEquals(1, line.length());
+	}
+	
+	@Test
+	public void testAddWithNull() {
+		Line line = new Line();
+		line.add(null);
+		assertEquals(0, line.length());
+	}
+	
+	public void testLength() {
+		Point[] points = getPointsExampleData();
+		Line line = new Line(points);
+		assertEquals(3, line.length());
+	}
+	
+	public void testLengthAfterAdd() {
+		Point[] points = getPointsExampleData();
+		Line line = new Line(points);
+		assertEquals(3, line.length());
+		line.add(new Point(2.3543, 8.345));
+		assertEquals(4, line.length());
+	}
+	
+	//-----------------------------------------------
+	// equals() Tests
+	//-----------------------------------------------
+	
+	@Test
+	public void testEqualsWithExactlySameLineObject() {
+		Point[] points = getPointsExampleData();
+		Line line = new Line(points);
+		assertTrue(line.equals(line));
+	}
+	
+	@Test
+	public void testEqualsWithTwoLineObjectsWithSamePoints() {
+		Point[] points = getPointsExampleData();
+		Line line = new Line(points);
+		Line line2 = new Line(points);
+		assertTrue(line.equals(line2));
+	}
+	
+	@Test
+	public void testEqualsWithTwoLineObjectsWithSamePointsInDiffentOrder() {
+		Point[] points = getPointsExampleData();
+		Line line = new Line(points);
+		Point[] points2 = new Point[3];
+		points2[0] = new Point(2.4, -2.4);
+		points2[2] = new Point(-0.2, 8.9);
+		points2[1] = new Point(-4.4, -2.4);
+		Line line2 = new Line(points2);
+		assertTrue(line.equals(line2));
+	}
+	
+	@Test
+	public void testEqualsWithTwoLinesWithDifferentPoints() {
+		Point[] points = getPointsExampleData();
+		Line line = new Line(points);
+		Point[] points2 = new Point[3];
+		points2[0] = new Point(2.3, -1.4);
+		points2[2] = new Point(-0.2, 2.9);
+		points2[1] = new Point(-42.4, -2.4);
+		Line line2 = new Line(points2);
+		assertFalse(line.equals(line2));
+	}
+	
+	@Test
+	public void testEqualsWithFalseObject() {
+		Point[] points = getPointsExampleData();
+		Line line = new Line(points);
+		// comparing a Line object to a Point object should return false...
+		assertFalse(line.equals(new Point(3.9, 4.2)));
+	}
+	
+	@Test
+	public void testEqualsWithNull() {
+		Point[] points = getPointsExampleData();
+		Line line = new Line(points);
+		assertFalse(line.equals(null));
+	}
+	
+	//-----------------------------------------------
+	// hashCode() Tests
+	//-----------------------------------------------
+	
+	@Test
+	public void testHashCodeWithoutPoints() {
+		Line line = new Line();
+		Line line2 = new Line();
+		assertEquals(line.hashCode(), line2.hashCode());
+	}
+	
+	@Test
+	public void testHashCodeWithSamePoints() {
+		Line line = new Line(getPointsExampleData());
+		Line line2 = new Line(getPointsExampleData());
+		assertEquals(line.hashCode(), line2.hashCode());
+	}
+	
+	@Test
+	public void testHashCodeWithDifferentPoints() {
+		Point[] points = getPointsExampleData();
+		Line line = new Line(points);
+		Line line2 = new Line();
+		assertNotEquals(line.hashCode(), line2.hashCode());
+	}
+	
+	//-----------------------------------------------
+	// toString() Tests
+	//-----------------------------------------------
+	
+	@Test
+	public void testToString() {
+		Point[] points = new Point[3];
+		points[0] = new Point(0.00000021, 12345.1246);
+		points[1] = new Point(-0.2556785, 1.1246365);
+		points[2] = new Point(-235.25853467, -1.1246);
+		Line line = new Line(points);
+		String expectedOutout = "(( +2.1000E-07, +1.2345E+04 ),\n ( -2.5568E-01, +1.1246E+00 ),\n ( -2.3526E+02, -1.1246E+00 ))";
+		assertEquals(expectedOutout, line.toString());
+	}
+	
+	//-----------------------------------------------
+	// isValid() Tests
+	//-----------------------------------------------
+	
+	@Test
+	public void testIsValidWithZeroPoints() {
+		Line line = new Line();
+		assertFalse(line.isValid());
+	}
+	
+	@Test
+	public void testIsValidWithOnePoint() {
+		Line line = new Line();
+		line.add(new Point(2.1, 4.3));
+		assertFalse(line.isValid());
+	}
+	
+	@Test
+	public void testIsValidWithManyPoints() throws RegressionFailedException {
+		Point[] points = getPointsExampleData();
+		Line line = new Line(points);
+		assertTrue(line.isValid());
+	}
+	
+	@Test
+	public void testIsValidWithTwoPointsWithSameCoordinates() {
+		Point[] points = new Point[2];
+		points[0] = new Point(2.1, 2.1);
+		points[1] = new Point(2.1, 2.1);
+		Line line = new Line(points);
+		assertFalse(line.isValid());
+	}
+	
+	@Test
+	public void testIsValidWithTwoPointsWithSameXCoordinates() {
+		Point[] points = new Point[2];
+		points[0] = new Point(2.1, 23.34);
+		points[1] = new Point(2.1, 21.23);
+		Line line = new Line(points);
+		assertFalse(line.isValid());
+	}
+	//-----------------------------------------------
+	// Slope Tests
+	//-----------------------------------------------
+	
+	@Test
+	public void testSlopeWithTwoValidPoints() throws RegressionFailedException{
+		// very simple tests
+		Point[] points = new Point[2];
+		points[0] = new Point(0, 0);
+		points[1] = new Point(1, 1);
+		Line line = new Line(points);
+		double slope = line.slope();
+		assertEquals(1, slope, 0);
+	}
+	
+	@Test
+	public void testSlopeWithValidPoints() throws RegressionFailedException{
+		// more complex parameters
+		Point[] points = new Point[6];
+		points[0] = new Point(0.2, 0);
+		points[1] = new Point(1, 3.12);
+		points[2] = new Point(3.23, 1);
+		points[3] = new Point(-1.5, 1.3);
+		points[4] = new Point(4.9, 12.2);
+		points[5] = new Point(3.32, 2);
+		Line line = new Line(points);
+		double slope = line.slope();
+		assertEquals(1.2, slope, 0.03);
+	}
+	
+	@Test(expected = RegressionFailedException.class)
+		public void testSlopeWithSamePoints() throws RegressionFailedException{
+		Point[] points = new Point[2];
+		points[0] = new Point(0, 0);
+		points[1] = new Point(0, 0);
+		// these points have the same coordinates. 
+		// So the slope can't be calculated with these two.
+		Line line = new Line(points);
+		line.slope();
+	}
+	
+	//-----------------------------------------------
+	// Intercept Tests
+	//-----------------------------------------------
+	
+	@Test
+	public void testInterceptIWithValidPoints() throws RegressionFailedException{
+		Point[] points = new Point[2];
+		points[0] = new Point(0, 0);
+		points[1] = new Point(1, 1);
+		Line line = new Line(points);
+		double intercept = line.intercept();
+		assertEquals(0, intercept, 0);
+	}
+	
+	@Test(expected = RegressionFailedException.class)
+	public void testInterceptIWithInvalidPoints() throws RegressionFailedException{
+		Point[] points = new Point[2];
+		points[0] = new Point(0, 0);
+		points[1] = new Point(0, 1);
+		// with these points the line lies on the y-axis. therefore slope can't be calculated. 
+		// And without slope, there is no intercept.
+		Line line = new Line(points);
+		line.intercept();
+	}
+}
+\end{lstlisting}
+
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{LinearRegressionProgram class listing}
+\label{subsec: analyser-class-listing}
+
+\begin{lstlisting}
+package workshop;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class LinearRegressionProgram {
+	
+	// Files 
+	private static final String FILENAME_DATA_SHORT = "C:\\Users\\User\\Desktop\\TDD\\TDDAssignment\\TDD\\src\\main\\java\\workshop\\data_short.dat";
+	private static final String FILENAME_DATA_LONG = "C:\\Users\\User\\Desktop\\TDD\\TDDAssignment\\TDD\\src\\main\\java\\workshop\\data_long.dat";
+	private static final String FILENAME_READER_EXCEL = "ReaderData.xlsx"; 
+	private static final String FILENAME_ANALYZER_EXCEL = "AnalyzerData.xlsx"; 
+	
+	// Data to calculate
+	private static int inValidLineCount = 0;
+	private static int validLineCount = 0;
+	private static double averagePointsPerValidLine = 0;
+	private static double averageSlopeForValidLines = 0;
+	private static double averageInterceptForValidLines = 0;
+	private static List<Double> slopes = new ArrayList<Double>();
+	private static List<Double> interceptionsForY = new ArrayList<Double>();
+	private static double interceptsStandardDeviation = 0;
+	private static double slopesStandardDeviation = 0;
+	private static Map<Integer, List<Long>> analyzerDataForCalculations;
+	
+	// Times stopped in milliseconds
+	private static long overallTime;
+	private static long readTime;
+	private static long analyzeTime;
+	private static long printAndParseResultsTime;
+	
+	public static void main(String[] args) {
+		Date startOverallTimestamp = new Date();
+		analyseDatFile(FILENAME_DATA_LONG);
+		Date endOverallTimestamp = new Date();
+		overallTime = endOverallTimestamp.getTime() - startOverallTimestamp.getTime();
+		printTimes(FILENAME_DATA_LONG);
+	}
+	
+	private static void analyseDatFile(final String fileName) {
+		analyzerDataForCalculations = new HashMap<Integer, List<Long>>();
+		Date startReadTimestamp = new Date();
+		Collection<Line> linesFromFile = LineReader.readAllLinesFromFile(fileName);
+		Date endReadTimestamp = new Date();
+		readTime = endReadTimestamp.getTime() - startReadTimestamp.getTime();
+		Date startAnalyzeTimestamp = new Date();
+		calculateStatistics(linesFromFile);
+		Date endAnalyzeTimestamp = new Date();
+		analyzeTime = endAnalyzeTimestamp.getTime() - startAnalyzeTimestamp.getTime();
+		Date startPrintAndParseResultsTimestamp = new Date();
+		printStatistics(fileName);
+		Map<Integer, Long> normalizedReaderData = normalizeTimeData(LineReader.getAnalyzerData());
+		Map<Integer, Long> normalizedAnalyzerData = normalizeTimeData(analyzerDataForCalculations);
+		try {
+			ExcelWriter.writeExcelOutput(normalizedReaderData, FILENAME_READER_EXCEL);
+			ExcelWriter.writeExcelOutput(normalizedAnalyzerData, FILENAME_ANALYZER_EXCEL);
+		} catch (IOException e) {
+			System.err.println("Excel Creation failed !");
+			e.printStackTrace();
+		}
+		Date endPrintAndParseResultsTimestamp = new Date();
+		printAndParseResultsTime = endPrintAndParseResultsTimestamp.getTime() - startPrintAndParseResultsTimestamp.getTime();		
+	}
+	
+	// print-method for statistics outputs
+	private static void printStatistics(String fileName) {
+		System.out.println("\nStatistics for file: "+fileName);
+		System.out.println("Total number of valid lines: " + validLineCount);
+		System.out.println("Total number of invalid lines: " + inValidLineCount);
+		System.out.println("Average number of points per valid line: " + averagePointsPerValidLine);
+		System.out.println("Average Slope for Valid Lines: " + averageSlopeForValidLines);
+		System.out.println("with standard deviation: " + slopesStandardDeviation);
+		System.out.println("Average intercept for valid lines: " + averageInterceptForValidLines);
+		System.out.println("with standard deviation: " + interceptsStandardDeviation);
+	}
+	
+	// print-method for time outputs
+	private static void printTimes(String fileName) {
+		System.out.println("\n\nTimes stopped for file: "+fileName);
+		System.out.println("programm runtime in milliseconds: " + overallTime);
+		System.out.println("reading dat-files runtime in milliseconds: " + readTime);
+		System.out.println("analyzing data runtime in milliseconds: " + analyzeTime);
+		System.out.println("printing and parsing results runtime in milliseconds: " + printAndParseResultsTime);
+	}
+	
+	// analyses all lines for required data
+	private static void calculateStatistics(Collection<Line> linesFromFile) {
+		double slopeSum = 0.0;
+		double interceptSum = 0.0;
+		int pointSum = 0;
+		
+		for (Line line : linesFromFile) {
+			Date startLine = new Date();
+			if (line.isValid()) {
+				validLineCount++;
+				pointSum += line.length();
+				try {
+					double slope = line.slope();
+					slopeSum += slope;
+					slopes.add(slope);
+					double intercept = line.intercept();
+					interceptSum += intercept;
+					interceptionsForY.add(intercept);
+				} catch (RegressionFailedException e) {
+					e.printStackTrace();
+				}
+			} else {
+				inValidLineCount++;
+			}
+			Date endLine = new Date();
+			// Get the amount of time it took, to calculate statistics for a line.
+			long timeToReadLine = endLine.getTime() - startLine.getTime();
+			if (analyzerDataForCalculations.containsKey(line.length())) {
+				analyzerDataForCalculations.get(line.length()).add(timeToReadLine);
+			} else {
+				List<Long> timeList = new ArrayList<>();
+				timeList.add(timeToReadLine);
+				analyzerDataForCalculations.put(line.length(), timeList);
+			}
+		}
+		// Dividing by 0 destroys reality
+		if (validLineCount > 0) {
+			averagePointsPerValidLine = (double) pointSum / validLineCount;
+			averageSlopeForValidLines = (double) slopeSum / validLineCount;
+			averageInterceptForValidLines = (double) interceptSum / validLineCount;
+		}
+		slopesStandardDeviation = calculateDeviation(slopes);
+		interceptsStandardDeviation = calculateDeviation(interceptionsForY);
+	}
+	
+	// Calculates the mean for a List of double-values
+	private static double calculateMean(List<Double> list) {
+		return list.stream().mapToDouble(p -> p.doubleValue()).sum() / list.size();
+	}
+	
+	// Calculates the standard deviation for a list of double-values
+	private static double calculateDeviation(List<Double> list) {
+		double temp = 0;
+		for (Double double1 : list) {
+			temp += Math.pow((double1.doubleValue() - calculateMean(list)), 2);
+		}
+		return Math.sqrt(temp / list.size());
+	}
+	
+	// Gets the avarage for the time it took to process a line with a certain 
+	// amount of points from raw timestamp-data
+	private static Map<Integer, Long> normalizeTimeData(Map<Integer, List<Long>> data){
+		Map<Integer, Long> normalizedData = new HashMap<Integer, Long>();
+		for (Integer key : data.keySet()){
+			List<Long> stoppedTimes = data.get(key);
+			long avarage = 0;
+			long sum = 0;
+			for (Long time : stoppedTimes){
+				sum += time;
+			}
+			if(stoppedTimes.size() != 0){
+				avarage = (long) sum / stoppedTimes.size();
+			}
+			normalizedData.put(key, avarage);
+		}
+		return normalizedData;
+	}
+}
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+\subsection{Line Reader listing}
+\label{subsec: LineReader-listing}
+\begin{lstlisting}
+package workshop;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import uk.ac.brunel.ee.lineRead;
+import uk.ac.brunel.ee.UnreadException;
+import uk.ac.brunel.ee.RereadException;
+
+public class LineReader {
+	
+	private static Map<Integer, List<Long>> timeData = new HashMap<Integer, List<Long>>();
+	
+	
+	public static Map<Integer, List<Long>> getAnalyzerData() {
+	Map<Integer, List<Long>> analyzerDataCopy = timeData;
+	return analyzerDataCopy;
+	}
+	
+	/**
+	* @param fileName
+	*            the filename
+	*/
+	public static Collection<Line> readAllLinesFromFile(String fileName) {
+		// new Analysis
+		timeData = new HashMap<Integer, List<Long>>();
+		
+		List<Line> lines = new ArrayList<Line>();
+		
+		Date start = new Date();
+		
+		// Open the file and initialise
+		lineRead reader = new lineRead(fileName);
+		
+		// Loop over all the lines in the data set
+		while (reader.nextLine()) {
+			Date startLineTimeStamp = new Date();
+			Line line = new Line();
+			boolean np = true;
+			// Loop over all the points associated with the current line
+			while (np) {
+				try {
+					np = reader.nextPoint();
+				} catch (UnreadException UE) {
+					System.out.println(UE);
+					System.exit(0);
+				}
+				// If there is another point read it.
+				if (np) {
+					try {
+						double x = reader.getX();
+						double y = reader.getY();
+						Point point = new Point(x, y);
+						line.add(point);
+					} catch (RereadException RE) {
+						System.out.println(RE);
+						System.exit(0);
+					}
+				}
+			}
+			lines.add(line);
+			Date endLineTimeStamp = new Date();
+			// Get the duration it took, to read a line in milliseconds.
+			long timeToReadLine = endLineTimeStamp.getTime() - startLineTimeStamp.getTime();
+			if (timeData.containsKey(line.length())) {
+				timeData.get(line.length()).add(timeToReadLine);
+			} else {
+				List<Long> timeList = new ArrayList<>();
+				timeList.add(timeToReadLine);
+				timeData.put(line.length(), timeList);
+			}
+		}
+		// Sort out the summary of the run
+		Date end = new Date();
+		long begin = start.getTime();
+		long fin = end.getTime();
+		System.out.println("run time is " + (fin - begin) + " milliseconds");
+		return lines;
+	}
+}
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+\subsection{Excel Writer listing}
+\label{subsec: ExcelWriter-listing}
+\begin{lstlisting}
+package workshop;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class ExcelWriter {
+
+	static XSSFWorkbook workbook;
+
+	public void getList(List<Integer> numbersOfPoints, List<Long> stoppedTimes) {
+		Map<Integer, List<?>> hashmap = new HashMap<Integer, List<?>>();
+		hashmap.put(0, numbersOfPoints);
+		hashmap.put(1, stoppedTimes);
+		System.out.println("hashmap : " + hashmap);
+		Set<Integer> keyset = hashmap.keySet();
+		int rownum = 0;
+		int cellnum = 0;
+		XSSFSheet sheet = workbook.getSheetAt(0);
+		rownum = 0;
+		for (Integer key : keyset) {
+			List<?> nameList = hashmap.get(key);
+			for (Object s : nameList) {
+				XSSFRow row = sheet.getRow(rownum++);
+				Cell cell = row.getCell(cellnum);
+				if (null != cell) {
+					if (s instanceof Long) {
+						cell.setCellValue((Long) s);
+					}
+					if (s instanceof Integer) {
+						cell.setCellValue((Integer) s);
+					}
+				}
+			}
+			cellnum++;
+			rownum = 0;
+		}
+	}
+	
+	public static void writeExcelOutput(Map<Integer, Long> normalizedData, String FileName) throws IOException {
+		workbook = new XSSFWorkbook();
+		List<Integer> keys = new ArrayList<>();
+		List<Long> values = new ArrayList<>();
+		for (Integer key : normalizedData.keySet()) {
+			keys.add(key);
+			values.add(normalizedData.get(key));
+		}
+		ExcelWriter writer = new ExcelWriter();
+		FileOutputStream out = new FileOutputStream(new File(FileName));
+		XSSFSheet sheet = workbook.createSheet();
+		for (int i = 0; i < normalizedData.keySet().size(); i++) {
+			XSSFRow row = sheet.createRow(i);
+			for (int j = 0; j < 2; j++)
+				row.createCell(j);
+		}
+		workbook.write(out);
+		out.close();
+		InputStream inp = new FileInputStream(new File(FileName));
+		workbook = new XSSFWorkbook(inp);
+		writer.getList(keys, values);
+		out = new FileOutputStream(new File(FileName));
+		workbook.write(out);
+		out.close();
+		inp.close();
+	}
+}
+\end{lstlisting}
