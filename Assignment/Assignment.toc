@@ -6,74 +6,74 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {2}IP/ICMP analysis}{2}{chapter.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.1}Node configuration}{4}{section.2.1}
+\contentsline {section}{\numberline {2.1}Node configuration}{3}{section.2.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.2}Subnet internal IP Destination}{4}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.1}a) Basic PING command}{4}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.1}a) Basic PING command}{5}{subsection.2.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.2}b) PING command with large data package}{4}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.2}b) PING command with large data package}{8}{subsection.2.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.3}c) PING command with 'don't fragment' flag}{4}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.3}c) PING command with 'don't fragment' flag}{11}{subsection.2.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Subnet external IP Destination}{4}{section.2.3}
+\contentsline {section}{\numberline {2.3}Subnet external IP Destination}{11}{section.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.1}d) Basic PING command with destination in another subnet}{4}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.1}d) Basic PING command with destination in another subnet}{12}{subsection.2.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.2}e) PING command with reduced 'time to live'}{4}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.2}e) PING command with reduced 'time to live'}{16}{subsection.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.3}f) PING command with timestamps}{4}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.3}f) PING command with timestamps}{19}{subsection.2.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}ARP analysis}{4}{section.2.4}
+\contentsline {section}{\numberline {2.4}ARP analysis}{22}{section.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.1}a) Deleting the ARP cache}{4}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.1}a) Deleting the ARP cache}{22}{subsection.2.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.2}b) Shutting down one PC}{4}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.2}b) Shutting down one PC}{22}{subsection.2.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.3}c) Reconnect after Reboot}{4}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.3}c) Reconnect after Reboot}{22}{subsection.2.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.5}IP multicast addressing}{4}{section.2.5}
+\contentsline {section}{\numberline {2.5}IP multicast addressing}{22}{section.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}TCP analysis}{5}{chapter.3}
+\contentsline {chapter}{\numberline {3}TCP analysis}{23}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Traffic generator handling}{5}{section.3.1}
+\contentsline {section}{\numberline {3.1}Traffic generator handling}{23}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.1}Connection establishment}{5}{subsection.3.1.1}
+\contentsline {section}{\numberline {3.2}Simple TCP Communication}{23}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.2}Data transfer}{5}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.2.1}Connection establishment}{23}{subsection.3.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.3}Connection release}{5}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.2.2}Data transfer}{23}{subsection.3.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Simple TCP Communication}{5}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.3}Connection release}{23}{subsection.3.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}TCP flow control}{5}{section.3.3}
+\contentsline {section}{\numberline {3.3}TCP flow control}{23}{section.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}TCP transmission error recovery/abort}{5}{section.3.4}
+\contentsline {section}{\numberline {3.4}TCP transmission error recovery/abort}{23}{section.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}TCP protocol errors (synchronization errors)}{5}{section.3.5}
+\contentsline {section}{\numberline {3.5}TCP protocol errors (synchronization errors)}{23}{section.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}IPv6/ICMPv6 analysis}{6}{chapter.4}
+\contentsline {chapter}{\numberline {4}IPv6/ICMPv6 analysis}{24}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Node configuration}{6}{section.4.1}
+\contentsline {section}{\numberline {4.1}Node configuration}{24}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}IPv4 and IPv6 configuration}{6}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.1}IPv4 and IPv6 configuration}{24}{subsection.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}interfaces for IPv6}{6}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.2}interfaces for IPv6}{24}{subsection.4.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}PING commands}{6}{section.4.2}
+\contentsline {section}{\numberline {4.2}PING commands}{24}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.1}a) Basic ICMPv6 PING command}{6}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.1}a) Basic ICMPv6 PING command}{24}{subsection.4.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.2}b) ICMPv6 PING command with large data package}{6}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.2}b) ICMPv6 PING command with large data package}{24}{subsection.4.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.3}c) Rebooting PC}{6}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.3}c) Rebooting PC}{24}{subsection.4.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.4}d) Enforcing Neighbor discovery}{6}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.4}d) Enforcing Neighbor discovery}{24}{subsection.4.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.5}e) ICMPv6 PING command with destination in another subnet}{6}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.5}e) ICMPv6 PING command with destination in another subnet}{24}{subsection.4.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.6}f) PING to a remote tunnel end}{6}{subsection.4.2.6}
+\contentsline {subsection}{\numberline {4.2.6}f) PING to a remote tunnel end}{24}{subsection.4.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusion}{7}{chapter.5}
+\contentsline {chapter}{\numberline {5}Conclusion}{25}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Bibliography}{8}{chapter*.6}
+\contentsline {chapter}{\nonumberline Bibliography}{26}{chapter*.14}

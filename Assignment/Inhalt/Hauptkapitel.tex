@@ -1,7 +1,7 @@
 \lstset{language=Java, numbers=left, numberstyle=\tiny, stepnumber=2, numbersep=5pt}
 \chapter{Introduction}
 \label{intro}
-The following reports refers to the Computer network assignment and is structured into three parts. The first part's topic is an analysis of the network protocols ICMP and IP (both v4), while the seconds part covers the exercises related to TCP. The final chapter describes the exercises for the new versions of ICMP and IP (v6). These exercises were done together with my lab-partner Antonio Parotta.
+The following report refers to the Computer network assignment and is structured into three parts. The first part's topic is an analysis of the network protocols ICMP and IP (both v4), while the second part covers the exercises related to TCP. The final chapter describes the exercises for the new versions of ICMP and IP (v6). These exercises were done together with my lab-partner Antonio Parotta.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -19,7 +19,7 @@ In this first part of the laboratory the program Wireshark was used to capture a
 To understand how these protocols work and to be able to explain how they behave in different situations, having a look on the protocol's headers is necessary. \\\\
 The PING-commands generate packages consisting of different protocol headers and transferable data. Each Ping is transformed into an Ethernet frame containing the IP and ICMP headers. Table \ref{abstract-icmp-header} is an representation of the basic ICMP Header while Table \ref{icmp-echo-request-header} shows the header for the echo request/reply packages that can be observed via Wireshark when executing the PING-commands.
 
-\begin{table}[]
+\begin{table}[H]
 	\centering
 	\label{abstract-icmp-header}
 	\begin{tabular}{|c|c|c|c|c|}
@@ -32,7 +32,7 @@ The PING-commands generate packages consisting of different protocol headers and
 	\caption{ICMP header}
 \end{table}
 
-\begin{table}[]
+\begin{table}[H]
 	\centering
 	\label{icmp-echo-request-header}
 	\begin{tabular}{|c|c|c|c|c|}
@@ -49,7 +49,7 @@ The PING-commands generate packages consisting of different protocol headers and
 
 Table \ref{ipv4-header} shows the header for the Internet Protocol v4. Noteable here are the entered destination address as well as the source address of the sender. The Time to Live is also an important segment of the header, which will be significant later on for an specific PING-Command. IP provides the possibility to specify options for the transfered packet. This will also be used in one of the PING-Commands.
 
-\begin{table}[]
+\begin{table}[H]
 	\centering
 	\label{ipv4-header}
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
@@ -70,7 +70,7 @@ Table \ref{ethernet} shows the abstract Ethernet II frame. This frame contains t
 $ \text{MTU } = \text{ Payload } - \text{ IP Header } - \text{ ICMP Header }$\\
 $ 1500\text{ byte } - 20 \text{ byte } - 8 \text{ byte } = 1472 \text{ byte }$
 
-\begin{table}[]
+\begin{table}[H]
 	\centering
 	\label{ethernet}
 	\begin{tabular}{|l|l|l|l|l|l|}
@@ -84,15 +84,696 @@ $ 1500\text{ byte } - 20 \text{ byte } - 8 \text{ byte } = 1472 \text{ byte }$
 
 \section{Node configuration}
 
-\section{Subnet internal IP Destination}
-\subsection{a) Basic PING command}
-\subsection{b) PING command with large data package}
-\subsection{c) PING command with 'don't fragment' flag}
+Figure \ref{ip-config} shows the node configuration and settings for the computer used for the exercises in this workshop:
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width =0.7\textwidth]{ipConfig.PNG}
+	\caption{Node configuration for 134.108.8.37}
+	\label{ip-config}
+\end{figure}
+
+\section{Subnet internal IP Destination}
+In the first exercise we created traffic by using the PING-Command to send packets to another PC within the same subnet. Figure \ref{network-internal} shows the simplified architecture for this environment:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width =0.7\textwidth]{Network1.PNG}
+	\caption{Source and Destination PC connected with a switch in the network lab}
+	\label{network-internal}
+\end{figure}
+
+\subsection{a) Basic PING command}
+The first task was sending a basic ping from one PC to another within the same subnet and capturing the sent packets using Wireshark. The PING-Command was:
+\begin{center}
+	\textit{ping -n 1 -l 64 134.108.8.37}
+\end{center}
+Listing \ref{simple-ping} shows the Wireshark trace for the captured packets. For this simple PING command, two ICMP packet were captured. One ICMP echo request was send from the source PC to the Destination PC and after this the Destination PC answers with an ICMP echo reqly. Both packets contain the Ethernet II frame as well as the IP and ICMP headers as discussed in chapter \ref{ipv4}. Each packet has the source and destination address from the IP header as well as same sequence number. The total size of each packet is 106. It contains the source and target MAC-addresses from the Ethernet frame (both 6 byte), the type of the Ethernet frame (2 byte), the IP-header (20 byte), the ICMP-header (8 byte) and the transmitted data (64 byte).
+
+\begin{lstlisting}[caption={Wireshark trace for simple PING command},captionpos=b,label{simple-ping}]
+No.     Time           Source                Destination     Protocol   Length Info
+445 32.125568      134.108.8.36          134.108.8.37          ICMP     106    Echo (ping) request  id=0x0001, seq=25/6400, ttl=128 (reply in 448)
+
+Frame 445: 106 bytes on wire (848 bits), 106 bytes captured (848 bits) on interface 0
+	Interface id: 0 (\\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF})
+		Interface name: \\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF}
+	Encapsulation type: Ethernet (1)
+	Arrival Time: Nov 17, 2017 09:46:22.558509000 Mitteleuropäische Zeit
+	[Time shift for this packet: 0.000000000 seconds]
+	Epoch Time: 1510908382.558509000 seconds
+	[Time delta from previous captured frame: 0.000092000 seconds]
+	[Time delta from previous displayed frame: 0.000000000 seconds]
+	[Time since reference or first frame: 32.125568000 seconds]
+	Frame Number: 445
+	Frame Length: 106 bytes (848 bits)
+	Capture Length: 106 bytes (848 bits)
+	[Frame is marked: True]
+	[Frame is ignored: False]
+	[Protocols in frame: eth:ethertype:ip:icmp:data]
+	[Coloring Rule Name: ICMP]
+	[Coloring Rule String: icmp || icmpv6]
+Ethernet II, Src: Dell\_87:b7:aa (90:b1:1c:87:b7:aa), Dst: Dell\_88:97:76 (90:b1:1c:88:97:76)
+	Destination: Dell\_88:97:76 (90:b1:1c:88:97:76)
+		Address: Dell\_88:97:76 (90:b1:1c:88:97:76)
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Source: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+		Address: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 134.108.8.36, Dst: 134.108.8.37
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)
+		0000 00.. = Differentiated Services Codepoint: Default (0)
+		.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 92
+	Identification: 0x30fb (12539)
+	Flags: 0x00
+		0... .... = Reserved bit: Not set
+		.0.. .... = Don´t fragment: Not set
+		..0. .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 128
+	Protocol: ICMP (1)
+	Header checksum: 0xec84 [validation disabled]
+	[Header checksum status: Unverified]
+	Source: 134.108.8.36
+	Destination: 134.108.8.37
+	[Source GeoIP: Unknown]
+	[Destination GeoIP: Unknown]
+Internet Control Message Protocol
+	Type: 8 (Echo (ping) request)
+	Code: 0
+	Checksum: 0x856a [correct]
+	[Checksum Status: Good]
+	Identifier (BE): 1 (0x0001)
+	Identifier (LE): 256 (0x0100)
+	Sequence number (BE): 25 (0x0019)
+	Sequence number (LE): 6400 (0x1900)
+	[Response frame: 448]
+	Data (64 bytes)
+
+0000  61 62 63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 70   abcdefghijklmnop
+0010  71 72 73 74 75 76 77 61 62 63 64 65 66 67 68 69   qrstuvwabcdefghi
+0020  6a 6b 6c 6d 6e 6f 70 71 72 73 74 75 76 77 61 62   jklmnopqrstuvwab
+0030  63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 70 71 72   cdefghijklmnopqr
+	Data: 6162636465666768696a6b6c6d6e6f707172737475767761...
+	[Length: 64]
+
+No.     Time           Source                Destination           Protocol Length Info
+448 32.125797      134.108.8.37          134.108.8.36          ICMP     106    Echo (ping) reply    id=0x0001, seq=25/6400, ttl=128 (request in 445)
+
+Frame 448: 106 bytes on wire (848 bits), 106 bytes captured (848 bits) on interface 0
+	Interface id: 0 (\\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF})
+		Interface name: \\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF}
+	Encapsulation type: Ethernet (1)
+	Arrival Time: Nov 17, 2017 09:46:22.558738000 Mitteleuropäische Zeit
+	[Time shift for this packet: 0.000000000 seconds]
+	Epoch Time: 1510908382.558738000 seconds
+	[Time delta from previous captured frame: 0.000005000 seconds]
+	[Time delta from previous displayed frame: 0.000229000 seconds]
+	[Time since reference or first frame: 32.125797000 seconds]
+	Frame Number: 448
+	Frame Length: 106 bytes (848 bits)
+	Capture Length: 106 bytes (848 bits)
+	[Frame is marked: True]
+	[Frame is ignored: False]
+	[Protocols in frame: eth:ethertype:ip:icmp:data]
+	[Coloring Rule Name: ICMP]
+	[Coloring Rule String: icmp || icmpv6]
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+	Destination: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+		Address: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Source: Dell\_88:97:76 (90:b1:1c:88:97:76)
+		Address: Dell\_88:97:76 (90:b1:1c:88:97:76)
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)
+		0000 00.. = Differentiated Services Codepoint: Default (0)
+		.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 92
+	Identification: 0x3021 (12321)
+	Flags: 0x00
+		0... .... = Reserved bit: Not set
+		.0.. .... = Don´t fragment: Not set
+		..0. .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 128
+	Protocol: ICMP (1)
+	Header checksum: 0x0000 [validation disabled]
+	[Header checksum status: Unverified]
+	Source: 134.108.8.37
+	Destination: 134.108.8.36
+	[Source GeoIP: Unknown]
+	[Destination GeoIP: Unknown]
+Internet Control Message Protocol
+	Type: 0 (Echo (ping) reply)
+	Code: 0
+	Checksum: 0x8d6a [correct]
+	[Checksum Status: Good]
+	Identifier (BE): 1 (0x0001)
+	Identifier (LE): 256 (0x0100)
+	Sequence number (BE): 25 (0x0019)
+	Sequence number (LE): 6400 (0x1900)
+	[Request frame: 445]
+	[Response time: 0.229 ms]
+	Data (64 bytes)
+
+0000  61 62 63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 70   abcdefghijklmnop
+0010  71 72 73 74 75 76 77 61 62 63 64 65 66 67 68 69   qrstuvwabcdefghi
+0020  6a 6b 6c 6d 6e 6f 70 71 72 73 74 75 76 77 61 62   jklmnopqrstuvwab
+0030  63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 70 71 72   cdefghijklmnopqr
+	Data: 6162636465666768696a6b6c6d6e6f707172737475767761...
+	[Length: 64]
+\end{lstlisting}
+\subsection{b) PING command with large data package}
+For the second exercise we had to execute a PING-Command with a very large data package of 2000 byte. The PING-Command was:
+\begin{center}
+	\textit{ping -n 1 -l 2000 134.108.8.36}
+\end{center}
+Figure \ref{ping-l2000} shows the console output for this ping:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width =0.7\textwidth]{ping-l200.PNG}
+	\caption{Console output for PING-Command with 2000 bytes data}
+	\label{ping-l2000}
+\end{figure}
+It seems that the protocol ICMP does not have any problems with this as the console output shows no warning. IP however does have a problem with this large packet size. As the data exceeds the Maximum Transmission Unit, the packet must be fragmented and separated into two packets. The following listing is shortened, but shows the four packages sent between both lab-PCs:
+\\
+\begin{lstlisting}[caption={Wireshark trace for PING command with 2000 bytes data},captionpos=b,label{l2000-ping}]
+No.     Time        Source                Destination           Protocol Length DestPort Info                                                            Delta Time
+236 0.000000    134.108.8.37          134.108.8.36          ICMP     1514            Echo (ping) request  id=0x0001, seq=25/6400, ttl=128 (reply in 240) 0.000000
+	
+Frame 236: 1514 bytes on wire (12112 bits), 1514 bytes captured (12112 bits) on interface 0
+	Interface id: 0 (\\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF})
+	Interface name: \\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF}
+	Encapsulation type: Ethernet (1)
+	Arrival Time: Nov 17, 2017 09:58:38.374317000 Mitteleuropäische Zeit
+	[Time shift for this packet: 0.000000000 seconds]
+	Epoch Time: 1510909118.374317000 seconds
+	[Time delta from previous captured frame: 0.000024000 seconds]
+	[Time delta from previous displayed frame: 0.000000000 seconds]
+	[Time since reference or first frame: 36.388239000 seconds]
+	Frame Number: 236
+	Frame Length: 1514 bytes (12112 bits)
+	Capture Length: 1514 bytes (12112 bits)
+	[Frame is marked: True]
+	[Frame is ignored: False]
+	[Protocols in frame: eth:ethertype:ip:icmp:data]
+	[Coloring Rule Name: ICMP]
+	[Coloring Rule String: icmp || icmpv6]
+Ethernet II, Src: 90:b1:1c:88:97:76, Dst: 90:b1:1c:87:b7:aa
+	Destination: 90:b1:1c:87:b7:aa
+		Address: 90:b1:1c:87:b7:aa
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Source: 90:b1:1c:88:97:76
+		Address: 90:b1:1c:88:97:76
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)
+	0000 00.. = Differentiated Services Codepoint: Default (0)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 1500
+	Identification: 0x3e7e (15998)
+	Flags: 0x01 (More Fragments)
+		0... .... = Reserved bit: Not set
+		.0.. .... = Don´t fragment: Not set
+		..1. .... = More fragments: Set
+	Fragment offset: 0
+	Time to live: 128
+	Protocol: ICMP (1)
+	Header checksum: 0x0000 [validation disabled]
+	[Header checksum status: Unverified]
+	Source: 134.108.8.37
+	Destination: 134.108.8.36
+	[Source GeoIP: Unknown]
+	[Destination GeoIP: Unknown]
+Internet Control Message Protocol
+	Type: 8 (Echo (ping) request)
+	Code: 0
+	Checksum: 0x7b5e [unverified] [fragmented datagram]
+	[Checksum Status: Unverified]
+	Identifier (BE): 1 (0x0001)
+	Identifier (LE): 256 (0x0100)
+	Sequence number (BE): 25 (0x0019)
+	Sequence number (LE): 6400 (0x1900)
+	[Response frame: 240]
+	Data (1472 bytes)
+		
+No.     Time        Source                Destination           Protocol Length DestPort Info                                                            Delta Time
+237 0.000007    134.108.8.37          134.108.8.36          IPv4     562             Fragmented IP protocol (proto=ICMP 1, off=1480, ID=3e7e)        0.000007
+	
+No.     Time        Source                Destination           Protocol Length DestPort Info                                                            Delta Time
+240 0.000488    134.108.8.36          134.108.8.37          ICMP     1514            Echo (ping) reply    id=0x0001, seq=25/6400, ttl=128 (request in 236) 0.000488
+	
+No.     Time        Source                Destination           Protocol Length DestPort Info                                                            Delta Time
+241 0.000002    134.108.8.36          134.108.8.37          IPv4     562             Fragmented IP protocol (proto=ICMP 1, off=1480, ID=332d)        0.000002
+\end{lstlisting}
+
+It can be observed that the first packet occupies all 1514 bytes that can be sent in one ICMP packet. Subtracting the segments from the Ethernet frame (14 byte), the IP-header (20 byte) and the ICMP-header (8 byte), there is room for 1472 byte of raw data. The remaining 528 byte of data can't be transmitted in the same packet. So the data must be fragmented and sent inside another packet. As ICMP doesn't play a role in the fragmentation, it's header isn't needed anymore in the second packet. However the second packet contains the IP-header (20 byte) as it is the protocol that manages the fragmentation and transmission controlling. The segments for the Ethernet frame (14 byte) are also included, because without that there could not be any transmission at all. So summed up the second packet has a size of 562 byte.
+\subsection{c) PING command with 'don't fragment' flag}
+For this last exercise another PING with 2000 byte of data was executed. But this time the 'don't fragment' flag \textbf{-f} was set:
+\begin{center}
+	\textit{ping -n 1 -l 2000 134.108.8.36 -f}
+\end{center}
+This causes a problem, because as discussed in the previous chapter this large amount of data cannot be transmitted in one single packet. So IP needs to fragment it into two separate packets. But in this case it receives the 'don't fragment' command. This contradicts the functionality of IP and it throws and error that ICMP recognizes and displays a message in the console:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width =0.7\textwidth]{ping-dontfragment.PNG}
+	\caption{Console output for PING-Command with 2000 bytes data}
+	\label{ping-dontfragment}
+\end{figure} 
+There is no Wireshark trace for this exercise, because there were no packets sent to the destination PC.
 \section{Subnet external IP Destination}
+For this second part of the laboratory, we moved on to PING-commands where the destination address was located in another subnet. Both subnets were connected by a router that assigned a range of addresses to the computers inside each subnet. Each computer inside one of these subnets was connected to a switch that had a connection to the router and the router provided a host IP-address for both subnets. Figure \ref{two-subnets} shows all involved network node and their IP-addresses.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width =1.0\textwidth]{two-subnets.PNG}
+	\caption{Two subnets in the network lab}
+	\label{two-subnets}
+\end{figure} 
+
 \subsection{d) Basic PING command with destination in another subnet}
+For this exercise the following PING-Command was used:
+\begin{center}
+	\textit{ping -n 1 -i 2 -r 4 134.108.190.10}
+\end{center}
+The parameter \textbf{-r} activates the recoding of the route and sets the maximal number of records. \textbf{-i} indicates the 'Time to Live' in the IP-header (s. Chapter \ref{ipv4}) and is basically nothing more than a hop-count that decrements, when the packet passes a network node (PCs or Routers in this case). When 'Time to Live' reaches zero, the packet will be abandoned. Figure \ref{ping-subnet} shows the output of the console command:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width =0.7\textwidth]{ping-subnet.PNG}
+	\caption{PING Command with Destination in another subnet}
+	\label{ping-subnet}
+\end{figure} 
+
+The output shows the recorded route, the reply packet from the destination PC took trough the network. The sent packets are shown in the following listing:
+\\
+\begin{lstlisting}[caption={Wireshark trace for PING command in another subnet},captionpos=b,label{subnet-ping}]
+No.     Time        Source                Destination           Protocol Length DestPort Info                                                            Delta Time
+49 0.000000    134.108.8.37          134.108.190.10        ICMP     94              Echo (ping) request  id=0x0001, seq=37/9472, ttl=2 (reply in 50) 0.000000
+
+Frame 49: 94 bytes on wire (752 bits), 94 bytes captured (752 bits) on interface 0
+	Interface id: 0 (\\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF})
+		Interface name: \\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF}
+	Encapsulation type: Ethernet (1)
+	Arrival Time: Nov 17, 2017 10:21:22.503562000 Mitteleuropäische Zeit
+	[Time shift for this packet: 0.000000000 seconds]
+	Epoch Time: 1510910482.503562000 seconds
+	[Time delta from previous captured frame: 0.187068000 seconds]
+	[Time delta from previous displayed frame: 0.000000000 seconds]
+	[Time since reference or first frame: 2.480985000 seconds]
+	Frame Number: 49
+	Frame Length: 94 bytes (752 bits)
+	Capture Length: 94 bytes (752 bits)
+	[Frame is marked: True]
+	[Frame is ignored: False]
+	[Protocols in frame: eth:ethertype:ip:icmp:data]
+	[Coloring Rule Name: ICMP]
+	[Coloring Rule String: icmp || icmpv6]
+	Ethernet II, Src: 90:b1:1c:88:97:76, Dst: 00:23:04:52:1c:00
+	Destination: 00:23:04:52:1c:00
+		Address: 00:23:04:52:1c:00
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Source: 90:b1:1c:88:97:76
+		Address: 90:b1:1c:88:97:76
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.190.10
+	0100 .... = Version: 4
+	.... 1010 = Header Length: 40 bytes (10)
+	Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)
+	0000 00.. = Differentiated Services Codepoint: Default (0)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 80
+	Identification: 0x42d5 (17109)
+	Flags: 0x00
+		0... .... = Reserved bit: Not set
+		.0.. .... = Don´t fragment: Not set
+		..0. .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 2
+	[Expert Info (Note/Sequence): "Time To Live" only 2]
+	["Time To Live" only 2]
+	[Severity level: Note]
+	[Group: Sequence]
+	Protocol: ICMP (1)
+	Header checksum: 0x0000 [validation disabled]
+	[Header checksum status: Unverified]
+	Source: 134.108.8.37
+	Destination: 134.108.190.10
+	[Source GeoIP: Unknown]
+	[Destination GeoIP: Unknown]
+	Options: (20 bytes), Record Route
+		IP Option - Record Route (19 bytes)
+			Type: 7
+			0... .... = Copy on fragmentation: No
+			.00. .... = Class: Control (0)
+			...0 0111 = Number: Record route (7)
+			Length: 19
+			Pointer: 4
+			Empty Route: 0.0.0.0 <- (next)
+			Empty Route: 0.0.0.0
+			Empty Route: 0.0.0.0
+			Empty Route: 0.0.0.0
+		IP Option - End of Options List (EOL)
+			Type: 0
+			0... .... = Copy on fragmentation: No
+			.00. .... = Class: Control (0)
+			...0 0000 = Number: End of Option List (EOL) (0)
+Internet Control Message Protocol
+	Type: 8 (Echo (ping) request)
+	Code: 0
+	Checksum: 0x4d36 [correct]
+	[Checksum Status: Good]
+	Identifier (BE): 1 (0x0001)
+	Identifier (LE): 256 (0x0100)
+	Sequence number (BE): 37 (0x0025)
+	Sequence number (LE): 9472 (0x2500)
+	[Response frame: 50]
+	Data (32 bytes)
+
+	0000  61 62 63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 70   abcdefghijklmnop
+	0010  71 72 73 74 75 76 77 61 62 63 64 65 66 67 68 69   qrstuvwabcdefghi
+	Data: 6162636465666768696a6b6c6d6e6f707172737475767761...
+	Text: abcdefghijklmnopqrstuvwabcdefghi
+	[Length: 32]
+
+No.     Time        Source                Destination           Protocol Length DestPort Info                                                            Delta Time
+50 0.000692    134.108.190.10        134.108.8.37          ICMP     94              Echo (ping) reply    id=0x0001, seq=37/9472, ttl=63 (request in 49) 0.000692
+
+Frame 50: 94 bytes on wire (752 bits), 94 bytes captured (752 bits) on interface 0
+	Interface id: 0 (\\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF})
+		Interface name: \\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF}
+	Encapsulation type: Ethernet (1)
+	Arrival Time: Nov 17, 2017 10:21:22.504254000 Mitteleuropäische Zeit
+	[Time shift for this packet: 0.000000000 seconds]
+	Epoch Time: 1510910482.504254000 seconds
+	[Time delta from previous captured frame: 0.000692000 seconds]
+	[Time delta from previous displayed frame: 0.000692000 seconds]
+	[Time since reference or first frame: 2.481677000 seconds]
+	Frame Number: 50
+	Frame Length: 94 bytes (752 bits)
+	Capture Length: 94 bytes (752 bits)
+	[Frame is marked: True]
+	[Frame is ignored: False]
+	[Protocols in frame: eth:ethertype:ip:icmp:data]
+	[Coloring Rule Name: ICMP]
+	[Coloring Rule String: icmp || icmpv6]
+Ethernet II, Src: 00:23:04:52:1c:00, Dst: 90:b1:1c:88:97:76
+	Destination: 90:b1:1c:88:97:76
+		Address: 90:b1:1c:88:97:76
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Source: 00:23:04:52:1c:00
+		Address: 00:23:04:52:1c:00
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+		Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 134.108.190.10, Dst: 134.108.8.37
+	0100 .... = Version: 4
+	.... 1010 = Header Length: 40 bytes (10)
+	Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)
+	0000 00.. = Differentiated Services Codepoint: Default (0)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 80
+	Identification: 0x048f (1167)
+	Flags: 0x00
+		0... .... = Reserved bit: Not set
+		.0.. .... = Don´t fragment: Not set
+		..0. .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 63
+	Protocol: ICMP (1)
+	Header checksum: 0xafa3 [validation disabled]
+	[Header checksum status: Unverified]
+	Source: 134.108.190.10
+	Destination: 134.108.8.37
+	[Source GeoIP: Unknown]
+	[Destination GeoIP: Unknown]
+	Options: (20 bytes), Record Route
+		IP Option - Record Route (19 bytes)
+			Type: 7
+			0... .... = Copy on fragmentation: No
+			.00. .... = Class: Control (0)
+			...0 0111 = Number: Record route (7)
+			Length: 19
+			Pointer: 20
+			Recorded Route: 134.108.190.14
+			Recorded Route: 134.108.190.10
+			Recorded Route: 134.108.190.10
+			Recorded Route: 134.108.11.254
+		IP Option - End of Options List (EOL)
+			Type: 0
+			0... .... = Copy on fragmentation: No
+			.00. .... = Class: Control (0)
+			...0 0000 = Number: End of Option List (EOL) (0)
+Internet Control Message Protocol
+	Type: 0 (Echo (ping) reply)
+	Code: 0
+	Checksum: 0x5536 [correct]
+	[Checksum Status: Good]
+	Identifier (BE): 1 (0x0001)
+	Identifier (LE): 256 (0x0100)
+	Sequence number (BE): 37 (0x0025)
+	Sequence number (LE): 9472 (0x2500)
+	[Request frame: 49]
+	[Response time: 0.692 ms]
+	Data (32 bytes)
+
+0000  61 62 63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 70   abcdefghijklmnop
+0010  71 72 73 74 75 76 77 61 62 63 64 65 66 67 68 69   qrstuvwabcdefghi
+Data: 6162636465666768696a6b6c6d6e6f707172737475767761...
+Text: abcdefghijklmnopqrstuvwabcdefghi
+[Length: 32]
+\end{lstlisting}
 \subsection{e) PING command with reduced 'time to live'}
+In this exercise the 'Time to Live' was reduced to 1 in the PING-Command:
+\begin{center}
+	\textit{ping -n 1 -i 1 -r 4 134.108.190.10}
+\end{center}
+This causes a Time-To-Live-Exceeded error that was displayed in the console output:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width =0.8\textwidth]{ping-timetolive.PNG}
+	\caption{PING Command with reduced Time to Live}
+	\label{ping-timetolive}
+\end{figure} 
+As the 'Time to Live' is reduced to 1, it cannot reach the destination PC. When bypassing the router, the TTL is decreased to zero. So the router will drop the packet and send the Time-To-Live-Exceeded error back to the source, while the destination PC never receives any traffic. The only packet sent is from the source to the router. This can be seen in the following Wireshark trace:\\
+\begin{lstlisting}[caption={Wireshark trace for PING command with reduced TTL},captionpos=b,label{timetolive-ping}]
+No.     Time        Source                Destination           Protocol Length DestPort Info                                                            Delta Time
+37 0.000000    134.108.8.37          134.108.190.10        ICMP     94              Echo (ping) request  id=0x0001, seq=38/9728, ttl=1 (no response found!) 0.000000
+
+Frame 37: 94 bytes on wire (752 bits), 94 bytes captured (752 bits) on interface 0
+	Interface id: 0 (\\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF})
+		Interface name: \\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF}
+	Encapsulation type: Ethernet (1)
+	Arrival Time: Nov 17, 2017 10:23:18.619066000 Mitteleuropäische Zeit
+	[Time shift for this packet: 0.000000000 seconds]
+	Epoch Time: 1510910598.619066000 seconds
+	[Time delta from previous captured frame: 0.145036000 seconds]
+	[Time delta from previous displayed frame: 0.000000000 seconds]
+	[Time since reference or first frame: 5.672194000 seconds]
+	Frame Number: 37
+	Frame Length: 94 bytes (752 bits)
+	Capture Length: 94 bytes (752 bits)
+	[Frame is marked: True]
+	[Frame is ignored: False]
+	[Protocols in frame: eth:ethertype:ip:icmp:data]
+	[Coloring Rule Name: ICMP]
+	[Coloring Rule String: icmp || icmpv6]
+	Ethernet II, Src: 90:b1:1c:88:97:76, Dst: 00:23:04:52:1c:00
+	Destination: 00:23:04:52:1c:00
+		Address: 00:23:04:52:1c:00
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Source: 90:b1:1c:88:97:76
+		Address: 90:b1:1c:88:97:76
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.190.10
+	0100 .... = Version: 4
+	.... 1010 = Header Length: 40 bytes (10)
+	Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)
+		0000 00.. = Differentiated Services Codepoint: Default (0)
+		.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 80
+	Identification: 0x42d9 (17113)
+	Flags: 0x00
+		0... .... = Reserved bit: Not set
+		.0.. .... = Don´t fragment: Not set
+		..0. .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	[Expert Info (Note/Sequence): "Time To Live" only 1]
+	["Time To Live" only 1]
+	[Severity level: Note]
+	[Group: Sequence]
+	Protocol: ICMP (1)
+	Header checksum: 0x0000 [validation disabled]
+	[Header checksum status: Unverified]
+	Source: 134.108.8.37
+	Destination: 134.108.190.10
+	[Source GeoIP: Unknown]
+	[Destination GeoIP: Unknown]
+	Options: (20 bytes), Record Route
+		IP Option - Record Route (19 bytes)
+			Type: 7
+			0... .... = Copy on fragmentation: No
+			.00. .... = Class: Control (0)
+			...0 0111 = Number: Record route (7)
+			Length: 19
+			Pointer: 4
+				Empty Route: 0.0.0.0 <- (next)
+				Empty Route: 0.0.0.0
+				Empty Route: 0.0.0.0
+				Empty Route: 0.0.0.0
+	IP Option - End of Options List (EOL)
+		Type: 0
+		0... .... = Copy on fragmentation: No
+		.00. .... = Class: Control (0)
+		...0 0000 = Number: End of Option List (EOL) (0)
+Internet Control Message Protocol
+	Type: 8 (Echo (ping) request)
+	Code: 0
+	Checksum: 0x4d35 [correct]
+	[Checksum Status: Good]
+	Identifier (BE): 1 (0x0001)
+	Identifier (LE): 256 (0x0100)
+	Sequence number (BE): 38 (0x0026)
+	Sequence number (LE): 9728 (0x2600)
+	[No response seen]
+	[Expert Info (Warning/Sequence): No response seen to ICMP request]
+	[No response seen to ICMP request]
+	[Severity level: Warning]
+	[Group: Sequence]
+Data (32 bytes)
+
+	0000  61 62 63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 70   abcdefghijklmnop
+	0010  71 72 73 74 75 76 77 61 62 63 64 65 66 67 68 69   qrstuvwabcdefghi
+	Data: 6162636465666768696a6b6c6d6e6f707172737475767761...
+	Text: abcdefghijklmnopqrstuvwabcdefghi
+	[Length: 32]
+\end{lstlisting}
 \subsection{f) PING command with timestamps}
+In this exercise the 'timestamp' option was used in the PING-Command:
+\begin{center}
+	\textit{ping -n 1 -i 2 -s 4 134.108.190.10}
+\end{center}
+The timestamp option has the effect that a timestamp which represents the amount of time from midnight to the exact moment, the packet bypasses a network node, is recorded in milliseconds:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width =0.8\textwidth]{ping-timestamp.PNG}
+	\caption{PING Command with timestamp option}
+	\label{ping-timestamp}
+\end{figure} 
+The time difference between the sending from the destination PC and the bypassing of the router is only 1 ms as seen in Figure \ref{ping-timestamp}. The Options Field in the IP-header contains the timestamps as seen in the following listing:
+\begin{lstlisting}[caption={Wireshark trace for PING command with timestamps},captionpos=b,label{timestamp-ping}]
+
+No.     Time        Source                Destination           Protocol Length DestPort Info                                                            Delta Time
+51 0.000778    134.108.190.10        134.108.8.37          ICMP     110             Echo (ping) reply    id=0x0001, seq=43/11008, ttl=63 (request in 50) 0.000778
+
+Frame 51: 110 bytes on wire (880 bits), 110 bytes captured (880 bits) on interface 0
+	Interface id: 0 (\\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF})
+		Interface name: \\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF}
+	Encapsulation type: Ethernet (1)
+	Arrival Time: Nov 17, 2017 10:32:16.698574000 Mitteleuropäische Zeit
+	[Time shift for this packet: 0.000000000 seconds]
+	Epoch Time: 1510911136.698574000 seconds
+	[Time delta from previous captured frame: 0.000778000 seconds]
+	[Time delta from previous displayed frame: 0.000778000 seconds]
+	[Time since reference or first frame: 3.015108000 seconds]
+	Frame Number: 51
+	Frame Length: 110 bytes (880 bits)
+	Capture Length: 110 bytes (880 bits)
+	[Frame is marked: True]
+	[Frame is ignored: False]
+	[Protocols in frame: eth:ethertype:ip:icmp:data]
+	[Coloring Rule Name: ICMP]
+	[Coloring Rule String: icmp || icmpv6]
+	Ethernet II, Src: 00:23:04:52:1c:00, Dst: 90:b1:1c:88:97:76
+	Destination: 90:b1:1c:88:97:76
+		Address: 90:b1:1c:88:97:76
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Source: 00:23:04:52:1c:00
+		Address: 00:23:04:52:1c:00
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 134.108.190.10, Dst: 134.108.8.37
+	0100 .... = Version: 4
+	.... 1110 = Header Length: 56 bytes (14)
+	Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)
+	0000 00.. = Differentiated Services Codepoint: Default (0)
+	.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 96
+	Identification: 0x0490 (1168)
+	Flags: 0x00
+		0... .... = Reserved bit: Not set
+		.0.. .... = Don´t fragment: Not set
+		..0. .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 63
+	Protocol: ICMP (1)
+	Header checksum: 0x0901 [validation disabled]
+	[Header checksum status: Unverified]
+	Source: 134.108.190.10
+	Destination: 134.108.8.37
+	[Source GeoIP: Unknown]
+	[Destination GeoIP: Unknown]
+	Options: (36 bytes), Time Stamp
+		IP Option - Time Stamp (36 bytes)
+			Type: 68
+				0... .... = Copy on fragmentation: No
+				.10. .... = Class: Debugging and measurement (2)
+				...0 0100 = Number: Time stamp (4)
+			Length: 36
+			Pointer: 37
+			0000 .... = Overflow: 0
+			.... 0001 = Flag: Time stamp and address (0x1)
+			Address: 134.108.190.14
+			Time stamp: 34336822
+			Address: 134.108.190.10
+			Time stamp: 34336823
+			Address: 134.108.190.10
+			Time stamp: 34336823
+			Address: 134.108.11.254
+			Time stamp: 34336823
+Internet Control Message Protocol
+	Type: 0 (Echo (ping) reply)
+	Code: 0
+	Checksum: 0x5530 [correct]
+	[Checksum Status: Good]
+	Identifier (BE): 1 (0x0001)
+	Identifier (LE): 256 (0x0100)
+	Sequence number (BE): 43 (0x002b)
+	Sequence number (LE): 11008 (0x2b00)
+	[Request frame: 50]
+	[Response time: 0.778 ms]
+Data (32 bytes)
+
+	0000  61 62 63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 70   abcdefghijklmnop
+	0010  71 72 73 74 75 76 77 61 62 63 64 65 66 67 68 69   qrstuvwabcdefghi
+	Data: 6162636465666768696a6b6c6d6e6f707172737475767761...
+	Text: abcdefghijklmnopqrstuvwabcdefghi
+	[Length: 32]
+
+\end{lstlisting}
 
 \section{ARP analysis}
 \subsection{a) Deleting the ARP cache}
