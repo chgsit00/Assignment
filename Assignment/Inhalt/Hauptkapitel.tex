@@ -776,11 +776,180 @@ Data (32 bytes)
 \end{lstlisting}
 
 \section{ARP analysis}
-\subsection{a) Deleting the ARP cache}
-\subsection{b) Shutting down one PC}
-\subsection{c) Reconnect after Reboot}
 
+In the following exercises the Address Resolution Protocol was analyzed to achieve a better understanding how IP-Addresses are mapped to actual Hardware MAC-Addresses. ARP does exactly this by putting both address in relation together into a cache, also called the ARP table. Table \ref{arp-header} shows the header for ARP:
+\begin{table}[H]
+	\centering
+	\label{arp-header}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+		\hline
+		bits                             & \multicolumn{2}{c|}{0-7}                                                                          & \multicolumn{2}{c|}{8-15}                                                                         & \multicolumn{2}{c|}{16-23} & \multicolumn{2}{c|}{24-31} \\ \hline
+		bytes                            & 1                                                & 2                                              & 3                                               & 4                                               & 5            & 6           & 7            & 8           \\ \hline
+		Offset 0                         & \multicolumn{4}{c|}{Hardware-Addresstype (HTYPE)}                                                                                                                                                     & \multicolumn{4}{c|}{Network Protocol Type (PTYPE)}      \\ \hline
+		Offset 32                        & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Hardware \\ Address \\ Length (HLEN)\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Protocol \\ Address \\ Length (PLEN)\end{tabular}} & \multicolumn{4}{c|}{Operation}                          \\ \hline
+		Offset 64                        & \multicolumn{8}{c|}{{ Sender MAC-Address}}                                                                                                                                                                          \\ \hline
+		Offset 128                       & \multicolumn{4}{c|}{{ Sender MAC-Address}}                                                                                                                & \multicolumn{4}{c|}{Sender IP Address}                  \\ \hline
+		Offset 160                       & \multicolumn{4}{c|}{Sender IP Address}                                                                                                                                                                & \multicolumn{4}{c|}{Target MAC-Address}                 \\ \hline
+		Offset 192                       & \multicolumn{8}{c|}{Target MAC-Address}                                                                                                                                                                                                                         \\ \hline
+		\multicolumn{1}{|l|}{Offset 224} & \multicolumn{8}{c|}{Target IP-Address}                                                                                                                                                                                                                          \\ \hline
+	\end{tabular}
+	\caption{Address Resolution Protocol Header}
+\end{table}
+ 
+The following Figure \ref{arp-table} shows the ARP table obtained by typing 'arp -a' into the console from one of the network lab PCs before it was deleted for the next exercise:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width =0.7\textwidth]{urspruenglicheARPtable.PNG}
+	\caption{ARP table}
+	\label{arp-table}
+\end{figure} 
+\subsection{a) Deleting the ARP cache}
+\label{apr1}
+Now the ARP table on the source PC (134.108.8.37) was deleted using the console command 'arp -d'. After executing this, the ARP table was empty. After that another PING-Command was executed:\\
+\begin{center}
+	\textit{ping -n 2 134.108.8.36}
+\end{center}
+The following figure shows the output of this Ping:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width =0.8\textwidth]{ping-arp.PNG}
+	\caption{PING Command Output after ARP table was deleted}
+	\label{ping-arp}
+\end{figure} 
+Because the ARP table is now empty, IP has the problem that the target IP-Address cannot be resolved. This leads to the ARP request packet sent from the Source PC into the network via Broadcast as seen in Listing \ref{arp-ping} asking who has the required Target IP Address. The PC inside the same subnet who owns this IP Address now answers with an ARP reply packet containing it's MAC-Address. Following this the source PC inserts a new mapping with the target PC's IP- and MAC-Address into it's ARP table. After that the two PINGs are executed as seen in the following Wireshark trace:\\
+\begin{lstlisting}[caption={Wireshark trace for PING command after deleting the ARP table},captionpos=b,label{arp-ping}]
+No.     Time        Source                Destination           Protocol Length DestPort Info                                                            Delta Time
+162 0.459379    90:b1:1c:88:97:76     ff:ff:ff:ff:ff:ff     ARP      42              Who has 134.108.8.36? Tell 134.108.8.37                         0.459379
+
+Frame 162: 42 bytes on wire (336 bits), 42 bytes captured (336 bits) on interface 0
+	Interface id: 0 (\\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF})
+		Interface name: \\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF}
+	Encapsulation type: Ethernet (1)
+	Arrival Time: Nov 17, 2017 10:50:47.561364000 Mitteleuropäische Zeit
+	[Time shift for this packet: 0.000000000 seconds]
+	Epoch Time: 1510912247.561364000 seconds
+	[Time delta from previous captured frame: 0.397775000 seconds]
+	[Time delta from previous displayed frame: 0.459379000 seconds]
+	[Time since reference or first frame: 1.803262000 seconds]
+	Frame Number: 162
+	Frame Length: 42 bytes (336 bits)
+	Capture Length: 42 bytes (336 bits)
+	[Frame is marked: True]
+	[Frame is ignored: False]
+	[Protocols in frame: eth:ethertype:arp]
+	[Coloring Rule Name: ARP]
+	[Coloring Rule String: arp]
+Ethernet II, Src: 90:b1:1c:88:97:76, Dst: ff:ff:ff:ff:ff:ff
+	Destination: ff:ff:ff:ff:ff:ff
+		Address: ff:ff:ff:ff:ff:ff
+		.... ..1. .... .... .... .... = LG bit: Locally administered address (this is NOT the factory default)
+		.... ...1 .... .... .... .... = IG bit: Group address (multicast/broadcast)
+	Source: 90:b1:1c:88:97:76
+		Address: 90:b1:1c:88:97:76
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Type: ARP (0x0806)
+Address Resolution Protocol (request)
+	Hardware type: Ethernet (1)
+	Protocol type: IPv4 (0x0800)
+	Hardware size: 6
+	Protocol size: 4
+	Opcode: request (1)
+	Sender MAC address: 90:b1:1c:88:97:76
+	Sender IP address: 134.108.8.37
+	Target MAC address: 00:00:00:00:00:00
+	Target IP address: 134.108.8.36
+
+No.     Time        Source                Destination           Protocol Length DestPort Info                                                            Delta Time
+163 0.000164    90:b1:1c:87:b7:aa     90:b1:1c:88:97:76     ARP      60              134.108.8.36 is at 90:b1:1c:87:b7:aa                            0.000164
+
+Frame 163: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+	Interface id: 0 (\\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF})
+		Interface name: \\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF}
+	Encapsulation type: Ethernet (1)
+	Arrival Time: Nov 17, 2017 10:50:47.561528000 Mitteleuropäische Zeit
+	[Time shift for this packet: 0.000000000 seconds]
+	Epoch Time: 1510912247.561528000 seconds
+	[Time delta from previous captured frame: 0.000164000 seconds]
+	[Time delta from previous displayed frame: 0.000164000 seconds]
+	[Time since reference or first frame: 1.803426000 seconds]
+	Frame Number: 163
+	Frame Length: 60 bytes (480 bits)
+	Capture Length: 60 bytes (480 bits)
+	[Frame is marked: True]
+	[Frame is ignored: False]
+	[Protocols in frame: eth:ethertype:arp]
+	[Coloring Rule Name: ARP]
+	[Coloring Rule String: arp]
+Ethernet II, Src: 90:b1:1c:87:b7:aa, Dst: 90:b1:1c:88:97:76
+	Destination: 90:b1:1c:88:97:76
+		Address: 90:b1:1c:88:97:76
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Source: 90:b1:1c:87:b7:aa
+		Address: 90:b1:1c:87:b7:aa
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Type: ARP (0x0806)
+	Padding: 000000000000000000000000000000000000
+Address Resolution Protocol (reply)
+	Hardware type: Ethernet (1)
+	Protocol type: IPv4 (0x0800)
+	Hardware size: 6
+	Protocol size: 4
+	Opcode: reply (2)
+	Sender MAC address: 90:b1:1c:87:b7:aa
+	Sender IP address: 134.108.8.36
+	Target MAC address: 90:b1:1c:88:97:76
+	Target IP address: 134.108.8.37
+
+No.     Time        Source                Destination           Protocol Length DestPort Info                                                            Delta Time
+164 0.000018    134.108.8.37          134.108.8.36          ICMP     74              Echo (ping) request  id=0x0001, seq=52/13312, ttl=128 (reply in 165) 0.000018
+
+
+No.     Time        Source                Destination           Protocol Length DestPort Info                                                            Delta Time
+165 0.000168    134.108.8.36          134.108.8.37          ICMP     74              Echo (ping) reply    id=0x0001, seq=52/13312, ttl=128 (request in 164) 0.000168
+
+
+No.     Time        Source                Destination           Protocol Length DestPort Info                                                            Delta Time
+176 1.005949    134.108.8.37          134.108.8.36          ICMP     74              Echo (ping) request  id=0x0001, seq=53/13568, ttl=128 (reply in 177) 1.005949
+
+
+No.     Time        Source                Destination           Protocol Length DestPort Info                                                            Delta Time
+177 0.000271    134.108.8.36          134.108.8.37          ICMP     74              Echo (ping) reply    id=0x0001, seq=53/13568, ttl=128 (request in 176) 0.000271
+
+\end{lstlisting}
+\subsection{b) Shutting down one PC}
+For this second exercise the ARP-table on the source PC was deleted again. But this time, the target PC was shut down before the same Ping command as in \ref{arp1} was executed. The following figure \ref{ping-shutdown} shows the console output for the Ping-Command:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width =0.8\textwidth]{ping-shutdown.PNG}
+	\caption{PING Command Output after ARP table was deleted and target PC was shut down}
+	\label{ping-shutdown}
+\end{figure} 
+
+Because the ARP table is empty, the source PC has to send another ARP request packet. But this time he receives no answer because the PC owning the required IP address is not reachable. The console output shows that the source PC tries to reach the target PC with another ARP request, but again there is no answer. So the communication is canceled after this. Listing \ref{label} shows the two ARP request packet that were sent from the source PC via Broadcast.\\
+ \begin{lstlisting}[caption={Wireshark trace for PING command after deleting the ARP table and shutting down target PC},captionpos=b,label{arp-delete-ping}]
+No.     Time           Source                Destination           Protocol Length Info
+21 2.895675       Dell\_88:97:76         Broadcast             ARP      42     Who has 134.108.8.36? Tell 134.108.8.37
+
+Frame 21: 42 bytes on wire (336 bits), 42 bytes captured (336 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Broadcast (ff:ff:ff:ff:ff:ff)
+Address Resolution Protocol (request)
+
+No.     Time           Source                Destination           Protocol Length Info
+31 3.798686       Dell\_88:97:76         Broadcast             ARP      42     Who has 134.108.8.36? Tell 134.108.8.37
+
+Frame 31: 42 bytes on wire (336 bits), 42 bytes captured (336 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Broadcast (ff:ff:ff:ff:ff:ff)
+Address Resolution Protocol (request)
+ \end{lstlisting}
+ 
+\subsection{c) Reconnect after Reboot}
+After rebooting the target PC and reconnecting it to the network, the same PING-Command as in \ref{apr1} was sent again from the source PC. Because now the target PC was reachable, the process and the outcome was exactly the same as in exercise \ref{apr1}.
 \section{IP multicast addressing}
+IP multicast addressing is used to send packets to groups of different IP addresses without broadcasting into the network. The are different protocols that are able to do this such as the Virtual Router Redundancy Protocol (VRRP), the Internet Group Management Protocol (IGMP), the routing protocol OSPF, the Network Time Protocol (NTP), the Simple Service Discovery Protocol (SSDP) and the Spanning Tree Protocol (STP).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
