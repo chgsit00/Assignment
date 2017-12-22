@@ -949,7 +949,88 @@ Address Resolution Protocol (request)
 \subsection{c) Reconnect after Reboot}
 After rebooting the target PC and reconnecting it to the network, the same PING-Command as in \ref{apr1} was sent again from the source PC. Because now the target PC was reachable, the process and the outcome was exactly the same as in exercise \ref{apr1}.
 \section{IP multicast addressing}
-IP multicast addressing is used to send packets to groups of different IP addresses without broadcasting into the network. The are different protocols that are able to do this such as the Virtual Router Redundancy Protocol (VRRP), the Internet Group Management Protocol (IGMP), the routing protocol OSPF, the Network Time Protocol (NTP), the Simple Service Discovery Protocol (SSDP) and the Spanning Tree Protocol (STP).
+IP multicast addressing is used to send packets to groups of different IP addresses without broadcasting into the network. The are different protocols that are able to do this such as the Virtual Router Redundancy Protocol (VRRP), the Internet Group Management Protocol (IGMP), the routing protocol OSPF, the Network Time Protocol (NTP), the Simple Service Discovery Protocol (SSDP) and the Spanning Tree Protocol (STP). 
+\\\\
+The range for IP-Multicast Addresses is from 224.0.0.0 to 239.255.255.255. This can be seen when observing the intranet traffic of the Hochschule Esslingen. As a multicast packet contains a range of target IP-addresses, they cannot be exclusively mapped to a single MAC-address. So a trick is used here. The 23 lowest bits from the IP-address are put into the MAC-address. This leads to a range of MAC-addresses from 01-00-5e-00-00-00 to 01-00-5e-7f-ff-ff. The Downside is, that it is possible, that a single MAC-address can be referenced by multiple IP-Addresses. The following listing shows an SSDP packet captured from the traffic of the Hochschule Esslingen:
+ \begin{lstlisting}[caption={A single SSDP packet},captionpos=b,label{ssdp}]
+No.     Time           Source                Destination           Protocol Length Info
+4 0.461068       134.108.8.33          239.255.255.250       SSDP     175    M-SEARCH * HTTP/1.1 
+
+Frame 4: 175 bytes on wire (1400 bits), 175 bytes captured (1400 bits) on interface 0
+	Interface id: 0 (\\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF})
+		Interface name: \\Device\\NPF\_{55902047-E973-4FFC-B9C0-B0FAC2DA73AF}
+	Encapsulation type: Ethernet (1)
+	Arrival Time: Nov 17, 2017 11:09:15.825997000 Mitteleuropäische Zeit
+	[Time shift for this packet: 0.000000000 seconds]
+	Epoch Time: 1510913355.825997000 seconds
+	[Time delta from previous captured frame: 0.115495000 seconds]
+	[Time delta from previous displayed frame: 0.115495000 seconds]
+	[Time since reference or first frame: 0.461068000 seconds]
+	Frame Number: 4
+	Frame Length: 175 bytes (1400 bits)
+	Capture Length: 175 bytes (1400 bits)
+	[Frame is marked: False]
+	[Frame is ignored: False]
+	[Protocols in frame: eth:ethertype:ip:udp:ssdp]
+	[Coloring Rule Name: UDP]
+	[Coloring Rule String: udp]
+	Ethernet II, Src: Dell\_87:b4:26 (90:b1:1c:87:b4:26), Dst: IPv4mcast\_7f:ff:fa (01:00:5e:7f:ff:fa)
+	Destination: IPv4mcast\_7f:ff:fa (01:00:5e:7f:ff:fa)
+		Address: IPv4mcast\_7f:ff:fa (01:00:5e:7f:ff:fa)
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...1 .... .... .... .... = IG bit: Group address (multicast/broadcast)
+	Source: Dell\_87:b4:26 (90:b1:1c:87:b4:26)
+		Address: Dell\_87:b4:26 (90:b1:1c:87:b4:26)
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 134.108.8.33, Dst: 239.255.255.250
+	0100 .... = Version: 4
+	.... 0101 = Header Length: 20 bytes (5)
+	Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)
+		0000 00.. = Differentiated Services Codepoint: Default (0)
+		.... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	Total Length: 161
+	Identification: 0x2fc2 (12226)
+	Flags: 0x00
+		0... .... = Reserved bit: Not set
+		.0.. .... = Don´t fragment: Not set
+		..0. .... = More fragments: Not set
+	Fragment offset: 0
+	Time to live: 1
+	Protocol: UDP (17)
+	Header checksum: 0x0b03 [validation disabled]
+	[Header checksum status: Unverified]
+	Source: 134.108.8.33
+	Destination: 239.255.255.250
+	[Source GeoIP: Unknown]
+	[Destination GeoIP: Unknown]
+User Datagram Protocol, Src Port: 53552, Dst Port: 1900
+	Source Port: 53552
+	Destination Port: 1900
+	Length: 141
+	Checksum: 0x01c6 [unverified]
+	[Checksum Status: Unverified]
+	[Stream index: 0]
+Simple Service Discovery Protocol
+	M-SEARCH * HTTP/1.1\r\\n
+		[Expert Info (Chat/Sequence): M-SEARCH * HTTP/1.1\r\\n]
+			[M-SEARCH * HTTP/1.1\r\\n]
+			[Severity level: Chat]
+			[Group: Sequence]
+		Request Method: M-SEARCH
+		Request URI: *
+		Request Version: HTTP/1.1
+	Host:239.255.255.250:1900\r\\n
+	ST:urn:schemas-upnp-org:device:InternetGatewayDevice:1\r\\n
+	Man:"ssdp:discover"\r\\n
+	MX:3\r\\n
+	\r\\n
+	[Full request URI: http://239.255.255.250:1900*]
+	[HTTP request 1/19]
+	[Next request in frame: 206]
+
+\end{lstlisting}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

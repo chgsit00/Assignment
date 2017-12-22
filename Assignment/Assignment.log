@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.22)  22 DEC 2017 12:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.22)  22 DEC 2017 12:39
 entering extended mode
 **./Assignment.tex
 (Assignment.tex
@@ -2357,40 +2357,64 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
 [27 <./Bilder/ping-shutdown.PNG>]
+Underfull \hbox (badness 10000) in paragraph at lines 952--955
+
+ []
+
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
- <use Bilder/Brunel_University_Logo.png>
+<use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 9
-56.
+77.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
 [28]
-chapter 3.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
-<use Bilder/Brunel_University_Logo.png>
-Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 9
-74.
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+025.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[29
+[29]
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+037.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[30]
+chapter 3.
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+<use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+055.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[31
 
 ]
 chapter 4.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 <use Bilder/Brunel_University_Logo.png>
-Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 9
-91.
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+072.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[30
+[32
 
 ]
 chapter 5.
@@ -2404,7 +2428,7 @@ Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[31
+[33
 
 ])
 chapter without number
@@ -2417,7 +2441,7 @@ Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[32
+[34
 
 
 ]
@@ -2437,10 +2461,10 @@ Package logreq Info: Writing requests to 'Assignment.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 38552 strings out of 493323
- 701381 string characters out of 3139069
+ 38671 strings out of 493323
+ 703003 string characters out of 3139069
  1481703 words of memory out of 3000000
- 40530 multiletter control sequences out of 15000+200000
+ 40570 multiletter control sequences out of 15000+200000
  54804 words of font info for 50 fonts, out of 3000000 for 9000
  1145 hyphenation exceptions out of 8191
  67i,18n,80p,8823b,3318s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2455,9 +2479,9 @@ ogram Files/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Program Files/MiK
 TeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
 e1/public/lm/lmtt12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmtt
 9.pfb>
-Output written on Assignment.pdf (36 pages, 1531044 bytes).
+Output written on Assignment.pdf (38 pages, 1549933 bytes).
 PDF statistics:
- 1368 PDF objects out of 1440 (max. 8388607)
- 786 named destinations out of 1000 (max. 500000)
+ 1474 PDF objects out of 1728 (max. 8388607)
+ 865 named destinations out of 1000 (max. 500000)
  417 words of extra memory for PDF output out of 10000 (max. 10000000)
 
