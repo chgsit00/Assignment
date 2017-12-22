@@ -55,7 +55,7 @@ Table \ref{ipv4-header} shows the header for the Internet Protocol v4. Noteable 
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 		\hline
 		bits       & 0-3               & 4-7           & 8-11             & 12-15             & 16-18  & 19-23      & 24-27      & 28-31      \\ \hline
-		bytes      & 1                 & 2             & 3                & 4                 & 5      & 6          & 7          & 8          \\ \hline
+		bytes                            & \multicolumn{2}{c|}{1}                                              & \multicolumn{2}{c|}{2}                                               & \multicolumn{2}{c|}{3}& \multicolumn{2}{c|}{4}\\ \hline
 		offset 0   & Version           & IHL           & \multicolumn{2}{c|}{Type of Service} & \multicolumn{4}{c|}{Total Length}             \\ \hline
 		offset 32  & \multicolumn{4}{c|}{Identification}                                      & Flags  & \multicolumn{3}{c|}{Fragment Offset} \\ \hline
 		offset 64  & \multicolumn{2}{c|}{Time to Live} & \multicolumn{2}{c|}{Protocol}        & \multicolumn{4}{c|}{Header Checksum}          \\ \hline
@@ -784,7 +784,7 @@ In the following exercises the Address Resolution Protocol was analyzed to achie
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 		\hline
 		bits                             & \multicolumn{2}{c|}{0-7}                                                                          & \multicolumn{2}{c|}{8-15}                                                                         & \multicolumn{2}{c|}{16-23} & \multicolumn{2}{c|}{24-31} \\ \hline
-		bytes                            & 1                                                & 2                                              & 3                                               & 4                                               & 5            & 6           & 7            & 8           \\ \hline
+		bytes                            & \multicolumn{2}{c|}{1}                                              & \multicolumn{2}{c|}{2}                                               & \multicolumn{2}{c|}{3}& \multicolumn{2}{c|}{4}\\ \hline
 		Offset 0                         & \multicolumn{4}{c|}{Hardware-Addresstype (HTYPE)}                                                                                                                                                     & \multicolumn{4}{c|}{Network Protocol Type (PTYPE)}      \\ \hline
 		Offset 32                        & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Hardware \\ Address \\ Length (HLEN)\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Protocol \\ Address \\ Length (PLEN)\end{tabular}} & \multicolumn{4}{c|}{Operation}                          \\ \hline
 		Offset 64                        & \multicolumn{8}{c|}{{ Sender MAC-Address}}                                                                                                                                                                          \\ \hline
@@ -1036,6 +1036,24 @@ Simple Service Discovery Protocol
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{TCP analysis}
 \label{tcp}
+
+\begin{table}[H]
+	\centering
+	\label{tcp-header}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		bits       & 0-3                                                   & 4-7      & 8                                                 & 9                                                 & 10                                                & 11                                                & 12                                                & 13                                                & 14                                                & 15                                                & 16-23             & 24-31             \\ \hline
+		bytes      & \multicolumn{2}{c|}{1}                                           & \multicolumn{8}{c|}{2}                                                                                                                                                                                                                                                                                                                                                                                                        & 3                 & 4                 \\ \hline
+		Offset 0   & \multicolumn{10}{c|}{source port}                                                                                                                                                                                                                                                                                                                                                                                                                                                                & \multicolumn{2}{c|}{destination port} \\ \hline
+		Offset 32  & \multicolumn{12}{c|}{sequence number}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    \\ \hline
+		Offset 64  & \multicolumn{12}{c|}{acknowledgement number}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \\ \hline
+		Offset 96  & \begin{tabular}[c]{@{}c@{}}data\\ offset\end{tabular} & reserved & \begin{tabular}[c]{@{}c@{}}C\\ W\\ R\end{tabular} & \begin{tabular}[c]{@{}c@{}}E\\ C\\ E\end{tabular} & \begin{tabular}[c]{@{}c@{}}U\\ R\\ G\end{tabular} & \begin{tabular}[c]{@{}c@{}}A\\ C\\ K\end{tabular} & \begin{tabular}[c]{@{}c@{}}P\\ S\\ H\end{tabular} & \begin{tabular}[c]{@{}c@{}}R\\ S\\ T\end{tabular} & \begin{tabular}[c]{@{}c@{}}S\\ Y\\ N\end{tabular} & \begin{tabular}[c]{@{}c@{}}F\\ I\\ N\end{tabular} & \multicolumn{2}{c|}{window}           \\ \hline
+		Offset 128 & \multicolumn{10}{c|}{checksum}                                                                                                                                                                                                                                                                                                                                                                                                                                                                   & \multicolumn{2}{c|}{urgent pointer}   \\ \hline
+		Offset 160 & \multicolumn{12}{c|}{options}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \\ \hline
+	\end{tabular}
+	\caption{Transmission Control Protocol Header}
+\end{table}
+
 \section{Traffic generator handling}
 
 \section{Simple TCP Communication}
