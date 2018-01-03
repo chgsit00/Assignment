@@ -952,7 +952,7 @@ After rebooting the target PC and reconnecting it to the network, the same PING-
 IP multicast addressing is used to send packets to groups of different IP addresses without broadcasting into the network. The are different protocols that are able to do this such as the Virtual Router Redundancy Protocol (VRRP), the Internet Group Management Protocol (IGMP), the routing protocol OSPF, the Network Time Protocol (NTP), the Simple Service Discovery Protocol (SSDP) and the Spanning Tree Protocol (STP). 
 \\\\
 The range for IP-Multicast Addresses is from 224.0.0.0 to 239.255.255.255. This can be seen when observing the intranet traffic of the Hochschule Esslingen. As a multicast packet contains a range of target IP-addresses, they cannot be exclusively mapped to a single MAC-address. So a trick is used here. The 23 lowest bits from the IP-address are put into the MAC-address. This leads to a range of MAC-addresses from 01-00-5e-00-00-00 to 01-00-5e-7f-ff-ff. The Downside is, that it is possible, that a single MAC-address can be referenced by multiple IP-Addresses. The following listing shows an SSDP packet captured from the traffic of the Hochschule Esslingen:
- \begin{lstlisting}[caption={A single SSDP packet},captionpos=b,label{ssdp}]
+\begin{lstlisting}[caption={A single SSDP packet},captionpos=b,label{ssdp}]
 No.     Time           Source                Destination           Protocol Length Info
 4 0.461068       134.108.8.33          239.255.255.250       SSDP     175    M-SEARCH * HTTP/1.1 
 
@@ -1036,7 +1036,8 @@ Simple Service Discovery Protocol
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{TCP analysis}
 \label{tcp}
-
+In this second part of the laboratory the Transmission Control Protocol (TCP) was examined through various exercises showing it's functionality.\\
+TCP is one layer above the protocols ICMP and IP in the transport layer of the OSI-model. It's main goal is to establish a stable connection between two hosts to ensure transmission of information without data loss. Other than the protocols one layer down in the Network Layer such as ICMP or IP, TCP provides enhanced functionality for transmission control, error recovery and handling for protocol errors. These functionalities will be shown in the exercises of this laboratory. Table \ref{tcp-header} shows the TCP Header.
 \begin{table}[H]
 	\centering
 	\label{tcp-header}
@@ -1046,7 +1047,7 @@ Simple Service Discovery Protocol
 		bytes      & \multicolumn{2}{c|}{1}                                           & \multicolumn{8}{c|}{2}                                                                                                                                                                                                                                                                                                                                                                                                        & 3                 & 4                 \\ \hline
 		Offset 0   & \multicolumn{10}{c|}{source port}                                                                                                                                                                                                                                                                                                                                                                                                                                                                & \multicolumn{2}{c|}{destination port} \\ \hline
 		Offset 32  & \multicolumn{12}{c|}{sequence number}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    \\ \hline
-		Offset 64  & \multicolumn{12}{c|}{acknowledgement number}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \\ \hline
+		Offset 64  & \multicolumn{12}{c|}{acknowledgment number}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \\ \hline
 		Offset 96  & \begin{tabular}[c]{@{}c@{}}data\\ offset\end{tabular} & reserved & \begin{tabular}[c]{@{}c@{}}C\\ W\\ R\end{tabular} & \begin{tabular}[c]{@{}c@{}}E\\ C\\ E\end{tabular} & \begin{tabular}[c]{@{}c@{}}U\\ R\\ G\end{tabular} & \begin{tabular}[c]{@{}c@{}}A\\ C\\ K\end{tabular} & \begin{tabular}[c]{@{}c@{}}P\\ S\\ H\end{tabular} & \begin{tabular}[c]{@{}c@{}}R\\ S\\ T\end{tabular} & \begin{tabular}[c]{@{}c@{}}S\\ Y\\ N\end{tabular} & \begin{tabular}[c]{@{}c@{}}F\\ I\\ N\end{tabular} & \multicolumn{2}{c|}{window}           \\ \hline
 		Offset 128 & \multicolumn{10}{c|}{checksum}                                                                                                                                                                                                                                                                                                                                                                                                                                                                   & \multicolumn{2}{c|}{urgent pointer}   \\ \hline
 		Offset 160 & \multicolumn{12}{c|}{options}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \\ \hline
@@ -1054,14 +1055,202 @@ Simple Service Discovery Protocol
 	\caption{Transmission Control Protocol Header}
 \end{table}
 
+TCP does not handle the networking part of the communication. This task is still handled by IP, which is one layer below TCP in the protocol stack. This is why there are no source- or target address fields in the TCP header. Instead it has segments for source- and target ports. These are necessary because a program such as \textit{Traffic}\footnote{bla} is needed for the TCP communication and these programs run on a port on both hosts. Sequence and acknowledgment numbers are used for the synchronization and error recovery between server and client. These will be important for the exercises. The control flags (each of them is only one bit) are used for traffic handling. The protocol decides how to interpret the sent data based on the set flags. They are also used for connection establishment, connection reset and for terminating a connection.
+
 \section{Traffic generator handling}
+As mentioned above, simple PING-commands weren't enough for generating traffic using the Transmission Control Protocol. A program which occupies ports on both PCs (server and client) is needed to establish a TCP connection. For this exercise a tool named \textit{Traffic} was used. The tool provides the functionality of a socket and can perform simple socket routines such as \textit{socket}, \textit{bind()}, \textit{listen()}, \textit{accept()}. It also provides a simple user interface where all functionalities are accessible for a user.
 
 \section{Simple TCP Communication}
+The first task in this laboratory was to establish a simple TCP-connection between a Server PC and a Client PC, sending multiple messages from client to server and vice versa, and finally releasing the connection.
+
 \subsection{Connection establishment}
+To establish a connection between server and client, TCP performs a routine known as the Three-Way-Handshake. The Three-Way-Handshake consists of three packets being transmitted between client and server. First, the client sends a TCP packet with the SYN-Flag containing a random number \textit{x} as sequence number (s. header in chapter \ref{tcp}) to the server. If the server is reachable, it replies with a TCP packet with the SYN and ACK-flags being enabled. Furthermore this packet contains the incremented sequence number \textit{x+1} from the client as acknowledgment number and a newly generated random number \textit{y} as sequence number. Finally the client performs the last step of the Three-Way-Handshake by replying with another ACK-flagged TCP-packet, containing the incremented sequence number from the server \textit{y+1} as acknowledgment number.\\
+After these steps were successful, a stable connection is established and both client and server can begin to send data to each other. The following figure \ref{three-way-handshake} shows the steps of the Three-Way-Handshake.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width =0.4\textwidth]{Tcp-handshake.png}
+	\caption{Three-Way-Handshake}
+	\label{three-way-handshake}
+\end{figure}
+The Wireshark-trace reveals some more details about the Three-Way-Handshake. As seen in listing \ref{3way} client and server also exchange information about the Maximum Segment Size (MSS).
+Furthermore both parties, the client and the server, set their window size which corresponds to
+the size of the buffer. When the buffer is completely occupied with data, no more data can be transfered until the buffer is cleaned by the receiver.
+
+\begin{lstlisting}[caption={Wireshark trace for Three-Way-Handshake},captionpos=b,label{3way}]
+No.     Time           Source                Destination           Protocol Length Info
+129 14.773660      134.108.8.37          134.108.8.36          TCP      66     51444 -> 6777 [SYN] Seq=0 Win=8192 Len=0 MSS=1460 WS=256 SACK\_PERM=1
+
+Frame 129: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51444, Dst Port: 6777, Seq: 0, Len: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+130 14.773711      134.108.8.36          134.108.8.37          TCP      66     6777 -> 51444 [SYN, ACK] Seq=0 Ack=1 Win=8192 Len=0 MSS=1460 WS=256 SACK\_PERM=1
+
+Frame 130: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: Dell\_87:b7:aa (90:b1:1c:87:b7:aa), Dst: Dell\_88:97:76 (90:b1:1c:88:97:76)
+Internet Protocol Version 4, Src: 134.108.8.36, Dst: 134.108.8.37
+Transmission Control Protocol, Src Port: 6777, Dst Port: 51444, Seq: 0, Ack: 1, Len: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+131 14.773828      134.108.8.37          134.108.8.36          TCP      60     51444 -> 6777 [ACK] Seq=1 Ack=1 Win=65536 Len=0
+
+Frame 131: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51444, Dst Port: 6777, Seq: 1, Ack: 1, Len: 0
+\end{lstlisting}
 \subsection{Data transfer}
+After the successful establishment of the TCP connection, multiple messages were transmitted between client and server. the Wireshark trace \ref{tcp-data} shows all the packets in chronological order. All packets have in common that the PSH and ACK flags are enabled. 
+\\\\
+The first message was sent from client to server and contained 100 bytes of data. Because this was the first packet after the Three-Way-Handshake, both acknowledgment and sequence numbers are 1. The server answers with an ACK-packet, where the acknowledgment number is now 101. This is because the data size of the previous packet sent from client to server is added to the acknowledgment number. Also the data size is subtracted from the buffer size.
+\\\\
+The second message sent from client to server is much larger, containing 1000 bytes of data. The procedure is the same as for the first message. The only difference is, that the sequence number of the packet is now 101 because of the previous ACK-Packet from the server. The server answers with and ACK-packet where the acknowledgment number is now 1101. Again the data size was added here and subtracted from the buffer size of the server. The sequence number is still 1, because the server hasn't sent any data to the client yet. The window-size of the server however is now reduced to 252, because the data has not been read from the buffer yet.
+\\\\
+The third message follows the same procedure as message 1, but of cause this time the acknowledgment number in the server's reply packet is 1201, because there were again 100 bytes transmitted. The window size of the server is now reduced to 251.
+\\\\
+The last message was sent from server to client. Here the sequence number is still 1 while the acknowledgment number is already 1201. The client replies with a ACK-packet containing a acknowledgment number increased to 101, because the previous packet was the first data packet it received since the Three-Way-Handshake.
+
+\begin{lstlisting}[caption={Wireshark trace for TCP messages},captionpos=b,label{tcp-data}]
+No.     Time           Source                Destination           Protocol Length Info
+41 7.691788       134.108.8.37          134.108.8.36          TCP      154    51444 -> 6777 [PSH, ACK] Seq=1 Ack=1 Win=256 Len=100
+
+Frame 41: 154 bytes on wire (1232 bits), 154 bytes captured (1232 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51444, Dst Port: 6777, Seq: 1, Ack: 1, Len: 100
+Data (100 bytes)
+
+No.     Time           Source                Destination           Protocol Length Info
+46 7.892984       134.108.8.36          134.108.8.37          TCP      54     6777 -> 51444 [ACK] Seq=1 Ack=101 Win=256 Len=0
+
+Frame 46: 54 bytes on wire (432 bits), 54 bytes captured (432 bits) on interface 0
+Ethernet II, Src: Dell\_87:b7:aa (90:b1:1c:87:b7:aa), Dst: Dell\_88:97:76 (90:b1:1c:88:97:76)
+Internet Protocol Version 4, Src: 134.108.8.36, Dst: 134.108.8.37
+Transmission Control Protocol, Src Port: 6777, Dst Port: 51444, Seq: 1, Ack: 101, Len: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+90 19.684399      134.108.8.37          134.108.8.36          TCP      1054   51444 -> 6777 [PSH, ACK] Seq=101 Ack=1 Win=256 Len=1000
+
+Frame 90: 1054 bytes on wire (8432 bits), 1054 bytes captured (8432 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51444, Dst Port: 6777, Seq: 101, Ack: 1, Len: 1000
+Data (1000 bytes)
+
+No.     Time           Source                Destination           Protocol Length Info
+92 19.889133      134.108.8.36          134.108.8.37          TCP      54     6777 -> 51444 [ACK] Seq=1 Ack=1101 Win=252 Len=0
+
+Frame 92: 54 bytes on wire (432 bits), 54 bytes captured (432 bits) on interface 0
+Ethernet II, Src: Dell\_87:b7:aa (90:b1:1c:87:b7:aa), Dst: Dell\_88:97:76 (90:b1:1c:88:97:76)
+Internet Protocol Version 4, Src: 134.108.8.36, Dst: 134.108.8.37
+Transmission Control Protocol, Src Port: 6777, Dst Port: 51444, Seq: 1, Ack: 1101, Len: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+1875 165.393174     134.108.8.37          134.108.8.36          TCP      154    51444 -> 6777 [PSH, ACK] Seq=1101 Ack=1 Win=256 Len=100
+
+Frame 1875: 154 bytes on wire (1232 bits), 154 bytes captured (1232 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51444, Dst Port: 6777, Seq: 1101, Ack: 1, Len: 100
+Data (100 bytes)
+
+No.     Time           Source                Destination           Protocol Length Info
+1879 165.608164     134.108.8.36          134.108.8.37          TCP      54     6777 -> 51444 [ACK] Seq=1 Ack=1201 Win=251 Len=0
+
+Frame 1879: 54 bytes on wire (432 bits), 54 bytes captured (432 bits) on interface 0
+Ethernet II, Src: Dell\_87:b7:aa (90:b1:1c:87:b7:aa), Dst: Dell\_88:97:76 (90:b1:1c:88:97:76)
+Internet Protocol Version 4, Src: 134.108.8.36, Dst: 134.108.8.37
+Transmission Control Protocol, Src Port: 6777, Dst Port: 51444, Seq: 1, Ack: 1201, Len: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+2086 201.626400     134.108.8.36          134.108.8.37          TCP      154    6777 -> 51444 [PSH, ACK] Seq=1 Ack=1201 Win=251 Len=100
+
+Frame 2086: 154 bytes on wire (1232 bits), 154 bytes captured (1232 bits) on interface 0
+Ethernet II, Src: Dell\_87:b7:aa (90:b1:1c:87:b7:aa), Dst: Dell\_88:97:76 (90:b1:1c:88:97:76)
+Internet Protocol Version 4, Src: 134.108.8.36, Dst: 134.108.8.37
+Transmission Control Protocol, Src Port: 6777, Dst Port: 51444, Seq: 1, Ack: 1201, Len: 100
+Data (100 bytes)
+
+No.     Time           Source                Destination           Protocol Length Info
+2088 201.832292     134.108.8.37          134.108.8.36          TCP      60     51444 -> 6777 [ACK] Seq=1201 Ack=101 Win=256 Len=0
+
+Frame 2088: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51444, Dst Port: 6777, Seq: 1201, Ack: 101, Len: 0
+\end{lstlisting}
 \subsection{Connection release}
+To terminate an active connection, one of the two connected nodes sends a TCP-packet with the FIN-Flag enabled to the other node. In this case the client releases the connection first. The server answers with an ACK-packet where the acknowledgment number is increased to 102 because of the FIN-Flag. At this point, the connection is half-closed. The server can still send data to the client, but the client cannot send any data to the server, because it already released the connection. Now the server sends a FIN-enabled TCP packet to the client to terminated it's side of the connection. The client answers with an ACK-packet where the sequence number is 102 as before and the acknowledgment number is increased from 1201 to 1202 because of the server's FIN-flag in the previous packet. Now the connection is fully terminated. The following Wireshark-trace shows the captured packets:
+
+\begin{lstlisting}[caption={Wireshark trace for Connection Release},captionpos=b,label{tcp-fin}]
+No.     Time           Source                Destination           Protocol Length Info
+3752 554.875797     134.108.8.36          134.108.8.37          TCP      54     6777 -> 51444 [FIN, ACK] Seq=101 Ack=1201 Win=251 Len=0
+
+Frame 3752: 54 bytes on wire (432 bits), 54 bytes captured (432 bits) on interface 0
+Ethernet II, Src: Dell\_87:b7:aa (90:b1:1c:87:b7:aa), Dst: Dell\_88:97:76 (90:b1:1c:88:97:76)
+Internet Protocol Version 4, Src: 134.108.8.36, Dst: 134.108.8.37
+Transmission Control Protocol, Src Port: 6777, Dst Port: 51444, Seq: 101, Ack: 1201, Len: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+3755 554.876001     134.108.8.37          134.108.8.36          TCP      60     51444 -> 6777 [ACK] Seq=1201 Ack=102 Win=256 Len=0
+
+Frame 3755: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51444, Dst Port: 6777, Seq: 1201, Ack: 102, Len: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+3869 569.922788     134.108.8.37          134.108.8.36          TCP      60     51444 -> 6777 [FIN, ACK] Seq=1201 Ack=102 Win=256 Len=0
+
+Frame 3869: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51444, Dst Port: 6777, Seq: 1201, Ack: 102, Len: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+3870 569.922807     134.108.8.36          134.108.8.37          TCP      54     6777 -> 51444 [ACK] Seq=102 Ack=1202 Win=251 Len=0
+
+Frame 3870: 54 bytes on wire (432 bits), 54 bytes captured (432 bits) on interface 0
+Ethernet II, Src: Dell\_87:b7:aa (90:b1:1c:87:b7:aa), Dst: Dell\_88:97:76 (90:b1:1c:88:97:76)
+Internet Protocol Version 4, Src: 134.108.8.36, Dst: 134.108.8.37
+Transmission Control Protocol, Src Port: 6777, Dst Port: 51444, Seq: 102, Ack: 1202, Len: 0
+
+\end{lstlisting}
 
 \section{TCP flow control}
+For this exercise another connection between server and client was established the same way as before. Now the task was to send a burst of 100 message from one host to another, while each message contained 1000 bytes of data. The intention behind this is to completely occupy the server's receive buffer with data and to observe what happens next. As seen in the Wireshark-trace, the client sends packet after packet to the server until the Window-size in the Servers corresponding ACK-packet is decreased to a value beneath 1000 bytes. When the client now tries to send the next packet, the server answers with a \textbf{TCP Zero Window} packet, where the window-size is decreased to 0, so the client cannot send another packet, no matter how small it is. This causes the client to stop sending the data packets. Instead it asks the server regulary if the receiver-buffer was cleared using a \textbf{TCP Zero Window Probe} packet. While the buffer is still occupied, the server answers with another TCP Zero Window packet. When the buffer is cleared by the server, it sends a \textbf{Zero Window Update} packet with the new buffer size to the client. As soon as the client receives this packet, it answers with an ACK-packet and continues to send the data packets. The following Wireshark trace shows an example for each of the packets mentioned above.
+\\
+\begin{lstlisting}[caption={Wireshark trace example for Zero Window packets},captionpos=b,label{tcp-fin}]
+No.     Time           Source                Destination           Protocol Length Info
+711 94.044149      134.108.8.37          134.108.8.36          TCP      60     [TCP ZeroWindowProbe] 51484 -> 6777 [ACK] Seq=73467 Ack=1 Win=256 Len=1
+
+Frame 711: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51484, Dst Port: 6777, Seq: 73467, Ack: 1, Len: 1
+Data (1 byte)
+
+0000  53                                                S
+
+No.     Time           Source                Destination           Protocol Length Info
+714 94.255811      134.108.8.36          134.108.8.37          TCP      54     [TCP ZeroWindow] [TCP ACKed unseen segment] 6777 -> 51484 [ACK] Seq=1 Ack=73468 Win=0 Len=0
+
+Frame 714: 54 bytes on wire (432 bits), 54 bytes captured (432 bits) on interface 0
+Ethernet II, Src: Dell\_87:b7:aa (90:b1:1c:87:b7:aa), Dst: Dell\_88:97:76 (90:b1:1c:88:97:76)
+Internet Protocol Version 4, Src: 134.108.8.36, Dst: 134.108.8.37
+Transmission Control Protocol, Src Port: 6777, Dst Port: 51484, Seq: 1, Ack: 73468, Len: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+1795 204.639823     134.108.8.36          134.108.8.37          TCP      54     [TCP Window Update] 6777 -> 51484 [ACK] Seq=1 Ack=73469 Win=18 Len=0
+
+Frame 1795: 54 bytes on wire (432 bits), 54 bytes captured (432 bits) on interface 0
+Ethernet II, Src: Dell\_87:b7:aa (90:b1:1c:87:b7:aa), Dst: Dell\_88:97:76 (90:b1:1c:88:97:76)
+Internet Protocol Version 4, Src: 134.108.8.36, Dst: 134.108.8.37
+Transmission Control Protocol, Src Port: 6777, Dst Port: 51484, Seq: 1, Ack: 73469, Len: 0
+
+\end{lstlisting}
 
 \section{TCP transmission error recovery/abort}
 
