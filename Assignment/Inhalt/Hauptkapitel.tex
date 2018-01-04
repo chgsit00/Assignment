@@ -1064,6 +1064,7 @@ As mentioned above, simple PING-commands weren't enough for generating traffic u
 The first task in this laboratory was to establish a simple TCP-connection between a Server PC and a Client PC, sending multiple messages from client to server and vice versa, and finally releasing the connection.
 
 \subsection{Connection establishment}
+\label{con-est}
 To establish a connection between server and client, TCP performs a routine known as the Three-Way-Handshake. The Three-Way-Handshake consists of three packets being transmitted between client and server. First, the client sends a TCP packet with the SYN-Flag containing a random number \textit{x} as sequence number (s. header in chapter \ref{tcp}) to the server. If the server is reachable, it replies with a TCP packet with the SYN and ACK-flags being enabled. Furthermore this packet contains the incremented sequence number \textit{x+1} from the client as acknowledgment number and a newly generated random number \textit{y} as sequence number. Finally the client performs the last step of the Three-Way-Handshake by replying with another ACK-flagged TCP-packet, containing the incremented sequence number from the server \textit{y+1} as acknowledgment number.\\
 After these steps were successful, a stable connection is established and both client and server can begin to send data to each other. The following figure \ref{three-way-handshake} shows the steps of the Three-Way-Handshake.
 \begin{figure}[H]
@@ -1253,14 +1254,266 @@ Transmission Control Protocol, Src Port: 6777, Dst Port: 51484, Seq: 1, Ack: 734
 \end{lstlisting}
 
 \section{TCP transmission error recovery/abort}
+For this exercise TCP's error recovery and abort functionality was analyzed. In the first case, a transmission recovery happens after the server answers before the client's timeout. In the second case, the server does not answer before the timeout and the client aborts the transmission.
+\subsection{transmission error recovery}
+For this first part, a new connection between server and client was initialized the same way as in chapter \ref{con-est}. After that the server blocks any TCP-traffic for the port, \textit{Traffic} is running on using a firewall. Now the clients sends a message to the server, but of course the related TCP-packet is blocked by the firewall. When the client does not receive an ACK-Packet for it's sent message, it sends a \textbf{TCP Retransmission} message. But there is still no answer, because the server still blocks any communication. Now the client keeps sending TCP Retransmission messages and for each packet the retransmission timeout (RTO) is increased. In this case the server is reconnected to the network again by turning off the firewall and answers with an acknowledge, before the client's RTO reaches a critical value. When the client receives this ACK-packet, the transmission was successfully recovered and the client can send it's message. The following Wireshark trace shows the client's original PSH-packet, the first and the last TCP Retransmission packet with unnecessary parts beeing collapsed and the server's ACK-packet. 
+\\
+\begin{lstlisting}[caption={Wireshark trace for TCP transmission error recovery},captionpos=b,label{tcp-recovery}]
+No.     Time           Source                Destination           Protocol Length Info
+115 20.815330      134.108.8.37          134.108.8.36          TCP      154    51693 -> 6777 [PSH, ACK] Seq=1 Ack=1 Win=65536 Len=100
 
+Frame 115: 154 bytes on wire (1232 bits), 154 bytes captured (1232 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51693, Dst Port: 6777, Seq: 1, Ack: 1, Len: 100
+Data (100 bytes)
+
+
+No.     Time           Source                Destination           Protocol Length Info
+117 21.123944      134.108.8.37          134.108.8.36          TCP      154    [TCP Retransmission] 51693 -> 6777 [PSH, ACK] Seq=1 Ack=1 Win=65536 Len=100
+
+Frame 117: 154 bytes on wire (1232 bits), 154 bytes captured (1232 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51693, Dst Port: 6777, Seq: 1, Ack: 1, Len: 100
+	Source Port: 51693
+	Destination Port: 6777
+	[Stream index: 0]
+	[TCP Segment Len: 100]
+	Sequence number: 1    (relative sequence number)
+	[Next sequence number: 101    (relative sequence number)]
+	Acknowledgment number: 1    (relative ack number)
+	0101 .... = Header Length: 20 bytes (5)
+	Flags: 0x018 (PSH, ACK)
+		000. .... .... = Reserved: Not set
+		...0 .... .... = Nonce: Not set
+		.... 0... .... = Congestion Window Reduced (CWR): Not set
+		.... .0.. .... = ECN-Echo: Not set
+		.... ..0. .... = Urgent: Not set
+		.... ...1 .... = Acknowledgment: Set
+		.... .... 1... = Push: Set
+		.... .... .0.. = Reset: Not set
+		.... .... ..0. = Syn: Not set
+		.... .... ...0 = Fin: Not set
+		[TCP Flags: ·······AP···]
+	Window size value: 256
+	[Calculated window size: 65536]
+	[Window size scaling factor: 256]
+	Checksum: 0xabc8 [unverified]
+	[Checksum Status: Unverified]
+	Urgent pointer: 0
+	[SEQ/ACK analysis]
+	[iRTT: 0.000295000 seconds]
+	[Bytes in flight: 100]
+	[Bytes sent since last PSH flag: 100]
+	[TCP Analysis Flags]
+		[Expert Info (Note/Sequence): This frame is a (suspected) retransmission]
+			[This frame is a (suspected) retransmission]
+			[Severity level: Note]
+			[Group: Sequence]
+		[The RTO for this segment was: 0.308614000 seconds]
+		[RTO based on delta from frame: 115]
+	TCP payload (100 bytes)
+	Retransmitted TCP segment data (100 bytes)
+
+No.     Time           Source                Destination           Protocol Length Info
+164 27.738317      134.108.8.37          134.108.8.36          TCP      154    [TCP Retransmission] 51693 -> 6777 [PSH, ACK] Seq=1 Ack=1 Win=65536 Len=100
+
+Frame 164: 154 bytes on wire (1232 bits), 154 bytes captured (1232 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51693, Dst Port: 6777, Seq: 1, Ack: 1, Len: 100
+	Source Port: 51693
+	Destination Port: 6777
+	[Stream index: 0]
+	[TCP Segment Len: 100]
+	Sequence number: 1    (relative sequence number)
+	[Next sequence number: 101    (relative sequence number)]
+	Acknowledgment number: 1    (relative ack number)
+	0101 .... = Header Length: 20 bytes (5)
+	Flags: 0x018 (PSH, ACK)
+		000. .... .... = Reserved: Not set
+		...0 .... .... = Nonce: Not set
+		.... 0... .... = Congestion Window Reduced (CWR): Not set
+		.... .0.. .... = ECN-Echo: Not set
+		.... ..0. .... = Urgent: Not set
+		.... ...1 .... = Acknowledgment: Set
+		.... .... 1... = Push: Set
+		.... .... .0.. = Reset: Not set
+		.... .... ..0. = Syn: Not set
+		.... .... ...0 = Fin: Not set
+		[TCP Flags: ·······AP···]
+	Window size value: 256
+	[Calculated window size: 65536]
+	[Window size scaling factor: 256]
+	Checksum: 0xabc8 [unverified]
+	[Checksum Status: Unverified]
+	Urgent pointer: 0
+	[SEQ/ACK analysis]
+		[iRTT: 0.000295000 seconds]
+		[Bytes in flight: 100]
+		[Bytes sent since last PSH flag: 100]
+		[TCP Analysis Flags]
+			[Expert Info (Note/Sequence): This frame is a (suspected) retransmission]
+				[This frame is a (suspected) retransmission]
+				[Severity level: Note]
+				[Group: Sequence]
+			[The RTO for this segment was: 6.922987000 seconds]
+			[RTO based on delta from frame: 115]
+	TCP payload (100 bytes)
+	Retransmitted TCP segment data (100 bytes)
+
+No.     Time           Source                Destination           Protocol Length Info
+	166 27.951282      134.108.8.36          134.108.8.37          TCP      54     6777 -> 51693 [ACK] Seq=1 Ack=101 Win=65536 Len=0
+
+Frame 166: 54 bytes on wire (432 bits), 54 bytes captured (432 bits) on interface 0
+Ethernet II, Src: Dell\_87:b7:aa (90:b1:1c:87:b7:aa), Dst: Dell\_88:97:76 (90:b1:1c:88:97:76)
+Internet Protocol Version 4, Src: 134.108.8.36, Dst: 134.108.8.37
+Transmission Control Protocol, Src Port: 6777, Dst Port: 51693, Seq: 1, Ack: 101, Len: 0
+	Source Port: 6777
+	Destination Port: 51693
+	[Stream index: 0]
+	[TCP Segment Len: 0]
+	Sequence number: 1    (relative sequence number)
+	Acknowledgment number: 101    (relative ack number)
+	0101 .... = Header Length: 20 bytes (5)
+	Flags: 0x010 (ACK)
+		000. .... .... = Reserved: Not set
+		...0 .... .... = Nonce: Not set
+		.... 0... .... = Congestion Window Reduced (CWR): Not set
+		.... .0.. .... = ECN-Echo: Not set
+		.... ..0. .... = Urgent: Not set
+		.... ...1 .... = Acknowledgment: Set
+		.... .... 0... = Push: Not set
+		.... .... .0.. = Reset: Not set
+		.... .... ..0. = Syn: Not set
+		.... .... ...0 = Fin: Not set
+		[TCP Flags: ·······A····]
+	Window size value: 256
+	[Calculated window size: 65536]
+	[Window size scaling factor: 256]
+	Checksum: 0x1d3c [unverified]
+	[Checksum Status: Unverified]
+	Urgent pointer: 0
+	[SEQ/ACK analysis]
+		[This is an ACK to the segment in frame: 115]
+		[The RTT to ACK the segment was: 7.135952000 seconds]
+		[iRTT: 0.000295000 seconds]
+\end{lstlisting}
+
+\subsection{transmission error abort}
+In this second case, the server wasn't reconnected to the network before the client's TCP-packet RTO reached a critical value. To set up the same starting situation as in the exercise before, a burst of 10 messages was sent from client to server to reduce the RTO to a minimum. Now the server blocks all TCP traffic again using it's firewall. After that the client sends another message, but this time the server does not reconnect to the network. After seven TCP Retransmission messages, the RTO reaches a critical value and the client now sends a RST-packet to the server to close it's side of the connection. When the server tries to send another message to the client, the client does not reply with an acknowledge but with an reset (RST). These packets can be seen in the following Wireshark trace:
+\\
+\begin{lstlisting}[caption={Wireshark trace for TCP transmission error abort},captionpos=b,label{tcp-abort}]
+No.     Time           Source                Destination           Protocol Length Info
+1182 150.782224     134.108.8.37          134.108.8.36          TCP      60     51685 -> 6777 [RST, ACK] Seq=101 Ack=1 Win=0 Len=0
+
+Frame 1182: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51685, Dst Port: 6777, Seq: 101, Ack: 1, Len: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+1971 264.235460     134.108.8.36          134.108.8.37          TCP      154    6777 -> 51685 [PSH, ACK] Seq=1 Ack=1 Win=65536 Len=100
+
+Frame 1971: 154 bytes on wire (1232 bits), 154 bytes captured (1232 bits) on interface 0
+Ethernet II, Src: Dell\_87:b7:aa (90:b1:1c:87:b7:aa), Dst: Dell\_88:97:76 (90:b1:1c:88:97:76)
+Internet Protocol Version 4, Src: 134.108.8.36, Dst: 134.108.8.37
+Transmission Control Protocol, Src Port: 6777, Dst Port: 51685, Seq: 1, Ack: 1, Len: 100
+Data (100 bytes)
+
+No.     Time           Source                Destination           Protocol Length Info
+1974 264.235679     134.108.8.37          134.108.8.36          TCP      60     51685 -> 6777 [RST] Seq=1 Win=0 Len=0
+
+Frame 1974: 60 bytes on wire (480 bits), 60 bytes captured (480 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51685, Dst Port: 6777, Seq: 1, Len: 0
+
+\end{lstlisting}
 \section{TCP protocol errors (synchronization errors)}
+In this exercise it was examined what TCP does when client and server are not synchronised
+correctly. In the first case, the client tries to connect to the server before the server's TCP socket has called \textit{listen()}. In this case the client tries to connect to a non-existing server. When the client does not receive a [SYN, ACK]-packet from the server, it starts to send TCP Retransmission messages. When the server performs a listen before the RTO reaches a critical value, the rest of the Three-Way-Handshake is done normally. Otherwise the client aborts the procedure. The following Wireshark-trace shows the related packets for SYN and TCP Retransmission messages:
+\\
+\begin{lstlisting}[caption={Connect before listen},captionpos=b,label{tcp-beforelisten}]
+No.     Time           Source                Destination           Protocol Length Info
+111 19.236136      134.108.8.37          134.108.8.36          TCP      66     51700 -> 6777 [SYN] Seq=0 Win=8192 Len=0 MSS=1460 WS=256 SACK\_PERM=1
 
+Frame 111: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51700, Dst Port: 6777, Seq: 0, Len: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+120 22.245072      134.108.8.37          134.108.8.36          TCP      66     [TCP Retransmission] 51700 -> 6777 [SYN] Seq=0 Win=8192 Len=0 MSS=1460 WS=256 SACK\_PERM=1
+
+Frame 120: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51700, Dst Port: 6777, Seq: 0, Len: 0
+
+No.     Time           Source                Destination           Protocol Length Info
+155 28.250924      134.108.8.37          134.108.8.36          TCP      62     [TCP Retransmission] 51700 -> 6777 [SYN] Seq=0 Win=8192 Len=0 MSS=1460 SACK\_PERM=1
+
+Frame 155: 62 bytes on wire (496 bits), 62 bytes captured (496 bits) on interface 0
+Ethernet II, Src: Dell\_88:97:76 (90:b1:1c:88:97:76), Dst: Dell\_87:b7:aa (90:b1:1c:87:b7:aa)
+Internet Protocol Version 4, Src: 134.108.8.37, Dst: 134.108.8.36
+Transmission Control Protocol, Src Port: 51700, Dst Port: 6777, Seq: 0, Len: 0
+\end{lstlisting}
+
+The same thing happens in the second case. When the server performs a \textit{listen} before blocking all TCP traffic for the related port, it does not notice any attempts to establish a connection. The Wireshark Trace for this looks the same as in the first case. In both cases the client's user screen shows an error message as seen in figure \ref{user-error}:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width =0.4\textwidth]{connection-failed.PNG}
+	\caption{Connection failed!}
+	\label{user-error}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{IPv6/ICMPv6 analysis}
 \label{ipv6}
+\begin{table}[H]
+	\centering
+	\label{ipv6-header}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+		\hline
+		bits       & 0-3          & 4-7             & 8-11             & 12-15      & 16-19           & 20-23          & 24-27          & 28-31         \\ \hline
+		bytes      & \multicolumn{2}{c|}{1}         & \multicolumn{2}{c|}{2}        & \multicolumn{2}{c|}{3}           & \multicolumn{2}{c|}{4}         \\ \hline
+		Offset 0   & Version      & \multicolumn{2}{c|}{Traffic Class} & \multicolumn{5}{c|}{Flow Label}                                                \\ \hline
+		Offset 32  & \multicolumn{4}{c|}{Payload Length}                            & \multicolumn{2}{c|}{Next Header} & \multicolumn{2}{c|}{Hop Limit} \\ \hline
+		Offset 64  & \multicolumn{8}{c|}{Source Address}                                                                               \\ \cline{1-1}
+		Offset 96  & \multicolumn{8}{c|}{}                                                                                                              \\ \cline{1-1}
+		Offset 128 & \multicolumn{8}{c|}{}                                                                                                              \\ \cline{1-1}
+		Offset 160 & \multicolumn{8}{c|}{}                                                                                                              \\ \hline
+		Offset 192 & \multicolumn{8}{c|}{Destination Address}                                                                         \\ \cline{1-1}
+		Offset 224 & \multicolumn{8}{c|}{}                                                                                                              \\ \cline{1-1}
+		Offset 256 & \multicolumn{8}{c|}{}                                                                                                              \\ \cline{1-1}
+		Offset 288 & \multicolumn{8}{c|}{}                                                                                                              \\ \hline
+	\end{tabular}
+	\caption{Internet Protocol v6 Header}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\label{icmpv6-header}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		bits       & 0-7        & 8-15       & 16-23       & 24-31             \\ \hline
+		bytes      & 1          & 2          & 3           & 4                 \\ \hline
+		Offset 0   & \multicolumn{4}{c|}{Source Address}      \\ \cline{1-1}
+		Offset 32  & \multicolumn{4}{c|}{}                                     \\ \cline{1-1}
+		Offset 64  & \multicolumn{4}{c|}{}                                     \\ \cline{1-1}
+		Offset 96  & \multicolumn{4}{c|}{}                                     \\ \hline
+		Offset 128 & \multicolumn{4}{c|}{Destination Address} \\ \cline{1-1}
+		Offset 160 & \multicolumn{4}{c|}{}                                     \\ \cline{1-1}
+		Offset 192 & \multicolumn{4}{c|}{}                                     \\ \cline{1-1}
+		Offset 224 & \multicolumn{4}{c|}{}                                     \\ \hline
+		Offset 256 & \multicolumn{4}{c|}{ICMPv6 length}                        \\ \hline
+		Offset 288 & \multicolumn{3}{c|}{Zeros}            & Next Header       \\ \hline
+	\end{tabular}
+	\caption{Internet Control Message Protocol v6 Header}
+\end{table}
 \section{Node configuration}
 \subsection{IPv4 and IPv6 configuration}
 \subsection{interfaces for IPv6}

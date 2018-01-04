@@ -22,17 +22,19 @@
 \BOOKMARK [2][]{subsection.3.2.3}{Connection release}{section.3.2}% 22
 \BOOKMARK [1][]{section.3.3}{TCP flow control}{chapter.3}% 23
 \BOOKMARK [1][]{section.3.4}{TCP transmission error recovery/abort}{chapter.3}% 24
-\BOOKMARK [1][]{section.3.5}{TCP protocol errors \(synchronization errors\)}{chapter.3}% 25
-\BOOKMARK [0][]{chapter.4}{IPv6/ICMPv6 analysis}{}% 26
-\BOOKMARK [1][]{section.4.1}{Node configuration}{chapter.4}% 27
-\BOOKMARK [2][]{subsection.4.1.1}{IPv4 and IPv6 configuration}{section.4.1}% 28
-\BOOKMARK [2][]{subsection.4.1.2}{interfaces for IPv6}{section.4.1}% 29
-\BOOKMARK [1][]{section.4.2}{PING commands}{chapter.4}% 30
-\BOOKMARK [2][]{subsection.4.2.1}{a\) Basic ICMPv6 PING command}{section.4.2}% 31
-\BOOKMARK [2][]{subsection.4.2.2}{b\) ICMPv6 PING command with large data package}{section.4.2}% 32
-\BOOKMARK [2][]{subsection.4.2.3}{c\) Rebooting PC}{section.4.2}% 33
-\BOOKMARK [2][]{subsection.4.2.4}{d\) Enforcing Neighbor discovery}{section.4.2}% 34
-\BOOKMARK [2][]{subsection.4.2.5}{e\) ICMPv6 PING command with destination in another subnet}{section.4.2}% 35
-\BOOKMARK [2][]{subsection.4.2.6}{f\) PING to a remote tunnel end}{section.4.2}% 36
-\BOOKMARK [0][]{chapter.5}{Conclusion}{}% 37
-\BOOKMARK [0][]{chapter*.20}{Bibliography}{}% 38
+\BOOKMARK [2][]{subsection.3.4.1}{transmission error recovery}{section.3.4}% 25
+\BOOKMARK [2][]{subsection.3.4.2}{transmission error abort}{section.3.4}% 26
+\BOOKMARK [1][]{section.3.5}{TCP protocol errors \(synchronization errors\)}{chapter.3}% 27
+\BOOKMARK [0][]{chapter.4}{IPv6/ICMPv6 analysis}{}% 28
+\BOOKMARK [1][]{section.4.1}{Node configuration}{chapter.4}% 29
+\BOOKMARK [2][]{subsection.4.1.1}{IPv4 and IPv6 configuration}{section.4.1}% 30
+\BOOKMARK [2][]{subsection.4.1.2}{interfaces for IPv6}{section.4.1}% 31
+\BOOKMARK [1][]{section.4.2}{PING commands}{chapter.4}% 32
+\BOOKMARK [2][]{subsection.4.2.1}{a\) Basic ICMPv6 PING command}{section.4.2}% 33
+\BOOKMARK [2][]{subsection.4.2.2}{b\) ICMPv6 PING command with large data package}{section.4.2}% 34
+\BOOKMARK [2][]{subsection.4.2.3}{c\) Rebooting PC}{section.4.2}% 35
+\BOOKMARK [2][]{subsection.4.2.4}{d\) Enforcing Neighbor discovery}{section.4.2}% 36
+\BOOKMARK [2][]{subsection.4.2.5}{e\) ICMPv6 PING command with destination in another subnet}{section.4.2}% 37
+\BOOKMARK [2][]{subsection.4.2.6}{f\) PING to a remote tunnel end}{section.4.2}% 38
+\BOOKMARK [0][]{chapter.5}{Conclusion}{}% 39
+\BOOKMARK [0][]{chapter*.23}{Bibliography}{}% 40

@@ -50,30 +50,34 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.4}TCP transmission error recovery/abort}{38}{section.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}TCP protocol errors (synchronization errors)}{38}{section.3.5}
+\contentsline {subsection}{\numberline {3.4.1}transmission error recovery}{39}{subsection.3.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}IPv6/ICMPv6 analysis}{39}{chapter.4}
+\contentsline {subsection}{\numberline {3.4.2}transmission error abort}{42}{subsection.3.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Node configuration}{39}{section.4.1}
+\contentsline {section}{\numberline {3.5}TCP protocol errors (synchronization errors)}{43}{section.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}IPv4 and IPv6 configuration}{39}{subsection.4.1.1}
+\contentsline {chapter}{\numberline {4}IPv6/ICMPv6 analysis}{45}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}interfaces for IPv6}{39}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.1}Node configuration}{46}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}PING commands}{39}{section.4.2}
+\contentsline {subsection}{\numberline {4.1.1}IPv4 and IPv6 configuration}{46}{subsection.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.1}a) Basic ICMPv6 PING command}{39}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.1.2}interfaces for IPv6}{46}{subsection.4.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.2}b) ICMPv6 PING command with large data package}{39}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.2}PING commands}{46}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.3}c) Rebooting PC}{39}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.1}a) Basic ICMPv6 PING command}{46}{subsection.4.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.4}d) Enforcing Neighbor discovery}{39}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.2}b) ICMPv6 PING command with large data package}{46}{subsection.4.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.5}e) ICMPv6 PING command with destination in another subnet}{39}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.3}c) Rebooting PC}{46}{subsection.4.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.6}f) PING to a remote tunnel end}{39}{subsection.4.2.6}
+\contentsline {subsection}{\numberline {4.2.4}d) Enforcing Neighbor discovery}{46}{subsection.4.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusion}{40}{chapter.5}
+\contentsline {subsection}{\numberline {4.2.5}e) ICMPv6 PING command with destination in another subnet}{46}{subsection.4.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Bibliography}{41}{chapter*.20}
+\contentsline {subsection}{\numberline {4.2.6}f) PING to a remote tunnel end}{46}{subsection.4.2.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Conclusion}{47}{chapter.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\nonumberline Bibliography}{48}{chapter*.23}
