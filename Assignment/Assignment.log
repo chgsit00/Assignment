@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.22)  4 JAN 2018 12:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.22)  5 JAN 2018 12:10
 entering extended mode
 **./Assignment.tex
 (Assignment.tex
@@ -2584,10 +2584,39 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 [44 <./Bilder/connection-failed.PNG>]
 chapter 4.
+
+Package caption Warning: \label without proper reference on input line 1483.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `ipv6-header' on page 45 undefined on input line 1478.
+
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1476--1500
+
+ []
+
+
+Package caption Warning: \label without proper reference on input line 1506.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `icmpv6-header' on page 45 undefined on input line 150
+2.
+
+
+Package caption Warning: \label without proper reference on input line 1520.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `icmpv6-abstract-header' on page 45 undefined on input
+ line 1517.
+
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-532.
+537.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2599,13 +2628,37 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-532.
+565.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
 [46]
+
+LaTeX Warning: Reference `netsh-interfaces' on page 47 undefined on input line 
+1570.
+
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+<use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+608.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[47]
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+630.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[48]
 chapter 5.
 ))
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
@@ -2617,7 +2670,7 @@ Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[47
+[49
 
 ])
 chapter without number
@@ -2630,7 +2683,7 @@ Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[48
+[50
 
 
 ]
@@ -2640,7 +2693,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 145.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 145.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 145.
 Package rerunfilecheck Info: File `Assignment.out' has not changed.
-(rerunfilecheck)             Checksum: 1A08162ACFD2A7B86C62AB738BE5F355;3015.
+(rerunfilecheck)             Checksum: B87E56284E63E6E90023D046BB3FFDCE;3015.
 
 
 LaTeX Warning: There were undefined references.
@@ -2650,10 +2703,10 @@ Package logreq Info: Writing requests to 'Assignment.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 39156 strings out of 493323
- 710183 string characters out of 3139069
+ 39323 strings out of 493323
+ 712407 string characters out of 3139069
  1567703 words of memory out of 3000000
- 40678 multiletter control sequences out of 15000+200000
+ 40772 multiletter control sequences out of 15000+200000
  72817 words of font info for 67 fonts, out of 3000000 for 9000
  1145 hyphenation exceptions out of 8191
  67i,18n,80p,8823b,3318s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2670,9 +2723,9 @@ ic/lm/lmri12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pf
 b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Program Fil
 es/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Program Files/MiKTeX 2.9/fon
 ts/type1/public/lm/lmtt9.pfb>
-Output written on Assignment.pdf (52 pages, 1730222 bytes).
+Output written on Assignment.pdf (54 pages, 1750615 bytes).
 PDF statistics:
- 1982 PDF objects out of 2073 (max. 8388607)
- 1228 named destinations out of 1440 (max. 500000)
+ 2082 PDF objects out of 2487 (max. 8388607)
+ 1301 named destinations out of 1440 (max. 500000)
  443 words of extra memory for PDF output out of 10000 (max. 10000000)
 

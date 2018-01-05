@@ -25,7 +25,7 @@ The PING-commands generate packages consisting of different protocol headers and
 	\begin{tabular}{|c|c|c|c|c|}
 		\hline
 		\textbf{bits}  & 0-7  & 8-15 & 16-23         & 24-31         \\ \hline
-		\textbf{bytes} & 1    & 2    & 3             & 4             \\ \hline
+		\textbf{bytes} & 0    & 1    & 2             & 3             \\ \hline
 		offset 0       & Type & Code & \multicolumn{2}{c|}{Checksum} \\ \hline
 		offset 32      & \multicolumn{4}{c|}{Data}                   \\ \hline
 	\end{tabular}
@@ -38,7 +38,7 @@ The PING-commands generate packages consisting of different protocol headers and
 	\begin{tabular}{|c|c|c|c|c|}
 		\hline
 		\textbf{bits}                   & 0-7            & 8-15           & 16-23             & 24-31            \\ \hline
-		\textbf{bytes}                  & 1              & 2              & 3                 & 4                \\ \hline
+		\textbf{bytes}                  & 0              & 1              & 2                 & 3                \\ \hline
 		offset 0                        & Type           & Code           & \multicolumn{2}{c|}{Checksum}        \\ \hline
 		\multicolumn{1}{|l|}{offset 32} & \multicolumn{2}{c|}{Identifier} & \multicolumn{2}{c|}{Sequence Number} \\ \hline
 		offset 64                       & \multicolumn{4}{c|}{data}                                              \\ \hline
@@ -55,7 +55,7 @@ Table \ref{ipv4-header} shows the header for the Internet Protocol v4. Noteable 
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 		\hline
 		bits       & 0-3               & 4-7           & 8-11             & 12-15             & 16-18  & 19-23      & 24-27      & 28-31      \\ \hline
-		bytes                            & \multicolumn{2}{c|}{1}                                              & \multicolumn{2}{c|}{2}                                               & \multicolumn{2}{c|}{3}& \multicolumn{2}{c|}{4}\\ \hline
+		bytes                            & \multicolumn{2}{c|}{0}                                              & \multicolumn{2}{c|}{1}                                               & \multicolumn{2}{c|}{2}& \multicolumn{2}{c|}{3}\\ \hline
 		offset 0   & Version           & IHL           & \multicolumn{2}{c|}{Type of Service} & \multicolumn{4}{c|}{Total Length}             \\ \hline
 		offset 32  & \multicolumn{4}{c|}{Identification}                                      & Flags  & \multicolumn{3}{c|}{Fragment Offset} \\ \hline
 		offset 64  & \multicolumn{2}{c|}{Time to Live} & \multicolumn{2}{c|}{Protocol}        & \multicolumn{4}{c|}{Header Checksum}          \\ \hline
@@ -784,7 +784,7 @@ In the following exercises the Address Resolution Protocol was analyzed to achie
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 		\hline
 		bits                             & \multicolumn{2}{c|}{0-7}                                                                          & \multicolumn{2}{c|}{8-15}                                                                         & \multicolumn{2}{c|}{16-23} & \multicolumn{2}{c|}{24-31} \\ \hline
-		bytes                            & \multicolumn{2}{c|}{1}                                              & \multicolumn{2}{c|}{2}                                               & \multicolumn{2}{c|}{3}& \multicolumn{2}{c|}{4}\\ \hline
+		bytes                            & \multicolumn{2}{c|}{0}                                              & \multicolumn{2}{c|}{1}                                               & \multicolumn{2}{c|}{2}& \multicolumn{2}{c|}{3}\\ \hline
 		Offset 0                         & \multicolumn{4}{c|}{Hardware-Addresstype (HTYPE)}                                                                                                                                                     & \multicolumn{4}{c|}{Network Protocol Type (PTYPE)}      \\ \hline
 		Offset 32                        & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Hardware \\ Address \\ Length (HLEN)\end{tabular}} & \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Protocol \\ Address \\ Length (PLEN)\end{tabular}} & \multicolumn{4}{c|}{Operation}                          \\ \hline
 		Offset 64                        & \multicolumn{8}{c|}{{ Sender MAC-Address}}                                                                                                                                                                          \\ \hline
@@ -1044,7 +1044,7 @@ TCP is one layer above the protocols ICMP and IP in the transport layer of the O
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 		\hline
 		bits       & 0-3                                                   & 4-7      & 8                                                 & 9                                                 & 10                                                & 11                                                & 12                                                & 13                                                & 14                                                & 15                                                & 16-23             & 24-31             \\ \hline
-		bytes      & \multicolumn{2}{c|}{1}                                           & \multicolumn{8}{c|}{2}                                                                                                                                                                                                                                                                                                                                                                                                        & 3                 & 4                 \\ \hline
+		bytes      & \multicolumn{2}{c|}{0}                                           & \multicolumn{8}{c|}{1}                                                                                                                                                                                                                                                                                                                                                                                                        & 2                 & 3                 \\ \hline
 		Offset 0   & \multicolumn{10}{c|}{source port}                                                                                                                                                                                                                                                                                                                                                                                                                                                                & \multicolumn{2}{c|}{destination port} \\ \hline
 		Offset 32  & \multicolumn{12}{c|}{sequence number}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    \\ \hline
 		Offset 64  & \multicolumn{12}{c|}{acknowledgment number}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \\ \hline
@@ -1473,13 +1473,18 @@ The same thing happens in the second case. When the server performs a \textit{li
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{IPv6/ICMPv6 analysis}
 \label{ipv6}
+In the third and last part of the laboratory we analyzed the new versions of the protocols IPv6 and ICMPv6 using Wireshark. There are some major differences to the version 4 headers of both protocols. The first thing to notice are the much larger address segments in the headers. Those segments now support much larger address spaces to handle IPv6-addresses. 
+\\\\
+Table \ref{ipv6-header} shows the header for the Internet Protocol v6.
+There is a new segment simply called 'Next Header' in the IP header, that handles the type of the next header. The next header usually specifies the transport layer protocol used by a packet's payload. But there can also be extension headers for IP which are specified using this field.
+Also the Time to Life in the IP-header has finally been renamed to what it actually is: a Hop Limit, that is decreased when the packet bypasses a network node. 
 \begin{table}[H]
 	\centering
 	\label{ipv6-header}
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 		\hline
 		bits       & 0-3          & 4-7             & 8-11             & 12-15      & 16-19           & 20-23          & 24-27          & 28-31         \\ \hline
-		bytes      & \multicolumn{2}{c|}{1}         & \multicolumn{2}{c|}{2}        & \multicolumn{2}{c|}{3}           & \multicolumn{2}{c|}{4}         \\ \hline
+		bytes      & \multicolumn{2}{c|}{0}         & \multicolumn{2}{c|}{1}        & \multicolumn{2}{c|}{2}           & \multicolumn{2}{c|}{3}         \\ \hline
 		Offset 0   & Version      & \multicolumn{2}{c|}{Traffic Class} & \multicolumn{5}{c|}{Flow Label}                                                \\ \hline
 		Offset 32  & \multicolumn{4}{c|}{Payload Length}                            & \multicolumn{2}{c|}{Next Header} & \multicolumn{2}{c|}{Hop Limit} \\ \hline
 		Offset 64  & \multicolumn{8}{c|}{Source Address}                                                                               \\ \cline{1-1}
@@ -1494,13 +1499,29 @@ The same thing happens in the second case. When the server performs a \textit{li
 	\caption{Internet Protocol v6 Header}
 \end{table}
 
+Table \ref{icmpv6-header} shows the header for the Internet Control Message Protocol v6. ICMP now does the same thing ARP did in version 4. It maps IPv6 Addresses to actual MAC-Addresses using the Neighbour Discovery Protocol (NDP).
+
 \begin{table}[H]
 	\centering
 	\label{icmpv6-header}
 	\begin{tabular}{|c|c|c|c|c|}
 		\hline
+		bits      & 0-7  & 8-15 & 16-23         & 24-31         \\ \hline
+		bytes     & 0    & 1    & 2             & 3             \\ \hline
+		Offset 0  & Type & Code & \multicolumn{2}{c|}{Checksum} \\ \hline
+		Offset 32 & \multicolumn{4}{c|}{Message Body}           \\ \hline
+	\end{tabular}
+	\caption{Internet Control Message Protocol v6 Header}
+\end{table}
+
+Table \ref{icmpv6-abstract-header} shows the abstract header for the Internet Control Message Protocol v6.
+\begin{table}[H]
+	\centering
+	\label{icmpv6-abstract-header}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
 		bits       & 0-7        & 8-15       & 16-23       & 24-31             \\ \hline
-		bytes      & 1          & 2          & 3           & 4                 \\ \hline
+		bytes      & 0          & 1          & 2           & 3                 \\ \hline
 		Offset 0   & \multicolumn{4}{c|}{Source Address}      \\ \cline{1-1}
 		Offset 32  & \multicolumn{4}{c|}{}                                     \\ \cline{1-1}
 		Offset 64  & \multicolumn{4}{c|}{}                                     \\ \cline{1-1}
@@ -1512,12 +1533,89 @@ The same thing happens in the second case. When the server performs a \textit{li
 		Offset 256 & \multicolumn{4}{c|}{ICMPv6 length}                        \\ \hline
 		Offset 288 & \multicolumn{3}{c|}{Zeros}            & Next Header       \\ \hline
 	\end{tabular}
-	\caption{Internet Control Message Protocol v6 Header}
+	\caption{Abstract Internet Control Message Protocol v6 Header}
 \end{table}
 \section{Node configuration}
 \subsection{IPv4 and IPv6 configuration}
-\subsection{interfaces for IPv6}
+The following listing \ref{ip-config-all} shows the output for the console command 'ipconfig \textbackslash all'. Unnecessary configurations such as the configurations for IPv4 were removed for this listing:
+\\ 
+\begin{lstlisting}[caption={IP Config},captionpos=b,label{ip-config-all}]
+Windows-IP-Konfiguration
 
+	Hostname  . . . . . . . . . . . . : itpc3105
+	Primäres DNS-Suffix . . . . . . . : rznt.rzdir.fht-esslingen.de
+	Knotentyp . . . . . . . . . . . . : Hybrid
+	IP-Routing aktiviert  . . . . . . : Nein
+	WINS-Proxy aktiviert  . . . . . . : Nein
+	DNS-Suffixsuchliste . . . . . . . : rznt.rzdir.fht-esslingen.de
+										rzdir.fht-esslingen.de
+										hs-esslingen.de
+Ethernet-Adapter IPV6:
+
+	Verbindungsspezifisches DNS-Suffix:
+	Beschreibung. . . . . . . . . . . : Broadcom BCM5709C NetXtreme II GigE (NDISVBD Client)
+	Physikalische Adresse . . . . . . : 00-0A-F7-0F-68-30
+	DHCP aktiviert. . . . . . . . . . : Ja
+	Autokonfiguration aktiviert . . . : Ja
+	IPv6-Adresse. . . . . . . . . . . : 2001:7c0:c00:19d:518b:9700:9521:f813(Bevorzugt)
+	Temporäre IPv6-Adresse. . . . . . : 2001:7c0:c00:19d:8873:ffa4:3014:bee(Bevorzugt)
+	Verbindungslokale IPv6-Adresse  . : fe80::518b:9700:9521:f813%12(Bevorzugt)
+	Standardgateway . . . . . . . . . : fe80::2e0:29ff:fe24:f2be%12
+	DNS-Server  . . . . . . . . . . . : fec0:0:0:ffff::1%1
+										fec0:0:0:ffff::2%1
+										fec0:0:0:ffff::3%1
+	NetBIOS über TCP/IP . . . . . . . : Deaktiviert
+\end{lstlisting}
+\subsection{interfaces for IPv6}
+The following listing \ref{netsh-interfaces} shows the network interfaces for the Internet Protocol v6. These were displayed using the console command 'netsh int IPv6 show addresses'.
+\\
+\begin{lstlisting}[caption={IPv6 netsh interfaces},captionpos=b,label{netsh-interfaces}]
+Schnittstelle 1: Loopback Pseudo-Interface 1
+
+Adresstyp  DAD-Status  Gueltigkeit Bevorzugt Adresse
+---------  ----------- ---------- ---------- ------------------------
+Andere     Bevorzugt     infinite   infinite ::1
+
+Schnittstelle 19: 6TO4 Adapter
+
+Adresstyp  DAD-Status  Gueltigkeit Bevorzugt Adresse
+---------  ----------- ---------- ---------- ------------------------
+Andere     Bevorzugt     infinite   infinite 2002:866c:824::866c:824
+
+Schnittstelle 11: IPV4-pub
+
+Adresstyp  DAD-Status  Gueltigkeit Bevorzugt Adresse
+---------  ----------- ---------- ---------- ------------------------
+Andere     Bevorzugt     infinite   infinite fe80::8b8:182:9a03:a4fc%11
+
+Schnittstelle 18: VirtualBox Host-Only Network
+
+Adresstyp  DAD-Status  Gueltigkeit Bevorzugt Adresse
+---------  ----------- ---------- ---------- ------------------------
+Andere     Bevorzugt     infinite   infinite fe80::184e:5e69:8495:6dec%18
+
+Schnittstelle 12: IPV6
+
+Adresstyp  DAD-Status  Gueltigkeit Bevorzugt Adresse
+---------  ----------- ---------- ---------- ------------------------
+Oeffentlich Bevorzugt  29d23h59m58s 6d23h59m58s 2001:7c0:c00:19d:518b:9700:9521:f813
+Temporaer   Bevorzugt  6d23h40m27s 6d23h40m27s 2001:7c0:c00:19d:8873:ffa4:3014:bee
+Andere     Bevorzugt     infinite   infinite fe80::518b:9700:9521:f813%12
+
+Schnittstelle 16: VMware Network Adapter VMnet1
+
+Adresstyp  DAD-Status  Gueltigkeit Bevorzugt Adresse
+---------  ----------- ---------- ---------- ------------------------
+Andere     Bevorzugt     infinite   infinite fe80::e4fd:7474:65e0:77cc%16
+
+Schnittstelle 17: VMware Network Adapter VMnet8
+
+Adresstyp  DAD-Status  Gueltigkeit Bevorzugt Adresse
+---------  ----------- ---------- ---------- ------------------------
+Andere     Bevorzugt     infinite   infinite fe80::61f6:ca2c:cd5e:9d1e%17
+
+
+\end{lstlisting}
 \section{PING commands}
 \subsection{a) Basic ICMPv6 PING command}
 \subsection{b) ICMPv6 PING command with large data package}
