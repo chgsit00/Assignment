@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.22)  5 JAN 2018 12:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.22)  6 JAN 2018 13:12
 entering extended mode
 **./Assignment.tex
 (Assignment.tex
@@ -2027,7 +2027,7 @@ Package pdftex.def Info: Bilder/Network1.PNG used on input line 100.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-07.
+08.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2035,14 +2035,14 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 [4 <./Bilder/ipConfig.PNG> <./Bilder/Network1.PNG>]
 
-LaTeX Warning: Reference `simple-ping' on page 5 undefined on input line 110.
+LaTeX Warning: Reference `simple-ping' on page 5 undefined on input line 111.
 
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 112.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 113.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 120
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 121
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\ts1lmtt.fd"
@@ -2052,7 +2052,7 @@ File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-42.
+43.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2062,7 +2062,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-90.
+91.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2072,7 +2072,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 2
-40.
+41.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2082,12 +2082,12 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/ping-l200.PNG Graphic file (type png)
 
 <use Bilder/ping-l200.PNG>
-Package pdftex.def Info: Bilder/ping-l200.PNG used on input line 264.
+Package pdftex.def Info: Bilder/ping-l200.PNG used on input line 265.
 (pdftex.def)             Requested size: 338.58632pt x 90.67395pt.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 2
-72.
+73.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2097,7 +2097,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 3
-19.
+20.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2107,7 +2107,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 3
-48.
+49.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2117,19 +2117,19 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/ping-dontfragment.PNG Graphic file (type png)
 
 <use Bilder/ping-dontfragment.PNG>
-Package pdftex.def Info: Bilder/ping-dontfragment.PNG used on input line 354.
+Package pdftex.def Info: Bilder/ping-dontfragment.PNG used on input line 355.
 (pdftex.def)             Requested size: 338.58632pt x 65.79997pt.
 
 <Bilder/two-subnets.PNG, id=576, 640.64343pt x 347.04657pt>
 File: Bilder/two-subnets.PNG Graphic file (type png)
 
 <use Bilder/two-subnets.PNG>
-Package pdftex.def Info: Bilder/two-subnets.PNG used on input line 363.
+Package pdftex.def Info: Bilder/two-subnets.PNG used on input line 364.
 (pdftex.def)             Requested size: 483.69687pt x 262.0318pt.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 3
-67.
+68.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2140,12 +2140,12 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/ping-subnet.PNG Graphic file (type png)
 
 <use Bilder/ping-subnet.PNG>
-Package pdftex.def Info: Bilder/ping-subnet.PNG used on input line 376.
+Package pdftex.def Info: Bilder/ping-subnet.PNG used on input line 377.
 (pdftex.def)             Requested size: 338.58632pt x 125.82153pt.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 3
-83.
+84.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2156,7 +2156,7 @@ File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 4
-29.
+30.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2166,7 +2166,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 4
-78.
+79.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2176,7 +2176,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 5
-26.
+27.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2186,12 +2186,12 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/ping-timetolive.PNG Graphic file (type png)
 
 <use Bilder/ping-timetolive.PNG>
-Package pdftex.def Info: Bilder/ping-timetolive.PNG used on input line 571.
+Package pdftex.def Info: Bilder/ping-timetolive.PNG used on input line 572.
 (pdftex.def)             Requested size: 386.95897pt x 70.30473pt.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 5
-75.
+76.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2201,7 +2201,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 6
-07.
+08.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2211,7 +2211,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 6
-57.
+58.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2221,12 +2221,12 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/ping-timestamp.PNG Graphic file (type png)
 
 <use Bilder/ping-timestamp.PNG>
-Package pdftex.def Info: Bilder/ping-timestamp.PNG used on input line 680.
+Package pdftex.def Info: Bilder/ping-timestamp.PNG used on input line 681.
 (pdftex.def)             Requested size: 386.95897pt x 141.4604pt.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 6
-88.
+89.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2236,7 +2236,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 7
-34.
+35.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2244,16 +2244,16 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 [20]
 
-Package caption Warning: \label without proper reference on input line 783.
+Package caption Warning: \label without proper reference on input line 784.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `arp-header' on page 21 undefined on input line 780.
+LaTeX Warning: Reference `arp-header' on page 21 undefined on input line 781.
 
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 7
-97.
+98.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2264,13 +2264,13 @@ File: Bilder/urspruenglicheARPtable.PNG Graphic file (type png)
 
 <use Bilder/urspruenglicheARPtable.PNG>
 Package pdftex.def Info: Bilder/urspruenglicheARPtable.PNG used on input line 8
-02.
+03.
 (pdftex.def)             Requested size: 338.58632pt x 667.417pt.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 8
-06.
+07.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2283,14 +2283,14 @@ File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 8
-06.
+07.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
 [23 <./Bilder/urspruenglicheARPtable.PNG>]
-Underfull \hbox (badness 10000) in paragraph at lines 808--809
+Underfull \hbox (badness 10000) in paragraph at lines 809--810
 
  []
 
@@ -2298,16 +2298,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 808--809
 File: Bilder/ping-arp.PNG Graphic file (type png)
 
 <use Bilder/ping-arp.PNG>
-Package pdftex.def Info: Bilder/ping-arp.PNG used on input line 815.
+Package pdftex.def Info: Bilder/ping-arp.PNG used on input line 816.
 (pdftex.def)             Requested size: 386.95897pt x 116.5108pt.
 
 
-LaTeX Warning: Reference `arp-ping' on page 24 undefined on input line 819.
+LaTeX Warning: Reference `arp-ping' on page 24 undefined on input line 820.
 
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 8
-34.
+35.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2317,7 +2317,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 8
-80.
+81.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2327,7 +2327,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 9
-21.
+22.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2335,36 +2335,36 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 [26]
 
-LaTeX Warning: Reference `arp1' on page 27 undefined on input line 923.
+LaTeX Warning: Reference `arp1' on page 27 undefined on input line 924.
 
 <Bilder/ping-shutdown.PNG, id=1133, 347.79938pt x 86.57344pt>
 File: Bilder/ping-shutdown.PNG Graphic file (type png)
 
 <use Bilder/ping-shutdown.PNG>
-Package pdftex.def Info: Bilder/ping-shutdown.PNG used on input line 927.
+Package pdftex.def Info: Bilder/ping-shutdown.PNG used on input line 928.
 (pdftex.def)             Requested size: 386.95897pt x 96.32484pt.
 
 
-LaTeX Warning: Reference `label' on page 27 undefined on input line 932.
+LaTeX Warning: Reference `label' on page 27 undefined on input line 933.
 
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 9
-47.
+48.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
 [27 <./Bilder/ping-shutdown.PNG>]
-Underfull \hbox (badness 10000) in paragraph at lines 952--955
+Underfull \hbox (badness 10000) in paragraph at lines 953--956
 
  []
 
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 9
-77.
+78.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2374,7 +2374,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-025.
+026.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2384,7 +2384,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-037.
+038.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2393,22 +2393,22 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 [30]
 chapter 3.
 
-Package caption Warning: \label without proper reference on input line 1043.
+Package caption Warning: \label without proper reference on input line 1044.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `tcp-header' on page 31 undefined on input line 1040.
+LaTeX Warning: Reference `tcp-header' on page 31 undefined on input line 1041.
 
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 1058.
+(Font)              <10> on input line 1059.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 1058.
+(Font)              <7> on input line 1059.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 1058.
+(Font)              <5> on input line 1059.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-062.
+063.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2420,12 +2420,12 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Tcp-handshake.png Graphic file (type png)
 
 <use Bilder/Tcp-handshake.png>
-Package pdftex.def Info: Bilder/Tcp-handshake.png used on input line 1072.
+Package pdftex.def Info: Bilder/Tcp-handshake.png used on input line 1073.
 (pdftex.def)             Requested size: 193.47578pt x 173.25632pt.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-076.
+077.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2433,12 +2433,12 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 [32]
 
-LaTeX Warning: Reference `3way' on page 33 undefined on input line 1076.
+LaTeX Warning: Reference `3way' on page 33 undefined on input line 1077.
 
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-104.
+105.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2446,32 +2446,32 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 [33 <./Bilder/Tcp-handshake.png>]
 
-LaTeX Warning: Reference `tcp-data' on page 34 undefined on input line 1106.
+LaTeX Warning: Reference `tcp-data' on page 34 undefined on input line 1107.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1106--1115
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1106--1115
+Underfull \hbox (badness 10000) in paragraph at lines 1107--1116
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1106--1115
+Underfull \hbox (badness 10000) in paragraph at lines 1107--1116
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1106--1115
+Underfull \hbox (badness 10000) in paragraph at lines 1107--1116
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1107--1116
 
  []
 
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-122.
+123.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2481,7 +2481,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-168.
+169.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2491,7 +2491,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-197.
+198.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2501,7 +2501,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-226.
+227.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2511,7 +2511,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-261.
+262.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2521,7 +2521,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-291.
+292.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2531,7 +2531,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-340.
+341.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2541,7 +2541,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-389.
+390.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2551,7 +2551,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-423.
+424.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2561,7 +2561,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-456.
+457.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2571,12 +2571,12 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/connection-failed.PNG Graphic file (type png)
 
 <use Bilder/connection-failed.PNG>
-Package pdftex.def Info: Bilder/connection-failed.PNG used on input line 1467.
+Package pdftex.def Info: Bilder/connection-failed.PNG used on input line 1468.
 (pdftex.def)             Requested size: 193.47578pt x 101.88017pt.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-474.
+475.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2585,38 +2585,38 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 [44 <./Bilder/connection-failed.PNG>]
 chapter 4.
 
-Package caption Warning: \label without proper reference on input line 1483.
+Package caption Warning: \label without proper reference on input line 1484.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `ipv6-header' on page 45 undefined on input line 1478.
+LaTeX Warning: Reference `ipv6-header' on page 45 undefined on input line 1479.
 
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1476--1500
+Underfull \hbox (badness 10000) in paragraph at lines 1477--1501
 
  []
 
 
-Package caption Warning: \label without proper reference on input line 1506.
+Package caption Warning: \label without proper reference on input line 1507.
 See the caption package documentation for explanation.
 
 
 LaTeX Warning: Reference `icmpv6-header' on page 45 undefined on input line 150
-2.
+3.
 
 
-Package caption Warning: \label without proper reference on input line 1520.
+Package caption Warning: \label without proper reference on input line 1521.
 See the caption package documentation for explanation.
 
 
 LaTeX Warning: Reference `icmpv6-abstract-header' on page 45 undefined on input
- line 1517.
+ line 1518.
 
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-537.
+538.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2625,10 +2625,14 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 [45
 
 ]
+
+LaTeX Warning: Reference `ip-config-all' on page 46 undefined on input line 154
+2.
+
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
- <use Bilder/Brunel_University_Logo.png>
+<use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-565.
+558.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2637,12 +2641,12 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 [46]
 
 LaTeX Warning: Reference `netsh-interfaces' on page 47 undefined on input line 
-1570.
+1572.
 
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-608.
+602.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2659,6 +2663,56 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
 [48]
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+671.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[49]
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+718.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[50]
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+750.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[51]
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+782.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[52]
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+795.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[53]
 chapter 5.
 ))
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
@@ -2670,7 +2724,7 @@ Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[49
+[54
 
 ])
 chapter without number
@@ -2683,7 +2737,7 @@ Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[50
+[55
 
 
 ]
@@ -2703,10 +2757,10 @@ Package logreq Info: Writing requests to 'Assignment.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 39323 strings out of 493323
- 712407 string characters out of 3139069
+ 39505 strings out of 493323
+ 715037 string characters out of 3139069
  1567703 words of memory out of 3000000
- 40772 multiletter control sequences out of 15000+200000
+ 40807 multiletter control sequences out of 15000+200000
  72817 words of font info for 67 fonts, out of 3000000 for 9000
  1145 hyphenation exceptions out of 8191
  67i,18n,80p,8823b,3318s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2723,9 +2777,9 @@ ic/lm/lmri12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pf
 b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Program Fil
 es/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Program Files/MiKTeX 2.9/fon
 ts/type1/public/lm/lmtt9.pfb>
-Output written on Assignment.pdf (54 pages, 1750615 bytes).
+Output written on Assignment.pdf (59 pages, 1789821 bytes).
 PDF statistics:
- 2082 PDF objects out of 2487 (max. 8388607)
- 1301 named destinations out of 1440 (max. 500000)
+ 2279 PDF objects out of 2487 (max. 8388607)
+ 1448 named destinations out of 1728 (max. 500000)
  443 words of extra memory for PDF output out of 10000 (max. 10000000)
 

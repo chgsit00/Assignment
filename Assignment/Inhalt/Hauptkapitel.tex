@@ -103,6 +103,7 @@ In the first exercise we created traffic by using the PING-Command to send packe
 \end{figure}
 
 \subsection{a) Basic PING command}
+\label{first-ping}
 The first task was sending a basic ping from one PC to another within the same subnet and capturing the sent packets using Wireshark. The PING-Command was:
 \begin{center}
 	\textit{ping -n 1 -l 64 134.108.8.37}
@@ -1536,6 +1537,7 @@ Table \ref{icmpv6-abstract-header} shows the abstract header for the Internet Co
 	\caption{Abstract Internet Control Message Protocol v6 Header}
 \end{table}
 \section{Node configuration}
+The first task in this laboratory was the same as in laboratory 1: Checking the IP-Addresses of the PCs used in the lab to find out to whom the PING-Commands (s. chapter \ref{pingv6}) should be sent. This can be done using Window's 'ipconfig \textbackslash all'-command in the console or by using the advanced 'netsh int IPv6 show addresses'-command to show all relevant network interfaces for the PC.
 \subsection{IPv4 and IPv6 configuration}
 The following listing \ref{ip-config-all} shows the output for the console command 'ipconfig \textbackslash all'. Unnecessary configurations such as the configurations for IPv4 were removed for this listing:
 \\ 
@@ -1548,8 +1550,8 @@ Windows-IP-Konfiguration
 	IP-Routing aktiviert  . . . . . . : Nein
 	WINS-Proxy aktiviert  . . . . . . : Nein
 	DNS-Suffixsuchliste . . . . . . . : rznt.rzdir.fht-esslingen.de
-										rzdir.fht-esslingen.de
-										hs-esslingen.de
+									rzdir.fht-esslingen.de
+									hs-esslingen.de
 Ethernet-Adapter IPV6:
 
 	Verbindungsspezifisches DNS-Suffix:
@@ -1562,8 +1564,8 @@ Ethernet-Adapter IPV6:
 	Verbindungslokale IPv6-Adresse  . : fe80::518b:9700:9521:f813%12(Bevorzugt)
 	Standardgateway . . . . . . . . . : fe80::2e0:29ff:fe24:f2be%12
 	DNS-Server  . . . . . . . . . . . : fec0:0:0:ffff::1%1
-										fec0:0:0:ffff::2%1
-										fec0:0:0:ffff::3%1
+									fec0:0:0:ffff::2%1
+									fec0:0:0:ffff::3%1
 	NetBIOS über TCP/IP . . . . . . . : Deaktiviert
 \end{lstlisting}
 \subsection{interfaces for IPv6}
@@ -1613,13 +1615,176 @@ Schnittstelle 17: VMware Network Adapter VMnet8
 Adresstyp  DAD-Status  Gueltigkeit Bevorzugt Adresse
 ---------  ----------- ---------- ---------- ------------------------
 Andere     Bevorzugt     infinite   infinite fe80::61f6:ca2c:cd5e:9d1e%17
-
-
 \end{lstlisting}
+
 \section{PING commands}
+\label{pingv6}
+For the following exercises the PING-command was used again to generate ICMP/IPv6 traffic in the network. These packets were again captured by Wireshark and analyzed to point out the differences between the new versions (v6) of these protocols compared to the older versions (v4) from the first laboratory in this workshop. The protocol stack however still stays the same. ICMPv6 request or reply packets are embedded in the IPv6 packet. And of course the IPv6 packet occupies parts of the payload segment of the Ethernet II frame (s. chapter \ref{ipv4}).
 \subsection{a) Basic ICMPv6 PING command}
+This PING-Command is equivalent to the very first PING-command in this workshop (s. chapter \ref{first-ping}). The only difference here is, that now ICMPv6/IPv6 is used instead of v4. The following PING-command does this:
+\begin{center}
+	\textit{ping -6 -n1 -l 64 2001:7c0:c00:19d:518b:9700:9521:f813}
+\end{center}
+Again Wireshark captured two sent packets for this PING-Command: An ICMPv6 request packet and an ICMPv6 reply packet. The size of the ICMPv6 packets however is larger than the size of the ICMPv4 packets, because the IPv6 header occupies 40 bytes instead of 20 as the IPv4 header does. This is why the ICMPv6 request packet has 126 bytes, while the ICMPv4 request packet from chapter \ref{first-ping} had only 106 bytes, although the amount of sent data is the same in both cases (64 bytes). The following listing shows the ICMPv6 request and reply packets:
+\\
+\begin{lstlisting}[caption={Simple ICMPv6 Ping},captionpos=b,label{icmpv5-ping}]
+No.     Time           Source                Destination           Protocol Length Info
+155 183.058271     2001:7c0:c00:19d:3c3d:b555:99e1:2a35 2001:7c0:c00:19d:518b:9700:9521:f813 ICMPv6   126    Echo (ping) request id=0x0001, seq=13, hop limit=128 (reply in 156)
+
+Frame 155: 126 bytes on wire (1008 bits), 126 bytes captured (1008 bits) on interface 0
+	Interface id: 0 (\\Device\\NPF\_{4B57F170-DC25-4B98-9415-3FA58C45E7F6})
+		Interface name: \\Device\\NPF\_{4B57F170-DC25-4B98-9415-3FA58C45E7F6}
+	Encapsulation type: Ethernet (1)
+	Arrival Time: Nov 18, 2017 12:38:14.859626000 Mitteleuropäische Zeit
+	[Time shift for this packet: 0.000000000 seconds]
+	Epoch Time: 1511005094.859626000 seconds
+	[Time delta from previous captured frame: 0.000019000 seconds]
+	[Time delta from previous displayed frame: 0.000019000 seconds]
+	[Time since reference or first frame: 183.058271000 seconds]
+	Frame Number: 155
+	Frame Length: 126 bytes (1008 bits)
+	Capture Length: 126 bytes (1008 bits)
+	[Frame is marked: True]
+	[Frame is ignored: False]
+	[Protocols in frame: eth:ethertype:ipv6:icmpv6:data]
+	[Coloring Rule Name: ICMP]
+	[Coloring Rule String: icmp || icmpv6]
+Ethernet II, Src: Broadcom\_0f:68:28 (00:0a:f7:0f:68:28), Dst: Broadcom\_0f:68:30 (00:0a:f7:0f:68:30)
+	Destination: Broadcom\_0f:68:30 (00:0a:f7:0f:68:30)
+		Address: Broadcom\_0f:68:30 (00:0a:f7:0f:68:30)
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Source: Broadcom\_0f:68:28 (00:0a:f7:0f:68:28)
+		Address: Broadcom\_0f:68:28 (00:0a:f7:0f:68:28)
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Type: IPv6 (0x86dd)
+	Internet Protocol Version 6, Src: 2001:7c0:c00:19d:3c3d:b555:99e1:2a35, Dst: 2001:7c0:c00:19d:518b:9700:9521:f813
+	0110 .... = Version: 6
+		.... 0000 0000 .... .... .... .... .... = Traffic Class: 0x00 (DSCP: CS0, ECN: Not-ECT)
+		.... 0000 00.. .... .... .... .... .... = Differentiated Services Codepoint: Default (0)
+	.... .... ..00 .... .... .... .... .... = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	.... .... .... 0000 0000 0000 0000 0000 = Flow Label: 0x00000
+	Payload Length: 72
+	Next Header: ICMPv6 (58)
+	Hop Limit: 128
+	Source: 2001:7c0:c00:19d:3c3d:b555:99e1:2a35
+	Destination: 2001:7c0:c00:19d:518b:9700:9521:f813
+	[Source GeoIP: Unknown]
+	[Destination GeoIP: Unknown]
+Internet Control Message Protocol v6
+	Type: Echo (ping) request (128)
+	Code: 0
+	Checksum: 0x76cc [correct]
+	[Checksum Status: Good]
+	Identifier: 0x0001
+	Sequence: 13
+	[Response In: 156]
+Data (64 bytes)
+
+
+No.     Time           Source                Destination           Protocol Length Info
+156 183.058370     2001:7c0:c00:19d:518b:9700:9521:f813 2001:7c0:c00:19d:3c3d:b555:99e1:2a35 ICMPv6   126    Echo (ping) reply id=0x0001, seq=13, hop limit=64 (request in 155)
+
+Frame 156: 126 bytes on wire (1008 bits), 126 bytes captured (1008 bits) on interface 0
+	Interface id: 0 (\\Device\\NPF\_{4B57F170-DC25-4B98-9415-3FA58C45E7F6})
+		Interface name: \\Device\\NPF\_{4B57F170-DC25-4B98-9415-3FA58C45E7F6}
+	Encapsulation type: Ethernet (1)
+	Arrival Time: Nov 18, 2017 12:38:14.859725000 Mitteleuropäische Zeit
+	[Time shift for this packet: 0.000000000 seconds]
+	Epoch Time: 1511005094.859725000 seconds
+	[Time delta from previous captured frame: 0.000099000 seconds]
+	[Time delta from previous displayed frame: 0.000099000 seconds]
+	[Time since reference or first frame: 183.058370000 seconds]
+	Frame Number: 156
+	Frame Length: 126 bytes (1008 bits)
+	Capture Length: 126 bytes (1008 bits)
+	[Frame is marked: True]
+	[Frame is ignored: False]
+	[Protocols in frame: eth:ethertype:ipv6:icmpv6:data]
+	[Coloring Rule Name: ICMP]
+	[Coloring Rule String: icmp || icmpv6]
+Ethernet II, Src: Broadcom\_0f:68:30 (00:0a:f7:0f:68:30), Dst: Broadcom\_0f:68:28 (00:0a:f7:0f:68:28)
+	Destination: Broadcom\_0f:68:28 (00:0a:f7:0f:68:28)
+		Address: Broadcom\_0f:68:28 (00:0a:f7:0f:68:28)
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+	Source: Broadcom\_0f:68:30 (00:0a:f7:0f:68:30)
+		Address: Broadcom\_0f:68:30 (00:0a:f7:0f:68:30)
+		.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+		.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+Type: IPv6 (0x86dd)
+	Internet Protocol Version 6, Src: 2001:7c0:c00:19d:518b:9700:9521:f813, Dst: 2001:7c0:c00:19d:3c3d:b555:99e1:2a35
+	0110 .... = Version: 6
+		.... 0000 0000 .... .... .... .... .... = Traffic Class: 0x00 (DSCP: CS0, ECN: Not-ECT)
+		.... 0000 00.. .... .... .... .... .... = Differentiated Services Codepoint: Default (0)
+	.... .... ..00 .... .... .... .... .... = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	.... .... .... 0000 0000 0000 0000 0000 = Flow Label: 0x00000
+	Payload Length: 72
+	Next Header: ICMPv6 (58)
+	Hop Limit: 64
+	Source: 2001:7c0:c00:19d:518b:9700:9521:f813
+	Destination: 2001:7c0:c00:19d:3c3d:b555:99e1:2a35
+	[Source GeoIP: Unknown]
+	[Destination GeoIP: Unknown]
+Internet Control Message Protocol v6
+	Type: Echo (ping) reply (129)
+	Code: 0
+	Checksum: 0x75cc [correct]
+	[Checksum Status: Good]
+	Identifier: 0x0001
+	Sequence: 13
+	[Response To: 155]
+	[Response Time: 0.099 ms]
+Data (64 bytes)
+\end{lstlisting}
 \subsection{b) ICMPv6 PING command with large data package}
+For this exercise another PING-Command was used to send a large data packet from one PC to another. The data field of this packet was large enough to enforce fragmentation.
+\begin{center}
+	\textit{ping -6 -n1 -l 2000 2001:7c0:c00:19d:518b:9700:9521:f813}
+\end{center}
+As the maximal size of an Ethernet frame is 1510 bytes, this large amount of data must be fragmented into two separate packets by IPv6. As seen in chapter \ref{ipv4} the Ethernet II segments occupy 14 bytes of data. Having a look on the introduction of this laboratory (s. chapter \ref{ipv6}), one can see that the ICMPv6 header still only occupies 8 bytes. But the IPv6 header now has a size of 40 bytes and the packet must must also contain information about the fragmentation in an additional fragmentation header (another 8 bytes) as routers cannot fragment IPv6 packets. Subtracting these segments from the Ethernet frame's maximal size determines the MTU for one IPv6 fragment:
+\begin{center}
+	MTU = 1510 bytes -14 bytes -8 bytes -40 bytes -8 bytes
+		= \underline{1440 bytes} 
+\end{center} 
+This first data packet is sent using an IPv6 packet with an IP fragmentation header and contains the first 1440 bytes of transmitted data. The second packet that is immediately sent after the IPv6 fragment is a ICMPv6 request packet containing the remaining 560 bytes of data, the ICMPv6 header (8 bytes), the IPv6 header (40 bytes) , and the Ethernet segments (14 bytes). So summed up this second packet has a size of 622 bytes. The reply packets are fragmented the same way. The following Wireshark trace shows all four collapsed packets transmitted between both PCs.
+\\
+\begin{lstlisting}[caption={IPv6 Fragmentation},captionpos=b,label{icmpv6-ping-fragment}]
+No.     Time           Source                Destination           Protocol Length Info
+9 1.250164       2001:7c0:c00:19d:3c3d:b555:99e1:2a35 2001:7c0:c00:19d:518b:9700:9521:f813 IPv6     1510   IPv6 fragment (off=0 more=y ident=0x00000000 nxt=58)
+
+Frame 9: 1510 bytes on wire (12080 bits), 1510 bytes captured (12080 bits) on interface 0
+Ethernet II, Src: Broadcom\_0f:68:28 (00:0a:f7:0f:68:28), Dst: Broadcom\_0f:68:30 (00:0a:f7:0f:68:30)
+Internet Protocol Version 6, Src: 2001:7c0:c00:19d:3c3d:b555:99e1:2a35, Dst: 2001:7c0:c00:19d:518b:9700:9521:f813
+Data (1448 bytes)
+
+No.     Time           Source                Destination           Protocol Length Info
+10 1.250167       2001:7c0:c00:19d:3c3d:b555:99e1:2a35 2001:7c0:c00:19d:518b:9700:9521:f813 ICMPv6   622    Echo (ping) request id=0x0001, seq=14, hop limit=128 (reply in 13)
+
+Frame 10: 622 bytes on wire (4976 bits), 622 bytes captured (4976 bits) on interface 0
+Ethernet II, Src: Broadcom\_0f:68:28 (00:0a:f7:0f:68:28), Dst: Broadcom\_0f:68:30 (00:0a:f7:0f:68:30)
+Internet Protocol Version 6, Src: 2001:7c0:c00:19d:3c3d:b555:99e1:2a35, Dst: 2001:7c0:c00:19d:518b:9700:9521:f813
+Internet Control Message Protocol v6
+
+No.     Time           Source                Destination           Protocol Length Info
+12 1.250367       2001:7c0:c00:19d:518b:9700:9521:f813 2001:7c0:c00:19d:3c3d:b555:99e1:2a35 IPv6     1510   IPv6 fragment (off=0 more=y ident=0x00000000 nxt=58)
+
+Frame 12: 1510 bytes on wire (12080 bits), 1510 bytes captured (12080 bits) on interface 0
+Ethernet II, Src: Broadcom\_0f:68:30 (00:0a:f7:0f:68:30), Dst: Broadcom\_0f:68:28 (00:0a:f7:0f:68:28)
+Internet Protocol Version 6, Src: 2001:7c0:c00:19d:518b:9700:9521:f813, Dst: 2001:7c0:c00:19d:3c3d:b555:99e1:2a35
+Data (1448 bytes)
+
+No.     Time           Source                Destination           Protocol Length Info
+13 1.250368       2001:7c0:c00:19d:518b:9700:9521:f813 2001:7c0:c00:19d:3c3d:b555:99e1:2a35 ICMPv6   622    Echo (ping) reply id=0x0001, seq=14, hop limit=64 (request in 10)
+
+Frame 13: 622 bytes on wire (4976 bits), 622 bytes captured (4976 bits) on interface 0
+Ethernet II, Src: Broadcom\_0f:68:30 (00:0a:f7:0f:68:30), Dst: Broadcom\_0f:68:28 (00:0a:f7:0f:68:28)
+Internet Protocol Version 6, Src: 2001:7c0:c00:19d:518b:9700:9521:f813, Dst: 2001:7c0:c00:19d:3c3d:b555:99e1:2a35
+Internet Control Message Protocol v6
+\end{lstlisting}
 \subsection{c) Rebooting PC}
+For this exercise the PC from where the previous PING-Commands were executed was shut down and rebooted, while the network activity was observed using the second PC. The aim was to get an idea of the Neighbor Discovery Protocol (NDP) and the Stateless Address Auto Configuration (SLAAC), that replace the Address Resolution Protocol (ARP) in IPv6.
 \subsection{d) Enforcing Neighbor discovery}
 \subsection{e) ICMPv6 PING command with destination in another subnet}
 \subsection{f) PING to a remote tunnel end}
