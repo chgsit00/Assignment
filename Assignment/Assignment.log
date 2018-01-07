@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.22)  6 JAN 2018 13:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.22)  7 JAN 2018 13:20
 entering extended mode
 **./Assignment.tex
 (Assignment.tex
@@ -2686,7 +2686,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-750.
+751.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2696,7 +2696,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-782.
+783.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2706,15 +2706,90 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-795.
+808.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
 [53]
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+837.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[54]
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+870.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[55]
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+906.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[56]
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+932.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[57]
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+972.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[58]
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+976.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[59]
 chapter 5.
-))
+)
+Underfull \hbox (badness 10000) in paragraph at lines 1978--5
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1978--5
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1978--5
+
+ []
+
+)
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
@@ -2724,7 +2799,7 @@ Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[54
+[60
 
 ])
 chapter without number
@@ -2737,7 +2812,7 @@ Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[55
+[61
 
 
 ]
@@ -2747,7 +2822,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 145.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 145.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 145.
 Package rerunfilecheck Info: File `Assignment.out' has not changed.
-(rerunfilecheck)             Checksum: B87E56284E63E6E90023D046BB3FFDCE;3015.
+(rerunfilecheck)             Checksum: 635DCE4E801522B46A3B7BA60D1F3494;3006.
 
 
 LaTeX Warning: There were undefined references.
@@ -2757,10 +2832,10 @@ Package logreq Info: Writing requests to 'Assignment.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 39505 strings out of 493323
- 715037 string characters out of 3139069
+ 39698 strings out of 493323
+ 717789 string characters out of 3139069
  1567703 words of memory out of 3000000
- 40807 multiletter control sequences out of 15000+200000
+ 40850 multiletter control sequences out of 15000+200000
  72817 words of font info for 67 fonts, out of 3000000 for 9000
  1145 hyphenation exceptions out of 8191
  67i,18n,80p,8823b,3318s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2777,9 +2852,9 @@ ic/lm/lmri12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pf
 b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Program Fil
 es/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb><C:/Program Files/MiKTeX 2.9/fon
 ts/type1/public/lm/lmtt9.pfb>
-Output written on Assignment.pdf (59 pages, 1789821 bytes).
+Output written on Assignment.pdf (65 pages, 1837275 bytes).
 PDF statistics:
- 2279 PDF objects out of 2487 (max. 8388607)
- 1448 named destinations out of 1728 (max. 500000)
+ 2481 PDF objects out of 2487 (max. 8388607)
+ 1598 named destinations out of 1728 (max. 500000)
  443 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -60,7 +60,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.1}Node configuration}{46}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}IPv4 and IPv6 configuration}{46}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.1}IPv6 configuration}{46}{subsection.4.1.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.1.2}interfaces for IPv6}{47}{subsection.4.1.2}
 \defcounter {refsection}{0}\relax 
@@ -74,10 +74,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.2.4}d) Enforcing Neighbor discovery}{53}{subsection.4.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.5}e) ICMPv6 PING command with destination in another subnet}{53}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.5}e) ICMPv6 PING command with destination in another subnet}{55}{subsection.4.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.6}f) PING to a remote tunnel end}{53}{subsection.4.2.6}
+\contentsline {subsection}{\numberline {4.2.6}f) PING to a remote tunnel end}{57}{subsection.4.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusion}{54}{chapter.5}
+\contentsline {chapter}{\numberline {5}Conclusion}{60}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Bibliography}{55}{chapter*.24}
+\contentsline {chapter}{\nonumberline Bibliography}{61}{chapter*.24}

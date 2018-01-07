@@ -1538,7 +1538,7 @@ Table \ref{icmpv6-abstract-header} shows the abstract header for the Internet Co
 \end{table}
 \section{Node configuration}
 The first task in this laboratory was the same as in laboratory 1: Checking the IP-Addresses of the PCs used in the lab to find out to whom the PING-Commands (s. chapter \ref{pingv6}) should be sent. This can be done using Window's 'ipconfig \textbackslash all'-command in the console or by using the advanced 'netsh int IPv6 show addresses'-command to show all relevant network interfaces for the PC.
-\subsection{IPv4 and IPv6 configuration}
+\subsection{IPv6 configuration}
 The following listing \ref{ip-config-all} shows the output for the console command 'ipconfig \textbackslash all'. Unnecessary configurations such as the configurations for IPv4 were removed for this listing:
 \\ 
 \begin{lstlisting}[caption={IP Config},captionpos=b,label{ip-config-all}]
@@ -1739,6 +1739,7 @@ Internet Control Message Protocol v6
 Data (64 bytes)
 \end{lstlisting}
 \subsection{b) ICMPv6 PING command with large data package}
+\label{ipv6-fragmentation}
 For this exercise another PING-Command was used to send a large data packet from one PC to another. The data field of this packet was large enough to enforce fragmentation.
 \begin{center}
 	\textit{ping -6 -n1 -l 2000 2001:7c0:c00:19d:518b:9700:9521:f813}
@@ -1786,11 +1787,198 @@ Internet Control Message Protocol v6
 \subsection{c) Rebooting PC}
 For this exercise the PC from where the previous PING-Commands were executed was shut down and rebooted, while the network activity was observed using the second PC. The aim was to get an idea of the Neighbor Discovery Protocol (NDP) and the Stateless Address Auto Configuration (SLAAC), that replace the Address Resolution Protocol (ARP) in IPv6.
 \subsection{d) Enforcing Neighbor discovery}
-\subsection{e) ICMPv6 PING command with destination in another subnet}
-\subsection{f) PING to a remote tunnel end}
+The linked layer communication requires actual MAC-addresses for all involved network-nodes. The mapping between IPv6 Addresses and MAC-addresses was done by the NDP (Neighbor Discovery Protocol) and the mapping itself is registered in the neighbor cache on each PC. For this exercise it was examined what happens when this mapping does not exist on a PC executing a PING-command to an unresolved IPv6 Address. To do this the following steps had to be done first:
+\begin{itemize}
+	\item Diplay the contents of the neighbor cache using \textit{'netsh interface ipv6 show neigbors'}.
+	\item Delete the contents of the neighbor cache using \textit{'netsh interface ipv6 delete neigbors'}.
+	\item Display the neighbor cache again to verify the deletion.
+	\item Execute the PING-command.
+\end{itemize}
+The ping used for this exercise was:
+\begin{center}
+	\textit{ping -6 -n2 -l 64 2001:7c0:c00:19d:518b:9700:9521:f813}
+\end{center}
+The following listing shows the neighbor cache after the deletion:
+\begin{lstlisting}[caption={Neighbor cache after deletion},captionpos=b,label{cache-delete}]
+Schnittstelle 12: IPV6
 
+Internetadresse                              Physische Adresse   Typ
+--------------------------------------------  -----------------  -----------
+fe80::2e0:29ff:fe24:f2be                      00-00-00-00-00-00  Nicht erreichbar
+ff02::1:ff24:f2be                             33-33-ff-24-f2-be  Permanent
+\end{lstlisting}
+
+When executing the PING-command the PC has to do the Neighbor Discovery first to resolve the destination PC's MAC-address by sending an \textbf{Neighbor Solicitation} packet using the multicast-address \textit{ff02::1:ff21:f813}. After that the router sends another Neighbor Solicitation packet using the multicast-address \textit{ff02::1:ffae:be48} to resolve the source-PC's MAC-address. Both PCs answer with a \textbf{Neighbor Advertisement} packet containing their MAC-addresses. After that the neighbor-cache on the source-PC has the required entries and the PING can be executed. The following Wireshark-trace shows this procedure:\\
+\begin{lstlisting}[caption={Neighbor discovery},captionpos=b,label{neighbor-discovery}]
+No.     Time           Source                Destination           Protocol Length Info
+2 0.752761       2001:7c0:c00:19d:fd5d:23c9:5ae:be48 ff02::1:ff21:f813     ICMPv6   86     Neighbor Solicitation for 2001:7c0:c00:19d:518b:9700:9521:f813 from 00:0a:f7:0f:68:28
+
+Frame 2: 86 bytes on wire (688 bits), 86 bytes captured (688 bits) on interface 0
+Ethernet II, Src: Broadcom\_0f:68:28 (00:0a:f7:0f:68:28), Dst: IPv6mcast\_ff:21:f8:13 (33:33:ff:21:f8:13)
+Internet Protocol Version 6, Src: 2001:7c0:c00:19d:fd5d:23c9:5ae:be48, Dst: ff02::1:ff21:f813
+Internet Control Message Protocol v6
+
+No.     Time           Source                Destination           Protocol Length Info
+3 0.753012       2001:7c0:c00:19d:8873:ffa4:3014:bee ff02::1:ffae:be48     ICMPv6   86     Neighbor Solicitation for 2001:7c0:c00:19d:fd5d:23c9:5ae:be48 from 00:0a:f7:0f:68:30
+
+Frame 3: 86 bytes on wire (688 bits), 86 bytes captured (688 bits) on interface 0
+Ethernet II, Src: Broadcom\_0f:68:30 (00:0a:f7:0f:68:30), Dst: IPv6mcast\_ff:ae:be:48 (33:33:ff:ae:be:48)
+Internet Protocol Version 6, Src: 2001:7c0:c00:19d:8873:ffa4:3014:bee, Dst: ff02::1:ffae:be48
+Internet Control Message Protocol v6
+
+No.     Time           Source                Destination           Protocol Length Info
+4 0.753130       2001:7c0:c00:19d:fd5d:23c9:5ae:be48 2001:7c0:c00:19d:8873:ffa4:3014:bee ICMPv6   86     Neighbor Advertisement 2001:7c0:c00:19d:fd5d:23c9:5ae:be48 (sol, ovr) is at 00:0a:f7:0f:68:28
+
+Frame 4: 86 bytes on wire (688 bits), 86 bytes captured (688 bits) on interface 0
+Ethernet II, Src: Broadcom\_0f:68:28 (00:0a:f7:0f:68:28), Dst: Broadcom\_0f:68:30 (00:0a:f7:0f:68:30)
+Internet Protocol Version 6, Src: 2001:7c0:c00:19d:fd5d:23c9:5ae:be48, Dst: 2001:7c0:c00:19d:8873:ffa4:3014:bee
+Internet Control Message Protocol v6
+
+No.     Time           Source                Destination           Protocol Length Info
+5 0.753253       2001:7c0:c00:19d:518b:9700:9521:f813 2001:7c0:c00:19d:fd5d:23c9:5ae:be48 ICMPv6   86     Neighbor Advertisement 2001:7c0:c00:19d:518b:9700:9521:f813 (sol, ovr) is at 00:0a:f7:0f:68:30
+
+Frame 5: 86 bytes on wire (688 bits), 86 bytes captured (688 bits) on interface 0
+Ethernet II, Src: Broadcom\_0f:68:30 (00:0a:f7:0f:68:30), Dst: Broadcom\_0f:68:28 (00:0a:f7:0f:68:28)
+Internet Protocol Version 6, Src: 2001:7c0:c00:19d:518b:9700:9521:f813, Dst: 2001:7c0:c00:19d:fd5d:23c9:5ae:be48
+Internet Control Message Protocol v6
+
+....
+Ping-packets
+....
+\end{lstlisting}
+
+ The following listing shows the restored neighbor cache:\\
+\begin{lstlisting}[caption={Neighbor cache after PING-command},captionpos=b,label{cache-restored}]
+Schnittstelle 12: IPV6
+
+Internetadresse                              Physische Adresse   Typ
+--------------------------------------------  -----------------  -----------
+2001:7c0:c00:19d:518b:9700:9521:f813          00-0a-f7-0f-68-30  Abgelaufen
+2001:7c0:c00:19d:8873:ffa4:3014:bee           00-0a-f7-0f-68-30  Abgelaufen
+fe80::2e0:29ff:fe24:f2be                      00-e0-29-24-f2-be  Abgelaufen (Router)
+ff02::1:ff21:f813                             33-33-ff-21-f8-13  Permanent
+ff02::1:ff24:f2be                             33-33-ff-24-f2-be  Permanent
+\end{lstlisting}
+
+\subsection{e) ICMPv6 PING command with destination in another subnet}
+For this exercise another PING-command was used to send packets to a PC in another subnet. The first subnet had the subnet-mask \textit{2001:7C0:C00:19d::/64}, the second had the subnet-mask \textit{2001:7C0:C00:19e::/64}. For the exercise the following PING-command was used:
+\begin{center}
+	\textit{ping -6 -n1 -l 64 2001:7c0:c00:19e:20a:f7ff:fe0f:67b8}
+\end{center}
+The hop-limit indicates the bypassing of a network-node such as a router. When the packet runs through a router, the hop limit is decremented. In this case the hop-limit in the IP-header of the ICMPv6 echo reply packet is decreased from it's standard value 64 to 63, because it 'hopped' from one subnet into another. The other way round, the hop-limit in the ICMPv6 request header should be 127 instead of 128, when the trace would haven been captured on the destination PC. But because it was captured on the source-PC, it hadn't passed the router yet. So the hop limit is still 128. The following listing shows both packets with an expanded IP-header segment:
+\\
+\begin{lstlisting}[caption={PING to a PC in another subnet},captionpos=b,label{hop-limit}]
+No.     Time           Source                Destination           Protocol Length Info
+3 0.920360       2001:7c0:c00:19d:fd5d:23c9:5ae:be48 2001:7c0:c00:19e:20a:f7ff:fe0f:67b8 ICMPv6   126    Echo (ping) request id=0x0001, seq=19, hop limit=128 (reply in 4)
+
+Frame 3: 126 bytes on wire (1008 bits), 126 bytes captured (1008 bits) on interface 0
+Ethernet II, Src: Broadcom\_0f:68:28 (00:0a:f7:0f:68:28), Dst: SmcEther\_24:f2:be (00:e0:29:24:f2:be)
+Internet Protocol Version 6, Src: 2001:7c0:c00:19d:fd5d:23c9:5ae:be48, Dst: 2001:7c0:c00:19e:20a:f7ff:fe0f:67b8
+	0110 .... = Version: 6
+	.... 0000 0000 .... .... .... .... .... = Traffic Class: 0x00 (DSCP: CS0, ECN: Not-ECT)
+		.... 0000 00.. .... .... .... .... .... = Differentiated Services Codepoint: Default (0)
+		.... .... ..00 .... .... .... .... .... = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	.... .... .... 0000 0000 0000 0000 0000 = Flow Label: 0x00000
+	Payload Length: 72
+	Next Header: ICMPv6 (58)
+	Hop Limit: 128
+	Source: 2001:7c0:c00:19d:fd5d:23c9:5ae:be48
+	Destination: 2001:7c0:c00:19e:20a:f7ff:fe0f:67b8
+	[Destination SA MAC: Broadcom\_0f:67:b8 (00:0a:f7:0f:67:b8)]
+	[Source GeoIP: Unknown]
+[Destination GeoIP: Unknown]
+Internet Control Message Protocol v6
+
+
+No.     Time           Source                Destination           Protocol Length Info
+4 0.920788       2001:7c0:c00:19e:20a:f7ff:fe0f:67b8 2001:7c0:c00:19d:fd5d:23c9:5ae:be48 ICMPv6   126    Echo (ping) reply id=0x0001, seq=19, hop limit=63 (request in 3)
+
+Frame 4: 126 bytes on wire (1008 bits), 126 bytes captured (1008 bits) on interface 0
+Ethernet II, Src: SmcEther\_24:f2:be (00:e0:29:24:f2:be), Dst: Broadcom\_0f:68:28 (00:0a:f7:0f:68:28)
+Internet Protocol Version 6, Src: 2001:7c0:c00:19e:20a:f7ff:fe0f:67b8, Dst: 2001:7c0:c00:19d:fd5d:23c9:5ae:be48
+	0110 .... = Version: 6
+	.... 0000 0000 .... .... .... .... .... = Traffic Class: 0x00 (DSCP: CS0, ECN: Not-ECT)
+		.... 0000 00.. .... .... .... .... .... = Differentiated Services Codepoint: Default (0)
+		.... .... ..00 .... .... .... .... .... = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+	.... .... .... 0000 0000 0000 0000 0000 = Flow Label: 0x00000
+	Payload Length: 72
+	Next Header: ICMPv6 (58)
+	Hop Limit: 63
+	Source: 2001:7c0:c00:19e:20a:f7ff:fe0f:67b8
+	Destination: 2001:7c0:c00:19d:fd5d:23c9:5ae:be48
+	[Source SA MAC: Broadcom\_0f:67:b8 (00:0a:f7:0f:67:b8)]
+	[Source GeoIP: Unknown]
+[Destination GeoIP: Unknown]
+Internet Control Message Protocol v6
+
+\end{lstlisting}
+\subsection{f) PING to a remote tunnel end}
+For the last exercise a PING was sent to a remote tunnel end at IP: 2001:7C0:0:FFDB::1
+(frankfurt2.belwue.de) in the 6WiN network via static tunnel. The following PING-command was used to to this:
+\begin{center}
+	\textit{ping -6 -n 1 -l 1452 2001:7C0:0:FFDB::1}
+\end{center}
+After executing this PING-command the first ICMPv6-packet captured has a size of 1514 bytes, which is exactly the maximal size of an Ethernet II frame (s. chapter \ref{ipv4}) containing the Ethernet II segments (14 bytes), the IPv6 header (40 bytes), the ICMPv6 header (8 bytes) and the raw data (1452 bytes). When this packet passes the router at the remote tunnel end, the original IPv6-packet must be encapsulated in an additional IPv4 packet, as the communication in the tunnel is still based on IPv4. So the IPv4-header (20 bytes) is added to the original packet and this makes the packet to big to be transmitted in a single frame. This causes the second captured packet \textbf{Packet Too Big} sent from the remote tunnel end to the source PC. After receiving this message, the Source PC uses fragmentation to split the data into an IPv6 fragment packet and an ICMPv6 echo request packet the same way as in chapter \ref{ipv6-fragmentation}. The IPv6 packet transfers the first 1432 bytes of data and contains the headers mentioned in chapter \ref{ipv6-fragmentation} (62 bytes) and has a maximal size of 1492 bytes to leave room for the additional IPv4-header. The ICMPv6-packet transfers the remaining 20 bytes. For both packets, the source PC now received an answer from the other side of the tunnel. All mentioned packets are shown in the following Wireshark-trace:
+\\
+\begin{lstlisting}[caption={PING to a remote tunnel end},captionpos=b,label{tunnel}]
+No.     Time           Source                Destination           Protocol Length Info
+7 4.129551       2001:7c0:c00:19d:a05e:db5f:7343:2551 2001:7c0:0:ffdb::1    ICMPv6   1514   Echo (ping) request id=0x0001, seq=27, hop limit=128 (no response found!)
+
+Frame 7: 1514 bytes on wire (12112 bits), 1514 bytes captured (12112 bits) on interface 0
+Ethernet II, Src: Broadcom\_0f:67:b0 (00:0a:f7:0f:67:b0), Dst: SmcEther\_24:f2:be (00:e0:29:24:f2:be)
+Internet Protocol Version 6, Src: 2001:7c0:c00:19d:a05e:db5f:7343:2551, Dst: 2001:7c0:0:ffdb::1
+Internet Control Message Protocol v6
+
+No.     Time           Source                Destination           Protocol Length Info
+8 4.129933       2001:7c0:c00:19d::1   2001:7c0:c00:19d:a05e:db5f:7343:2551 ICMPv6   1294   Packet Too Big
+
+Frame 8: 1294 bytes on wire (10352 bits), 1294 bytes captured (10352 bits) on interface 0
+Ethernet II, Src: SmcEther\_24:f2:be (00:e0:29:24:f2:be), Dst: Broadcom\_0f:67:b0 (00:0a:f7:0f:67:b0)
+Internet Protocol Version 6, Src: 2001:7c0:c00:19d::1, Dst: 2001:7c0:c00:19d:a05e:db5f:7343:2551
+Internet Control Message Protocol v6
+
+No.     Time           Source                Destination           Protocol Length Info
+16 10.499710      2001:7c0:c00:19d:a05e:db5f:7343:2551 2001:7c0:0:ffdb::1    IPv6     1494   IPv6 fragment (off=0 more=y ident=0x00000008 nxt=58)
+
+Frame 16: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits) on interface 0
+Ethernet II, Src: Broadcom\_0f:67:b0 (00:0a:f7:0f:67:b0), Dst: SmcEther\_24:f2:be (00:e0:29:24:f2:be)
+Internet Protocol Version 6, Src: 2001:7c0:c00:19d:a05e:db5f:7343:2551, Dst: 2001:7c0:0:ffdb::1
+Data (1432 bytes)
+
+No.     Time           Source                Destination           Protocol Length Info
+17 10.499716      2001:7c0:c00:19d:a05e:db5f:7343:2551 2001:7c0:0:ffdb::1    ICMPv6   90     Echo (ping) request id=0x0001, seq=28, hop limit=128 (reply in 19)
+
+Frame 17: 90 bytes on wire (720 bits), 90 bytes captured (720 bits) on interface 0
+Ethernet II, Src: Broadcom\_0f:67:b0 (00:0a:f7:0f:67:b0), Dst: SmcEther\_24:f2:be (00:e0:29:24:f2:be)
+Internet Protocol Version 6, Src: 2001:7c0:c00:19d:a05e:db5f:7343:2551, Dst: 2001:7c0:0:ffdb::1
+Internet Control Message Protocol v6
+
+No.     Time           Source                Destination           Protocol Length Info
+18 10.506693      2001:7c0:0:ffdb::1    2001:7c0:c00:19d:a05e:db5f:7343:2551 IPv6     90     IPv6 fragment (off=1432 more=n ident=0x0000009d nxt=58)
+
+Frame 18: 90 bytes on wire (720 bits), 90 bytes captured (720 bits) on interface 0
+Ethernet II, Src: SmcEther\_24:f2:be (00:e0:29:24:f2:be), Dst: Broadcom\_0f:67:b0 (00:0a:f7:0f:67:b0)
+Internet Protocol Version 6, Src: 2001:7c0:0:ffdb::1, Dst: 2001:7c0:c00:19d:a05e:db5f:7343:2551
+Data (28 bytes)
+
+No.     Time           Source                Destination           Protocol Length Info
+19 10.506968      2001:7c0:0:ffdb::1    2001:7c0:c00:19d:a05e:db5f:7343:2551 ICMPv6   1494   Echo (ping) reply id=0x0001, seq=28, hop limit=63 (request in 17)
+
+Frame 19: 1494 bytes on wire (11952 bits), 1494 bytes captured (11952 bits) on interface 0
+Ethernet II, Src: SmcEther\_24:f2:be (00:e0:29:24:f2:be), Dst: Broadcom\_0f:67:b0 (00:0a:f7:0f:67:b0)
+Internet Protocol Version 6, Src: 2001:7c0:0:ffdb::1, Dst: 2001:7c0:c00:19d:a05e:db5f:7343:2551
+Internet Control Message Protocol v6
+
+\end{lstlisting}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Conclusion}
 \label{conclusion}
+In this workshop we analyzed traffic based on the most common and important network protocols to get an idea of how networks work in general.
+\\\\
+For the first laboratory in this workshop we analyzed the protocols \textbf{Internet Protocol v4} (IPv4), \textbf{Internet Message Control Protocol v4} (ICMPv4) and \textbf{Address Resolution Protocol} (ARP). By using the PING-commands in the console and varying the options of this command we generated traffic between two PCs and observed that traffic using the program \textit{Wireshark}.
+\\\\
+The second laboratory was about the \textbf{Transmission Control Protocol} (TCP). We used a program called \textit{Traffic}, that offers the functionality of a simple TCP-Socket with a graphical user interface to generate traffic between two PCs. We observed the connection establishment in TCP, communication in TCP and TCP's error recovery behavior.
+\\\\
+For the third and last laboratory we had a look on the new versions of the protocols IPv6 and ICMPv6 to work out the changes that had been made to these protocols and to try out new enhanced functionality such as the \textbf{Neighbor Discovery Protocol} (NDP) and the \textbf{Stateless Address Auto Configuration} (SLAAC).

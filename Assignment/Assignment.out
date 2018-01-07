@@ -27,7 +27,7 @@
 \BOOKMARK [1][]{section.3.5}{TCP protocol errors \(synchronization errors\)}{chapter.3}% 27
 \BOOKMARK [0][]{chapter.4}{IPv6/ICMPv6 analysis}{}% 28
 \BOOKMARK [1][]{section.4.1}{Node configuration}{chapter.4}% 29
-\BOOKMARK [2][]{subsection.4.1.1}{IPv4 and IPv6 configuration}{section.4.1}% 30
+\BOOKMARK [2][]{subsection.4.1.1}{IPv6 configuration}{section.4.1}% 30
 \BOOKMARK [2][]{subsection.4.1.2}{interfaces for IPv6}{section.4.1}% 31
 \BOOKMARK [1][]{section.4.2}{PING commands}{chapter.4}% 32
 \BOOKMARK [2][]{subsection.4.2.1}{a\) Basic ICMPv6 PING command}{section.4.2}% 33
