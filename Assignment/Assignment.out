@@ -32,9 +32,8 @@
 \BOOKMARK [1][]{section.4.2}{PING commands}{chapter.4}% 32
 \BOOKMARK [2][]{subsection.4.2.1}{a\) Basic ICMPv6 PING command}{section.4.2}% 33
 \BOOKMARK [2][]{subsection.4.2.2}{b\) ICMPv6 PING command with large data package}{section.4.2}% 34
-\BOOKMARK [2][]{subsection.4.2.3}{c\) Rebooting PC}{section.4.2}% 35
+\BOOKMARK [2][]{subsection.4.2.3}{c\) Stateless Address Auto Configuration}{section.4.2}% 35
 \BOOKMARK [2][]{subsection.4.2.4}{d\) Enforcing Neighbor discovery}{section.4.2}% 36
 \BOOKMARK [2][]{subsection.4.2.5}{e\) ICMPv6 PING command with destination in another subnet}{section.4.2}% 37
 \BOOKMARK [2][]{subsection.4.2.6}{f\) PING to a remote tunnel end}{section.4.2}% 38
 \BOOKMARK [0][]{chapter.5}{Conclusion}{}% 39
-\BOOKMARK [0][]{chapter*.24}{Bibliography}{}% 40

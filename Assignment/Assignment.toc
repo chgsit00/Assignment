@@ -70,14 +70,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.2.2}b) ICMPv6 PING command with large data package}{51}{subsection.4.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.3}c) Rebooting PC}{53}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.3}c) Stateless Address Auto Configuration}{53}{subsection.4.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.4}d) Enforcing Neighbor discovery}{53}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.4}d) Enforcing Neighbor discovery}{55}{subsection.4.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.5}e) ICMPv6 PING command with destination in another subnet}{55}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.5}e) ICMPv6 PING command with destination in another subnet}{58}{subsection.4.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.6}f) PING to a remote tunnel end}{57}{subsection.4.2.6}
+\contentsline {subsection}{\numberline {4.2.6}f) PING to a remote tunnel end}{59}{subsection.4.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusion}{60}{chapter.5}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Bibliography}{61}{chapter*.24}
+\contentsline {chapter}{\numberline {5}Conclusion}{62}{chapter.5}
