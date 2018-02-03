@@ -10,28 +10,30 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.1}TCP Socket}{2}{subsection.2.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Java Remote Method Invocation}{2}{section.2.2}
+\contentsline {subsection}{\numberline {2.1.2}UDP Socket}{3}{subsection.2.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Job Server/Client Architecture}{4}{chapter.3}
+\contentsline {section}{\numberline {2.2}Java Remote Method Invocation}{4}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Overall Architecture}{4}{section.3.1}
+\contentsline {chapter}{\numberline {3}Job Server/Client Architecture}{7}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}UDP-Multicast}{4}{section.3.2}
+\contentsline {section}{\numberline {3.1}Overall Architecture}{7}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}The Job Server}{4}{section.3.3}
+\contentsline {section}{\numberline {3.2}UDP-Multicast}{7}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}The Job Client}{4}{section.3.4}
+\contentsline {section}{\numberline {3.3}The Job Server}{7}{section.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}Workload-Balancing}{4}{section.3.5}
+\contentsline {section}{\numberline {3.4}The Job Client}{7}{section.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Other possible solutions}{5}{chapter.4}
+\contentsline {section}{\numberline {3.5}Workload-Balancing}{7}{section.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Server Broadcast}{5}{section.4.1}
+\contentsline {chapter}{\numberline {4}Other possible solutions}{8}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Workload Balancer}{5}{section.4.2}
+\contentsline {section}{\numberline {4.1}Server Broadcast}{8}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusion}{6}{chapter.5}
+\contentsline {section}{\numberline {4.2}Workload Balancer}{8}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Bibliography}{7}{chapter*.3}
+\contentsline {chapter}{\numberline {5}Conclusion}{9}{chapter.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\nonumberline Bibliography}{10}{chapter*.5}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {A}Appendix}{i}{appendix.A}

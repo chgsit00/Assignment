@@ -16,14 +16,41 @@ First of all, the client must know the hostname and port number of the server in
 \\
 After the connection has been established, data can be transferred in both directions between server and client. The next two chapters show two different socket types and their differences.
 \subsection{TCP Socket}
-In general there are two different socket types. The first is the \textbf{Stream Socket} whose communication is based on the Transmission Control Protocol (\textbf{TCP}).
+In general there are two different socket types. The first is the \textbf{Stream Socket} whose communication is based on the Transmission Control Protocol (\textbf{TCP}). Because TCP is connection oriented, the Three-Way-Handshake routine must be performed between server and client. This ensures a stable connection between the two end points via which data can be transmitted. TCP also has a built-in error recovery routine which automatically detects and attempts to fix connection terminations, lost data packets and other failures. The main advantage of this kind of socket is that the communication is safer, because lost packets are detected and resent by the sender (server or client). The main disadvantage is, that these sockets have a larger overhead with the complicated connection establishment and error recovery routines and are therefor slower. Figure \ref{tcpsocket} shows the necessary function calls, both Stream sockets must perform to establish a connection and transmit data:\\
 \begin{figure}[H]
 	\centering
 	\includegraphics[width =0.7\textwidth]{tcpsocket.PNG}
 	\caption{TCP communication between server and client}
-	\label{Wallet}
+	\label{tcpsocket}
 \end{figure}
+\subsection{UDP Socket}
+The \textbf{Datagram Socket} is used for \textbf{UDP} (User Datagram Protocol) communication between two endpoints in the network or between two processes on the same computer.
+\\Unlike TCP, UDP does not work connection-oriented. Here the transmitter sends its packets to the destination without worrying about whether the destination is reachable at all. There is also no error recovery because the sender doesn't care if its packets get lost or not. Datagram sockets are only used in certain use cases. Normally, the sender does care whether its packets arrive at their destination or not, which is why this type of communication is rarely used. UDP is only an alternative if the same information is repeated at short intervals, or if the receiver can easily restore missing information using the context. The main advantage however is that UDP is much faster than other network protocols. Figure \ref{udpsocket} shows the function calls both Datagram sockets must perform to transmit data to each other:\\
+\begin{figure}[H]
+	\centering
+	\includegraphics[width =0.6\textwidth]{udpsocket.PNG}
+	\caption[Caption for LOF]{UDP communication between server and client\footnotemark}
+	\label{udpsocket}
+\end{figure}
+\footnotetext{image-source: http:///www.tenouk.com//Module41a.html}
 \section{Java Remote Method Invocation}
+Remote Method Invocation (\textbf{RMI}) enables the call of a method of a remote Java object. The target object is located in another Java virtual machine that can run on a remote or local computer. The call looks exactly like a local call for the calling object, but special exceptions must be caught that can signal connection errors. This technique makes it very easy to build a distributed system in Java, which seems to communicate via normal method calls. For example, RMI can be used to outsource compute-intensive tasks to connected systems that have stronger processors or are simply less busy at the moment. 
+\\
+Again the basic architecture for RMI is distributed in a client and a server system. The server specifies an interface describing the method or methods that can be called remotely. This interface is called \textit{Remote Interface}. For the client to be able to call a remote method, it must also know this remote interface. The server however must provide a class which implements this interface and therefor provides a real method that can be invoked. This class must also inherit from the \textit{UnicastRemoteObject} class so that the JVM can create stubs and skeletons. The stub is a proxy object, which is required by the client to call the remote method. The skeleton is the proxy of the object on the server side.
+\\
+Because the remote method offers the possibility to pass parameters and return return values to the caller, some additional information has to be considered. It is possible to pass and return simply data types such as integers or strings without taking further action. But if the user wants to transfer complex objects such class-instances, their classes must implement the \textit{Serializable}-Interface.
+\\
+Parameters can be transferred via \textit{Object by Value} and \textit{Object by Reference}. The first means that a copy of the object is sent from the client to the server or the other way around. In the case of the second, a real reference to the object is transferred.
+\\
+The remote object (or service object) must be registered in the RMI registry, which is part of the JRMI environment. This is done with a unique name. This is necessary because the client uses this name to retrieve the object reference from this registry and thus obtains access to the service object. The communication between client and server is based on a simple request/reply protocol. This is why only the client can call methods on the server remotely. The other way around isn't possible. All server-methods that can be called remotely must also throw a \textit{RemoteException} if there is a connection error. Figure \ref{rmi} shows RMI's architecture:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width =0.8\textwidth]{rmi.png}
+	\caption[Caption for LOF]{The RMI architecture\footnotemark}
+	\label{rmi}
+\end{figure}
+\footnotetext{image-source: https://www.slideshare.net/tedionn/java-rmi-26537540}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
