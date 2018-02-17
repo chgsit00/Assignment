@@ -14,26 +14,30 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.2}Java Remote Method Invocation}{4}{section.2.2}
 \defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.3}Sockets vs RMI}{6}{section.2.3}
+\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Job Server/Client Architecture}{7}{chapter.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.1}Overall Architecture}{7}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}UDP-Multicast}{7}{section.3.2}
+\contentsline {section}{\numberline {3.2}UDP-Multicast}{8}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}The Job Server}{7}{section.3.3}
+\contentsline {section}{\numberline {3.3}The Job Server}{9}{section.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}The Job Client}{7}{section.3.4}
+\contentsline {section}{\numberline {3.4}The Job Client}{11}{section.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}Workload-Balancing}{7}{section.3.5}
+\contentsline {section}{\numberline {3.5}Load Balancing}{12}{section.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Other possible solutions}{8}{chapter.4}
+\contentsline {chapter}{\numberline {4}Other possible solutions}{13}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Server Broadcast}{8}{section.4.1}
+\contentsline {section}{\numberline {4.1}Using TCP instead of UDP for multicast replies}{13}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Workload Balancer}{8}{section.4.2}
+\contentsline {section}{\numberline {4.2}Using sockets instead of RMI}{13}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusion}{9}{chapter.5}
+\contentsline {section}{\numberline {4.3}Load Balancer}{14}{section.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Bibliography}{10}{chapter*.5}
+\contentsline {subsection}{\numberline {4.3.1}static load-balancing}{14}{subsection.4.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Appendix}{i}{appendix.A}
+\contentsline {subsection}{\numberline {4.3.2}dynamic load-balancing}{15}{subsection.4.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Conclusion}{16}{chapter.5}
