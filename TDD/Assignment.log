@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.22)  3 MAR 2018 10:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.22)  3 MAR 2018 10:37
 entering extended mode
 **./Assignment.tex
 (Assignment.tex
@@ -1687,7 +1687,14 @@ Package biblatex Info: Data encoding 'latin1' specified.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Assignment.bbl' found.
-(Assignment.bbl)
+(Assignment.bbl
+
+Package biblatex Warning: Biber reported the following issues
+(biblatex)                with 'AP1':
+(biblatex)                - Invalid format of field 'date' 
+(biblatex)                - Invalid format of field 'date'.
+
+)
 Package biblatex Info: Reference section=0 on input line 59.
 Package biblatex Info: Reference segment=0 on input line 59.
 Package hyperref Info: Link coloring ON on input line 59.
@@ -1721,7 +1728,7 @@ Dictionary: glossaries-dictionary, Language: German
 
 pdfTeX warning: pdflatex.exe (file ./Bilder/Deckblatt-Assignment.pdf): PDF incl
 usion: found PDF version <1.7>, but at most version <1.5> allowed
-<Bilder/Deckblatt-Assignment.pdf, id=50, 597.55246pt x 845.07724pt>
+<Bilder/Deckblatt-Assignment.pdf, id=54, 597.55246pt x 845.07724pt>
 File: Bilder/Deckblatt-Assignment.pdf Graphic file (type pdf)
 
 <use Bilder/Deckblatt-Assignment.pdf>
@@ -1745,7 +1752,7 @@ usion: found PDF version <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./Bilder/Deckblatt-Assignment.pdf): PDF incl
 usion: found PDF version <1.7>, but at most version <1.5> allowed
-<Bilder/Deckblatt-Assignment.pdf, id=53, page=1, 597.55246pt x 845.07724pt>
+<Bilder/Deckblatt-Assignment.pdf, id=57, page=1, 597.55246pt x 845.07724pt>
 File: Bilder/Deckblatt-Assignment.pdf Graphic file (type pdf)
 
 <use Bilder/Deckblatt-Assignment.pdf, page 1>
@@ -1786,7 +1793,7 @@ ine 68.
 
 pdfTeX warning: pdflatex.exe (file ./Bilder/submission.pdf): PDF inclusion: fou
 nd PDF version <1.7>, but at most version <1.5> allowed
-<Bilder/submission.pdf, id=85, 597.55246pt x 845.07724pt>
+<Bilder/submission.pdf, id=89, 597.55246pt x 845.07724pt>
 File: Bilder/submission.pdf Graphic file (type pdf)
 
 <use Bilder/submission.pdf>
@@ -1808,7 +1815,7 @@ nd PDF version <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./Bilder/submission.pdf): PDF inclusion: fou
 nd PDF version <1.7>, but at most version <1.5> allowed
-<Bilder/submission.pdf, id=88, page=1, 597.55246pt x 845.07724pt>
+<Bilder/submission.pdf, id=92, page=1, 597.55246pt x 845.07724pt>
 File: Bilder/submission.pdf Graphic file (type pdf)
 
 <use Bilder/submission.pdf, page 1>
@@ -1878,7 +1885,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout7 = `Assignment.toc'.
 
 
-<Bilder/Brunel_University_Logo.png, id=130, 1467.4825pt x 580.1675pt>
+<Bilder/Brunel_University_Logo.png, id=135, 1467.4825pt x 580.1675pt>
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 
 <use Bilder/Brunel_University_Logo.png>
@@ -1937,7 +1944,7 @@ chapter 2.
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 14.
 
-<Bilder/mapreduce.PNG, id=145, 735.49782pt x 271.0125pt>
+<Bilder/mapreduce.PNG, id=150, 735.49782pt x 271.0125pt>
 File: Bilder/mapreduce.PNG Graphic file (type png)
 
 <use Bilder/mapreduce.PNG>
@@ -1949,12 +1956,8 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 21.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 21.
-
-
-LaTeX Warning: Citation 'AP1' on page 2 undefined on input line 24.
-
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
-<use Bilder/Brunel_University_Logo.png>
+ <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 2
 8.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
@@ -2026,47 +2029,56 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 [6
 
 ])
+chapter without number
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 124.
 
-LaTeX Warning: Empty bibliography on input line 124.
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\t1lmtt.fd"
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 
+<use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+45.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[7
+
+
+]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 145.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 145.
-(Assignment.aux (Inhalt/Hauptteil.aux))
+ (Assignment.aux (Inhalt/Hauptteil.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 145.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 145.
 Package rerunfilecheck Info: File `Assignment.out' has not changed.
-(rerunfilecheck)             Checksum: F15A15905C3549BB15839FF3BB48AE02;703.
-
-
-LaTeX Warning: There were undefined references.
-
-
-Package biblatex Warning: Please (re)run BibTeX on the file(s):
-(biblatex)                Assignment
-(biblatex)                and rerun LaTeX afterwards.
-
+(rerunfilecheck)             Checksum: 4D64540594D4A40AADC5E8FA7F325DB9;752.
 Package logreq Info: Writing requests to 'Assignment.run.xml'.
 \openout1 = `Assignment.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36984 strings out of 493323
- 679394 string characters out of 3139069
+ 37046 strings out of 493323
+ 680397 string characters out of 3139069
  1242691 words of memory out of 3000000
- 39741 multiletter control sequences out of 15000+200000
- 59314 words of font info for 57 fonts, out of 3000000 for 9000
+ 39795 multiletter control sequences out of 15000+200000
+ 62427 words of font info for 59 fonts, out of 3000000 for 9000
  1145 hyphenation exceptions out of 8191
  67i,18n,79p,8823b,1735s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/Program Files/M
 iKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/lm/lmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr
-12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr7.pfb><C:/Program 
-Files/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX 2.9/fo
-nts/type1/public/lm/lmri12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
-lm/lmssbx10.pfb>
-Output written on Assignment.pdf (9 pages, 1245742 bytes).
+ype1/public/lm/lmcsc10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/l
+mr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/lm/lmr7.pfb><C:/Program Files/MiKTeX 2.9
+/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
+/lm/lmri12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb>
+Output written on Assignment.pdf (10 pages, 1289445 bytes).
 PDF statistics:
- 205 PDF objects out of 1000 (max. 8388607)
- 22 named destinations out of 1000 (max. 500000)
- 151 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 227 PDF objects out of 1000 (max. 8388607)
+ 25 named destinations out of 1000 (max. 500000)
+ 159 words of extra memory for PDF output out of 10000 (max. 10000000)
 

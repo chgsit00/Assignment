@@ -16,5 +16,16 @@
   {}
 \endgroup
 
-\sortlist[entry]{none/global/}\endsortlist
+\sortlist[entry]{none/global/}
+  \entry{AP1}{online}{}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Ap1}
+    \field{title}{HCFS}
+    \verb{url}
+    \verb https://wiki.apache.org/hadoop/HCFS
+    \endverb
+    \warn{\item Invalid format of field 'date' \item Invalid format of field
+  'date'}
+  \endentry
+\endsortlist
 \endinput

@@ -23,3 +23,5 @@
 \contentsline {subsection}{\numberline {5.0.3}Changing the requiredMappers and requiredReducers}{5}{subsection.5.0.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {6}Conclusion}{6}{chapter.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\nonumberline Bibliography}{7}{chapter*.3}
