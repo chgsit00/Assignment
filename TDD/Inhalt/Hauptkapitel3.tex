@@ -1,0 +1,223 @@
+\chapter{Training und Evaluation}
+\label{training-und-evaluation}
+In dem vorherigen Kapitel wurden die für die Versuche benötigten Hilfsmittel, sowie die verwendeten Daten beschrieben. In diesem Kapitel soll aufgezeigt werden, auf welche verschiedenen Arten sich ein Lerner trainieren lässt. Des Weiteren werden zwei verschiedene Möglichkeiten erläutert, die beschreiben, wie die Ergebnisse ausgewertet werden können. Folgend werden die einzelnen Experimente, chronologisch geordnet, aufgezeigt und evaluiert.
+	
+	\section{Trainingsmethoden}
+	\label{trainingsmethoden}
+	Um einen funktionierenden Klassifizierer zu erhalten, muss zuvor der Lerner trainiert werden. Das geschieht beim supervised Learning (Kap. \ref{document-und-algorithmen}) mit vorklassifizierten Datensätzen. WEKA stellt dabei zwei verschiedene Methoden zur Verfügung. Beide Methoden werden anschließend vorgestellt. Unabhängig von der Traningsmethode gilt: Je mehr Daten für das Training zur Verfügung stehen, desto akkurater wird die Klassifikation.
+	
+		\subsection{Percentage Split}
+		\label{split}
+		Das wohl geläufigste Verfahren ist die des Aufteilens der vorhandenen Daten in zwei Teile. Ein Teil der Daten wird ausschließlich für das Training verwendet, wobei der andere nur zu Testzwecken existiert. Je größer der Anteil der für das Training zugeteilten Daten, desto bessere Ergebnisse können erwartet werden. Der Trainingsanteil sollte jedoch nicht zu hoch sein, da sonst zu wenig Daten für das Testen und Evaluieren vorhanden wären. Standardmäßig werden $66\%$ der Daten für das Training verwendet \cite[vgl.][]{WFH11}.\\
+		Der, durch die Trainingsdaten, trainierte Lerner wird auf die Testdaten angewandt. Je nach Klassifikationsergebnis können die Features angepasst werden. Daraufhin wird nochmals mit den Trainingsdaten trainiert. Dieses Verfahren wird in WEKA als Percentage Split bezeichnet. Die Unterteilung der Daten ist nötig, um den Lerner nicht nur an die Trainingsdaten anzupassen. Dieses Phänomen wird als Overfitting bezeichnet. Es können extrem gute Ergebnisse anhand der Daten, die für das Training verwendet worden sind, erzielt werden. Für bis dahin unberührte Daten ist der so trainierte Klassifizierer hingegen nicht aussagekräftig.\\
+		Oftmals werden die Daten nicht in zwei, sondern drei Teile geteilt \cite[vgl.][]{WFH11}. Hier werden die Datenteile als Trainingsdaten, Validationsdaten und Testdaten bezeichnet \cite[vgl.][]{WFH11}. Die Validationsdaten können aus mehreren Sets bestehen, was bedeutet, dass die Daten nicht in drei gleichgroße Teile geteilt werden müssen.\\
+		Das Vorgehen ist hierbei folgendes. Der Lerner bekommt die Trainingsdaten zum Trainieren. Anschließend wird auf einem Set der Validationsdaten getestet. An dieser Stelle können die Features je nach Bedarf angepasst werden. Das verwendete Set wird danach zu den Trainingsdaten hinzugefügt und es wird erneut trainiert. Sind mehrere Sets von Validationsdaten vorhanden, kann dieser Vorgang öfters wiederholt werden. Anschließend wird auf den, bis dahin unberührten, Testdaten getestet.\\
+		Geeignet ist dieses Trainingsverfahren, wenn eine große Anzahl an Daten zur Verfügung steht, da immer möglichst viele Trainingsdaten für bestmögliche Ergebnisse benötigt werden.
+		
+		\subsection{Cross-Validation}
+		\label{cross-validation}
+		Ist die Anzahl der Daten (und somit die Anzahl der möglichen Trainingsdaten) gering oder begrenzt, ergibt sich das Problem, dass der Lerner nur ungenügend trainiert werden kann. Daraus resultiert eine ungenaue Klassifikation.\\
+		Bei der \textit{n-Fold Cross-Validation} werden die Daten in $n$ gleichgroße Teile aufgeteilt. Ein Teil davon wird für den Test verwendet, während $n-1$ Teile für das Training zu Verfügung stehen. Ist ein Trainings- und Testdurchlauf beendet, wird ein anderer Teil aus den $n$ Teilen für das Testen verwendet. Die restlichen Daten werden wie im Percentage Split als Trainingsdaten genutzt. Dieser Prozess wird so oft durchgeführt, bis mit allen Teilen einmal getestet worden ist. Ist das der Fall, ist ein n-Fold Cross-Validation Durchlauf beendet. Da die Daten zufällig in $n$ Teile geschnitten werden, ist es üblich die n-Fold Cross-Validation wiederholt durchzuführen. In \cite{WFH11} wird vorgeschlagen diese Wiederholung $n$-mal auszuführen. Der Standardwert für $n$ liegt laut \cite{WFH11} bei 10.\\
+		Eine weitere Möglichkeit ist das \textit{Leave-One-Out Cross-Validation}. Bei dieser Methode werden die Daten in $n$ Teilstücke unterteilt. Wobei hier $n$ die Anzahl der Objekte ist. Dabei wird an einem Objekt getestet und an dem Rest trainiert. Ein Durchlauf ist beendet, sobald an allen Objekten einmal getestet worden ist. Hierbei ist es nicht notwendig die Cross-Validation mehrere Male durchzuführen, da es in diesem Fall keinen zufälligen Schnitt gibt.\\
+		Da für diese Bachelorarbeit keine vorklassifizierten Anforderungen vorhanden waren, mussten diese von Hand klassifiziert werden. Der dazugehörige Prozess ist so zeitaufwendig, dass er den Rahmen der Bachelorthesis gesprengt hätte. Aufgrund dessen steht nur eine begrenzte Anzahl an Daten für dieses Projekt zur Verfügung. Aus diesem Grund wurde mit dem n-Fold Cross-Validation ($n=10$) trainiert. Für die Methode des Percentage Split wären mehr Daten nötig gewesen.
+	
+	\section{Evaluationsmethoden}
+	\label{evaluationsmethoden}
+	In diesem Abschnitt werden zwei gängige Methoden vorgestellt, die für das Auswerten von Klassifikationsergebnissen verwendet werden. Die erste Methode nennt sich die ROC-Methode, die Zweite ist die sogenannte PR-Methode. Beide Möglichkeiten basieren auf der sogenannten \textit{Confusion Matrix}, welche nachfolgend erklärt wird.
+	
+		\subsection{Confusion Matrix und ihre Werte}
+		Bei der binären Klassifikation sind nur vier Fälle möglich, in welche der Klassifikator die Objekte kategorisieren kann. Ausgehend von der Annahme, ein Objekt wird bewertet, ergeben sich folgende Möglichkeiten.
+		\begin{itemize}
+			\item \textbf{True Positive (tp)}\\
+			Das Objekt wurde richtig klassifiziert. Das heißt,  das Objekt gehört zur Klasse A und wurde als diese erkannt.
+			\item \textbf{False Positive (fp)}\\
+			Das Objekt wurde falsch klassifiziert. In diesem Fall wurde das Objekt als Element der Klasse A erkannt, obwohl es dies nicht ist.
+			\item \textbf{True Negative (tn)}\\
+			Das Objekt wurde richtig klassifiziert. Das Objekt gehört zur Klasse B und wurde auch als dieses erkannt.
+			\item \textbf{False Negative (fn)}\\
+			Das Objekt wurde falsch klassifiziert. Hier wurde das Objekt in Klasse B kategorisiert, obwohl es zur Klasse A gehört.
+		\end{itemize}
+		Aus diesen Fällen ergibt sich die Confusion Matrix. Dabei werden die Häufigkeiten der auftretenden Fälle (tp, fp, tn, fn) in einer $2 \times 2$-Matrix dargestellt. Im Idealfall treten die Fälle False Negativ und False Positive nicht auf. Tabelle \ref{confusion-matrix} zeigt die Confusion Matrix, die sich für das Beispiel der Qualitätsanalyse von Anforderungen ergibt.
+		
+		\begin{table}[!htb]
+			\centering
+			\begin{tabular}{|c|c|c|}
+				\hline
+				& Klasse A & Klasse B \\ \hline
+				Klasse A   & Anzahlt  $tp$           & Anzahl $fn$               \\ \hline
+				Klasse B & Anzahl $fp$            & Anzahl $tn$              \\ \hline
+			\end{tabular}
+			\vspace{3mm}
+			\caption{Confusion Matrix im Fall der Qualitätsanalyse von Anforderungen}
+			\label{confusion-matrix}
+		\end{table}
+		Sowohl die ROC-Methode, als auch die PR-Methode basieren auf einer Confusion Matrix. Das nächste Unterkapitel erläutert die Idee der ROC-Methode.
+	
+		\subsection{ROC-Methode}
+		Aus den Werten der Confusion Matrix können verschiedene Kenngrößen berechnet werden. Hier wird zwischen Sensitivität (auch Richig-Positiv-Rate oder Recall genannt), Falsch-Negativ-Rate, Spezifität (auch Richtig-Negativ-Rate genannt) und Falsch-Positiv-Rate (auch false alarm rate genannt) unterschieden. Mit diesen Werten kann gut erkannt werden, wie sich der Klassifizierer in bestimmten Situationen verhält.\\
+		Die Sensitivität gibt in diesem Fall an, wie viel Prozent der Anforderungen der Klasse \textit{Qualitativ hochwertig}
+		tatsächlich erkannt worden sind. Die Falsch-Negativ-Rate zeigt den Anteil der Objekte an, die fälschlicherweise als qualitativ minderwertig deklariert worden sind. Die Spezifität und Falsch-Positiv-Rate geben die gegenteiligen Werte an. Das heißt im Falle der Spezifität, dass sie anstatt die Anzahl der korrekt in \textit{Qualitativ hochwertig} klassifizierten Objekte, die Rate der korrekt in \textit{Qualitativ minderwertig} darstellt.
+		
+		\begin{minipage}{1\textwidth}
+			\fbox{\parbox[c]{0.98\linewidth}{
+					\begin{align}
+					\text{Sensitivität} &= \frac{\text{Anzahl} ~tp}{\text{Anzahl} ~tp +\text{Anzahl}~fn}\\
+					\text{Falsch-Positiv-Rate} &= \frac{\text{Anzahl} ~fp}{\text{Anzahl} ~fp +\text{Anzahl}~tn}\\
+					\text{Spezifität} &= \frac{\text{Anzahl} ~tn}{\text{Anzahl} ~tn +\text{Anzahl}~fp}\\
+					\text{Falsch-Negativ-Rate} &= \frac{\text{Anzahl} ~fn}{\text{Anzahl} ~fn +\text{Anzahl}~tp}
+					\end{align}
+				}}
+		\end{minipage}\\\\
+		Die \textbf{R}eceiver \textbf{O}perating \textbf{C}haracteristic-Methode (kurz ROC) verwendet zwei dieser Kenngrößen um eine Kurve zu zeichnen. Die Sensitivität wird auf der y-Achse abgebildet, die Falsch-Positiv-Rate auf der x-Achse \cite[vgl.][]{Faw06}. Die dabei entstehende Ebene wird ROC-Space genannt und hat einen Gesamtflächeninhalt von genau $1$, da der ROC-Space sowohl auf der x-Achse als auch auf der y-Achse bis zum Wert $1$ betrachtet wird. Dies entspricht einer Rate von $100\%$. Ist somit die Sensitivität $=1$, kommt das einer Trefferquote der qualitativ hochwertigen Anforderungen von $100\%$ gleich. Dies muss dennoch nicht bedeuten, dass der Klassifikator präzise arbeitet. Es könnte der Fall sein, dass er jedes Objekt schlicht als positiv kategorisiert. Somit wären alle Objekte, ob qualitativ hoch- oder minderwertig derselben Klasse zugeordnet. Deshalb wird der Flächeninhalt unter der so genannten ROC-Kurve betrachtet. \\
+		Der Flächeninhalt, auch als ROC-AUC\footnote{Area under curve} bekannt, unter der Kurve zur x-Achse ist wie folgt interpretierbar. Ist dieser gleich dem Flächeninhalt der ersten Winkelhalbierenden ($y=x$), beträgt er somit $0.5$, steht dies für einen Zufallsprozess des Klassifikatiors \cite[vgl.][]{Faw06}. Eine theoretische ROC-AUC von $1$, würde einer perfekten Klassifikation entsprechen \cite[vgl.][]{Faw06}. Liegt der Wert der ROC-AUC zwischen $0$ und $0.5$ spricht das für eine umgekehrte Klassifikation, das heißt, die Objekte müssten jeweils der anderen Klasse zugeordnet werden \cite[vgl.][]{Faw06}. Hier wird für weiteres Lesen \cite{Faw06} empfohlen, insbesondere wenn sich für die Erstellung der ROC-Kruve interessiert wird.\\
+		Eine weitere Methode die hilfreich ist, um Klassifizierer zu bewerten ist die PR-Methode. Diese wird im nächsten Abschnitt erläutert.
+		
+		\subsection{PR-Methode und F-Measure}
+		Aus der Confusion Matrix (siehe Tabelle \ref{confusion-matrix}) lässt sich noch eine weitere wichtige Kenngröße bestimmen. Diese wird \textit{Precision} genannt. Sie wird, wie die Formel \ref{precision} zeigt berechnet.
+		
+		\begin{minipage}{1\textwidth}
+			\fbox{\parbox[c]{0.98\linewidth}{
+					\begin{align}
+						\label{precision}
+						\text{Precision} = \frac{\text{Anzahl}~tp}{\text{Anzahl}~tp+ \text{Anzahl}~fp}
+					\end{align}
+				}}
+		\end{minipage}\\\\
+		Der Precision-Wert gibt an wie viel Prozent der Voraussagen für die positive Klasse korrekt sind. Bei der \textbf{P}recision-\textbf{R}ecall-Methode (kurz PR-Methode) wird neben dieser Kenngröße auch die Sensitivität verwendet. In dieser Methode wird die Sensitivität jedoch als Recall bezeichnet. Aus einem ähnlichen Grund, wie bei der ROC-Methode, sollte hier nicht nur der Recall-Wert betrachtet werden. Je mehr Voraussagen gemacht werden, desto höher steigt die Chance, dass eine korrekte Vorhersage eintrifft. Die Precision schützt vor diesem möglichen Fehlverhalten des Klassifizieres.\\
+		Um nicht ständig beide Werte miteinander vergleichen zu müssen, wurde eine weitere Kenngröße eingeführt, die die Werte des Recall und der Precision kombiniert. Sie berechnet sich aus dem harmonischen Mittel und wird als \textit{F-Measure} bezeichnet. Formel \ref{f-measure} zeigt die Berechnung für den F-Measure, mit Hilfe des harmonischen Mittels für zwei Werte.
+		
+		\begin{minipage}{1\textwidth}
+		\fbox{\parbox[c]{0.98\linewidth}{
+				\begin{align}
+					\label{f-measure}
+					\text{F-Measure} = 2*\left(\frac{\text{Precision}*\text{Recall}}{\text{Precision}+ \text{Recall}}\right)
+				\end{align}
+			}}
+		\end{minipage}\\\\
+		Diese kombinierte Kenngröße erlaubt eine sinnvolle Beurteilung der Klassifikation.\\
+		Des Weiteren kann über die Confusion Matrix die Genauigkeit (Accuracy) berechnet werden. Diese Kenngröße gibt an, wie viel Prozent der getesteten Objekte tatsächlich korrekt klassifiziert worden sind. Bei der Genauigkeit ist zu beachten, dass diese nicht zur Bewertung der Algorithmen herangezogen werden kann, da diese sich ausschließlich auf das vorliegende Datenset bezieht \cite[vgl.][]{WFH11}.
+		Für diese Arbeit wurden sowohl die ROC-Methode als auch die PR-Methode mittels F-Measure angewandt, um die Algorithmen zu bewerten.\\
+		In den nächsten Abschnitten werden die einzelnen Evaluationsergebnisse dargestellt. Dies geschieht mit zur Hilfenahme des F-Measures. Wobei für die Endevaluation die ROC-Methode zusätzlich verwendet wird. Dies hat den Grund, dass die Bewertung der Algorithmen über die letzte Evaluation stattfindet. Die anderen Ergebnisse wurde mit der PR-Methode ausgewertet. Mehrere Ergebnisse kamen auf Grund der Tatsache zustande, dass über den Projektzeitraum verschieden Features herausgearbeitet wurden. Diese wurden in verschiedenen Kombinationen getestet. Die einzelnen Evaluationsergebnisse zeigen nicht alle durchgeführten Versuche auf. Sie repräsentieren einzig die wichtigsten Meilensteine der Bachelorarbeiten von Sebastian Zieschang \cite{Zie16} und der vorliegenden.
+	
+	\section{Erstes Evaluationsergebniss}
+	\label{ergebnisse}
+	Zu Anfang war der wichtigste Punkt, möglichst geeignete Features für die Anforderungen zu generieren. Für die Erstellung der ersten Features wurden die gewonnenen Erkenntnisse aus Kapitel \ref{requirement-engineering} herangezogen. Bei den ersten Versuchen sollten die Features auf den Trainingsdaten getestet werden, sowie die Funktionsweisen der genutzten Programme kennen zu lernen.\\
+	Als Algorithmus wird hierfür der J48 (Kap. \ref{j48}) verwendet. Der Grund dafür ist die Übersichtlichkeit des erstellten Entscheidungsbaumes. Dadurch konnte erkannt und nachvollzogen werden, wie der J48 auf verschiedene Features reagiert. Für dieses Evaluationsergebnis wurden sechs Features genutzt. Es handelt sich dabei um die Features \textit{Bad Words}, \textit{Konjunktionen}, \textit{Modalverb}, \textit{Anzahl der Kommas}, \textit{Anzahl der Sätze} und \textit{Anzahl der Wörter}.  Dabei wurde ein Datenset, bestehend aus 50 qualitativ hochwertigen und 50 qualitativ minderwertigen Anforderungen trainiert und getestet.\\
+	Tabelle \ref{evo1} fasst das erste Evaluationsergebnis zusammen. Es wird der verwendete Algorithmus aufgelistet, sowie die Werte der Confusion Matrix. Weiterhin werden die Kenngrößen der PR-Methoden, der F-Measure und Genauigkeit gezeigt.
+		
+	\begin{table}[!htb]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+			\hline
+			Algorithmus & TP & FN & FP & TN & Recall & Precision & F-Measure & Acc. \\ \hline
+			J48         & $44$ & $6$  & $7$  & $43$ & $0.88$   & $0.885$     & $0.873$     & $87\%$        \\ \hline
+		\end{tabular}
+		\vspace{3mm}
+		\caption{Erstes Evaluationsergebnis}
+		\label{evo1}
+	\end{table}
+	\vspace{-7mm}
+	Obwohl die Kenngrößen auf eine recht gute Performance der Klassifikation hindeuten und die Werte der Confusion Matrix zeigen, dass wenige Objekte falschen Klassen zugeordnet wurden, ist das Ergebnis mit Vorsicht zu betrachten. Das Datenset war zu klein, um aus den Zahlen von Tabelle \ref{evo1} Rückschlüsse auf die Realität zu ziehen.
+	
+	\section{Zweites Evaluationsergebnis}
+	\label{ergebnisse2}
+	Bei den nächsten Evaluationen konnte mit einem größeren Datenset getestet werden. Es umfasste insgesamt ca. $4000$ vorklassifizierte Anforderungen. Diese stehen im Verhältnis $3:1$ von qualitativ minderwertigen, zu qualitativ hochwertigen Anforderungen. Zusätzlich wurden die Features \textit{Tiefe der Schablone}, \textit{Struktur}, \textit{Anzahl der Phrasen}, \textit{Kleine Schablone} und \textit{Große Schablone} hinzugenommen. Das Feature \textit{Anzahl der Wörter} wurde entfernt, da sich gezeigt hat, dass dieses Feature sich negativ auf die Klassifikationsperformance auswirkt.\\
+	Da alle Anforderungen, die kein Modalverb enthalten immer qualitativ minderwertig sind, wurde sich dazu entschlossen, sie direkt auszufiltern. Dadurch betrachten die Algorithmen keine Anforderungen ohne Modalverb. Das hat den Vorteil, dass das Attribut, das für die Modalverben zuständig ist, nicht zu stark gewichtet wird. Damit wurde sichergestellt, dass der Lerner, Anforderungen nicht direkt als hochwertig klassifiziert, sobald sie ein Modalverb enthalten. Die dabei wegfallenden Anforderungen werden erst in \ref{ergebnisse3} beachtet.\\
+	Tabelle \ref{evo2} zeigt den ersten Versuch mit den neuen Features und dem großen Datenset. An diesem Ergebnis wird deutlich, dass die Genauigkeit nicht aussagekräftig ist. Obwohl diese $76.68\%$ beträgt, sind die Recall-, Precision- und F-Measure-Werte auf $0$.
+	\begin{table}[!htb]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+			\hline
+			Algorithmus & TP & FN & FP & TN & Recall & Precision & F-Measure & Acc. \\ \hline
+			J48         & $0$ & $995$  & $0$  & $3271$ & $0$   & $0$     & $0$     & $76.68\%$        \\ \hline
+		\end{tabular}
+		\vspace{3mm}
+		\caption{Evaluationsergebnis mit einem unbalanciertem Datenset}
+		\label{evo2}
+	\end{table}
+	\vspace{-7mm}
+	Die Werte der Confusion Matrix zeigen, dass der J48 alle Anforderungen als qualitativ minderwertig klassifiziert hat. Das liegt an dem Ungleichgewicht von qualitativ hochwertigen und qualitativ minderwertigen Anforderungen im Datenset. Ein solches Datenset wird als \textit{unbalanciertes Datenset} bezeichnet \cite[vgl.][]{Gan12}. Wie genau sich unbalancierte Datensets auf die Klassifikation auswirken und wie die daraus resultierenden Probleme gelöst werden können, kann in \cite{Gan12} nachgelesen werden. In diesem Fall wurde das Datenset durch das sogenannte \textit{Undersampling} bearbeitet. Beim Undersampling werden Daten, die zur überwiegenden Klasse gehören, aus dem Datenset herausgenommen, um so ein Gleichgewicht zwischen den beiden Klassen zu erreichen \cite[vgl.][]{Gan12}.\\
+	Tabelle \ref{evo3} zeigt die Ergebnisse nach dem Undersampling.
+	\begin{table}[!htb]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+			\hline
+			Algorithmus & TP & FN & FP & TN & Recall & Precision & F-Measure & Acc. \\ \hline
+			J48         & $857$ & $138$  & $383$  & $895$ & $0.861$   & $0.692$     & $0.767$     & $77.08\%$        \\ \hline
+		\end{tabular}
+		\vspace{3mm}
+		\caption{Evaluationsergebnis mit einem ausbalanciertem Datenset}
+		\label{evo3}
+	\end{table}
+	\vspace{-7mm}
+	Es ist ersichtlich, dass ein Gleichgewicht zwischen den Klassen in den Trainingsdaten eine deutliche Verbesserung der Klassifikationsergebnisse mit sich bringt. Dieses Datenset besteht aus insgesamt ca. $2000$ Anforderungen, mit einem Verhältnis von $1:1$.
+	
+	\section{Drittes Evaluationsergebnis - Abschließende Evaluation}
+	\label{ergebnisse3}
+	In weiteren Versuchen ist aufgefallen, dass viele Anforderungen in den Trainingsdaten mehrfach vorkamen. Hierdurch kann es passieren, dass bestimmte Attribute öfters vorkommen als sie sollten und somit von den Algorithmen stärker gewichtet werden. Für die letzten Versuche wurden alle Anforderungen die sich wiederholten rausgefiltert. Des Weiteren wurde in mehreren Experimenten jedes Feature einzeln entfernt, um so prüfen zu können, ob sich möglicherweise eine Steigerung der Performance erreichen lässt. Zu diesem Zeitpunkt wurden weitere Features mit Hilfe eines Dependenz-Parsers erstellt. Hier werden auch die Anforderungen, die kein Modalverb enthalten, beachtet.\\
+	Tabelle \ref{mod-filter} zeigt die Ergebnisse aller vorgestellten Algorithmen mit den, für die finale Evaluation, gewählten Features, sowie dem Modalverb-Filter.
+	\begin{table}[!htb]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+			\hline
+			Algorithmus                                               & TP   & FN  & FP   & TN   & Recall & Precision & F-Measure & Acc.    \\ \hline
+			OneR                                                      & $1567$ & $9$   & $685$  & $813$  & $0.994$  & $0.697$     & $0.819$     & $77.42\%$ \\ \hline
+			\begin{tabular}[c]{@{}c@{}}Na\"{i}ve Bayes\end{tabular}     & $1462$ & $114$ & $280$  & $1218$ & $0.928$  & $0.84$      & $0.881$     & $87.18\%$ \\ \hline
+			J48                                                       & $1443$ & $113$ & $185$  & $1313$ & $0.916$  & $0.887$     & $0.901 $    & $89.65\%$ \\ \hline
+			JRip                                                      & $1449$ & $127$ & $164$  & $1334$ & $0.919$  & $0.899$     & $0.909$     & $90.53\%$ \\ \hline
+			IBk                                                       & $1550$ & $26$  & $1073$ & $425$  & $0.984$  & $0.591$     & $0.738$     & $64.24\%$ \\ \hline
+			\begin{tabular}[c]{@{}c@{}}Simple Logistic\end{tabular} & $1466$ & $110$ & $204$  & $1294$ & $0.930$  & $0.879$     & $0.903$     & $89.78\%$ \\ \hline
+		\end{tabular}
+		\vspace{3mm}
+		\caption{Ergebnisse mit finalen Features}
+		\label{mod-filter}
+	\end{table}
+	\vspace{-7mm}
+	Es werden alle Features verwendet wie in \ref{ergebnisse2}. Zusätzliche wurden die Features \textit{Abhängigkeitstokens}, \textit{Bedeutung des Modalverbs} und \textit{N-Gram} hinzugefügt. Das Datenset enthält ca. $3000$ Anforderungen, mit einem Verhältnis von $1:1$. Wobei die zusätzlichen Anforderungen ohne Modalverb (ca. $2000$) nicht dazu zählen.\\
+	Tabelle \ref{lastEvo} zeigt die Ergebnisse der letzten vorgenommenen Evaluation. Dafür wurden die rund $2000$ herausgefilterten Anforderungen wieder beachtet.
+	\begin{table}[!htb]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+			\hline
+			Algorithmus                                               & TP   & FN   & FP  & TN   & Recall & Precision & F-Measure & Acc.    \\ \hline
+			OneR                                                      & $ 2923 $  & $ 685 $  & $ 9 $   & $ 1567 $ & $ 0.997 $  & $ 0.81 $      & $ 0.894 $     & $ 86.61 \%$ \\ \hline
+			\begin{tabular}[c]{@{}c@{}}Na\"{i}ve Bayes\end{tabular}     & $ 3328 $ & $ 280 $  & $ 114 $ & $ 1462 $ & $ 0.967 $  & $ 0.922 $     & $ 0.944 $     & $  92.4\%  $  \\ \hline
+			J48                                                       & $ 3523 $ & $ 185 $  & $ 113 $ & $ 1443 $ & $ 0.968 $  & $ 0.949 $     & $ 0.958 $     & $ 94.23\% $ \\ \hline
+			JRip                                                      & $ 3444 $ & $ 164 $  & $ 127 $ & $ 1449 $ & $ 0.946 $  & $ 0.955 $     & $ 0.96 $      & $ 94.39\% $ \\ \hline
+			IBk                                                       & $ 2535 $  & $ 1073 $ & $ 26 $  & $ 1550 $ & $ 0.99 $   & $ 0.703 $     & $ 0.822 $     & $ 78.8\% $  \\ \hline
+			\begin{tabular}[c]{@{}c@{}}Simple Logistic\end{tabular} & $ 3404 $ & $ 204 $  & $ 110 $ & $ 1446 $ & $ 0.967 $  & $ 0.943 $     & $ 0.956 $     & $ 93.92\% $ \\ \hline
+		\end{tabular}
+		\vspace{3mm}
+		\caption{Ergebnisse der letzten Evaluation}
+		\label{lastEvo}
+	\end{table}
+	\vspace{-7mm}
+	Diese wurden als Richtig-Negative gespeichert und nach der Klassifikation zu dem Wert $tn$ der Confusion Matrix hinzu addiert.\\
+	Von dem Lerner wurde bisher angenommen, dass die qualitativ guten Anforderungen der positiven Klasse angehören. Da das Ziel des Projekts das Erkennen der qualitativ schlechten Anforderungen ist, wurde diese Klasse als positiv definiert. Demnach vertauschen sich die Werte in der Confusion Matrix TP $\longleftrightarrow$ TN und FP $\longleftrightarrow$ FN miteinander. Das heißt, alle Anforderungen die bisher als positiv klassifiziert wurden, werden für diese Evaluation als negativ angesehen. Durch diese Maßnahme ändert sich an der Klassifizierung der Anforderungen durch die Algorithmen nichts.\\
+	Da für die Bewertung der Algorithmen meistens nur die ersten zwei Ziffern nach dem Komma betrachtet werden \cite[vgl.][]{WFH11}, können die Algorithmen nach dem Kombinationsmaß F-Measure als gleich gut betrachtet werden. Um genauere Aussagen machen zu können, wird hier die ROC-Methode eingesetzt. Dafür wurde mittels WEKA (Kap. \ref{weka}) die ROC-Kurve gezeichnet und die dazugehörige ROC-AUC berechnet. Tabelle \ref{auc} zeigt die Werte der ROC-AUC für jeden Algorithmus. Leser die sich für die dazugehörigen ROC-Kurven interessieren können sie in Anhang \ref{sec:Anhang} finden.
+	\begin{table}[!htb]
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			Algorithmus       & ROC-AUC \\ \hline
+			OneR              & $ 0.769 $   \\ \hline
+			Na\"{i}ve Bayes	  & $ 0.945 $   \\ \hline
+			J48               & $ 0.927 $   \\ \hline
+			JRip              & $ 0.926 $   \\ \hline
+			IBk               & $ 0.883 $   \\ \hline
+			Simple Logistic   & $ 0.963 $   \\ \hline
+		\end{tabular}
+		\vspace{3mm}
+		\caption{ROC-AUC-Werte mit dazugehörigen Algorithmen}
+		\label{auc}
+	\end{table}
+	\vspace{-7mm}
+	Anhand der Tabellen \ref{lastEvo} und \ref{auc} kann die Bewertung der Algorithmen vorgenommen werden. Im nächsten Kapitel werden die Ergebnisse der letzten Evaluation genauer betrachtet.
+	
+	\section{Diskussion der letzten Evaluation}
+	\label{ergDisk}
+	Auf Grund der langen Zeiten des Preprocessing mit der Erstellung der Attribute, die je nach gewählten Features zwischen einer halben Stunde und zwei Stunden dauert, spielt die Zeit, die die Algorithmen für das Training und die Klassifikation benötigen, keine Rolle. Diese belaufen sich auf wenige Minuten. Wobei der OneR, der als Baseline diente am schnellsten war und der Simple Logistic, der das einzige Ensemble ist, am längsten brauchte. Somit wurde entschieden, dass die Trainings- und Klassifikationszeiten nicht in die Bewertung mit einfließen. Des Weiteren wurde nicht betrachtet, wie die verschiedenen Algorithmen auf fehlende Werte in den Attributen reagieren und mit diesen umgehen. Da sämtliche Features eigens für das Problem der automatisierten Qualitätsanalyse erstellt wurden und alle Attribute numerische Werte enthalten, ist dieses Phänomen nicht aufgetreten. Auch die Robustheit gegenüber ausreisenden Werten ist in diesem Fall kein Beurteilungskriterium, da die einzelnen, ob qualitativ gut oder schlecht, sich immer sehr ähnlich waren. Aus diesen Gründen werden die Algorithmen nur anhand ihrer Performance der Klassifizierung beurteilt. Dafür bieten der F-Measure und die ROC-AUC eine gute Grundlage, um Algorithmen, im Bereich der Textklassifikation zu bewerten.\\
+	An dieser Stelle sei noch einmal gesagt, dass die Werte für den Vergleich auf die zweite Nachkommastelle gerundet werden. Somit gibt der OneR mit einem F-Measure von $0.89$ die erste Baseline an. Tabelle \ref{lastEvo} zeigt, dass alle Algorithmen außer der IBk darüber liegen. Aus diesem Grund wird der IBk nicht mehr bei der Analyse der ROC-AUC betrachtet. Insbesondere erfüllen die drei Algorithmen J48, JRip und SimpleLogistic die Baseline. Diese haben den höchsten F-Measure von $0.96$. Der Na\"{i}ve Bayes ist mit seinem F-Measure von $0.94$ einerseits über der Baseline, erreicht andererseits nicht die Performance von den bisher drei besten Algorithmen.\\
+	Um nun bewerten zu können welcher der drei Algorithmen am besten für die Klassifikation von Anforderungen ist, wird die jeweilige ROC-AUC betrachtet. Tabelle \ref{auc} zeigt eine Baseline von $0.77$. In diesem Fall erfüllen alle Algorithmen die Baseline und sind somit besser als der OneR. Bei der Bewertung anhand der ROC-Methode fallen die Algorithmen J48 und JRip, mit einer gemeinsamen ROC-AUC von $0.93$, hinter den Na\"{i}ve Bayes, der einen Flächeninhalt unter der ROC-Kurve von $0.95$ erreicht. Von allen Algorithmen sticht der Simple Logistic, mit einer ROC-AUC von $0.96$, am besten hervor. Somit bietet dieser die beste Performance im Vergleich der betrachteten Algorithmen im Bereich der Qualitätsanalyse von natürlichsprachigen Anforderungen.\\
+	Da dieser ein Ensemble ist, wurde gezeigt, dass Ensembles, trotz ihrer hohen Komplexität, geeigneter sind als eigenständige Algorithmen. Werden nur die eigenständigen Algorithmen betrachtet, liegen der J48, JRip und der Na\"{i}ve Bayes sehr nah beieinander. Da der IBk bei dem F-Measure sowie der ROC-AUC am schlechtesten abgeschnitten hat (ohne Beachtung des Baseline-Algorithmus), ist dieser vernachlässigbar. Diese Ergebnisse könnten sich jedoch mit größeren Datensets, sowie anderen Features ändern.
+	

@@ -1,0 +1,732 @@
+\subsection{Point test listing}
+\label{subsec: point-test-listing}
+\begin{lstlisting}
+package de.workshop.testdriven.linearregression;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+* 
+* @author Mateusz Szlek
+*/
+public class PointTest {
+	
+	private Point defaultPoint;
+	private final double COORD_1 = -17.0;
+	private final double COORD_2 = 99.9;
+	
+	@Before
+	public void setUp() throws Exception{
+		defaultPoint= new Point();
+	}
+	
+	//Get-Set-Test
+	@Test
+	public void testSettersAndGetters() throws Exception{
+		defaultPoint.setX(COORD_1);
+		defaultPoint.setY(COORD_2);
+		assertThat(defaultPoint.getX(), is(COORD_1));
+		assertThat(defaultPoint.getY(), is(COORD_2));
+	}
+	
+	//Constructor Tests
+	@Test
+	public void testDefaultConstructorValues() throws Exception{
+		assertThat(defaultPoint.getX(), is(0.0));
+		assertThat(defaultPoint.getY(), is(0.0));
+	}
+	
+	@Test
+	public void testAlternateConstructorValuesPositiv() throws Exception{
+		defaultPoint = new Point(1.0, 3.0);
+		assertThat(defaultPoint.getX(), is(1.0));
+		assertThat(defaultPoint.getY(), is(3.0));
+	}
+	
+	@Test
+	public void testAlternateConstructorValuesNegative() throws Exception{
+		defaultPoint = new Point(-21.7,COORD_1);
+		assertThat(defaultPoint.getX(), is(-21.7));
+		assertThat(defaultPoint.getY(), is(COORD_1));
+	}
+	
+	//Equals-Tests
+	@Test
+	public void testEqualsSelf() throws Exception{
+		boolean equals = defaultPoint.equals(defaultPoint);
+		assertThat(equals, is(true));
+	}
+	
+	@Test
+	public void testEqualsWithSamePoint() throws Exception{
+		Point testingPoint = new Point();
+		boolean equals = defaultPoint.equals(testingPoint);
+		assertThat(equals, is(true));
+		
+		equals = testingPoint.equals(defaultPoint);
+		assertThat(equals, is(true));
+	}
+	
+	@Test
+	public void testEqualsWithAnotherPointAndAnotherObjectAndNull() throws Exception{
+		Point testingPoint = new Point(COORD_1, COORD_2);
+		boolean equals = defaultPoint.equals(testingPoint);
+		assertThat(equals, is(false));
+		
+		equals = defaultPoint.equals(new Point(COORD_1, 0));
+		assertThat(equals, is(false));
+		
+		equals = defaultPoint.equals(new Point(0, COORD_2));
+		assertThat(equals, is(false));
+		
+		equals = defaultPoint.equals("test with another object");
+		assertThat(equals, is(false));
+		
+		equals = defaultPoint.equals(null);
+		assertThat(equals, is(false));
+	}
+	
+	//Hash-Test
+	@Test
+	public void testHashCode() throws Exception{
+		Point testingPoint = new Point();
+		boolean equals = defaultPoint.hashCode() == testingPoint.hashCode();
+		assertThat(equals, is(true));
+	}
+	
+	//ToString-Tests
+	@Test
+	public void testToString() throws Exception{
+		String defaultOutput =  "( " + "0.0000E00, 0.0000E00" + " )";
+		assertThat(defaultPoint.toString(), is(defaultOutput));
+		
+		Point testingPoint = new Point(0.0000065342, 4.23456);
+		assertThat(testingPoint.toString(), is("( 6.5342E-06, 4.2345E00 )"));
+		
+		testingPoint = new Point(-0.0000065342, -4.23454);
+		assertThat(testingPoint.toString(), is("( -6.5342E-06, -4.2345E00 )"));
+		
+		testingPoint = new Point(-6234.0, 42356.0);
+		assertThat(testingPoint.toString(), is("( -6.2340E03, 4.2356E04 )"));
+		
+		testingPoint = new Point(Double.MIN_VALUE, Double.MAX_VALUE);
+		assertThat(testingPoint.toString(), is("( 4.9000E-324, 1.7976E308 )"));
+	}
+	
+	//Norm-Tests
+	@Test
+	public void testNormWithOrigin() throws Exception{
+		double computedNorm = defaultPoint.norm();
+		assertThat(computedNorm, is(0.0));
+	}
+	
+	@Test
+	public void testNormPoitiv() throws Exception{
+		Point testingPoint = new Point(4.0, 3.0);
+		double computedNorm = testingPoint.norm();
+		assertThat(computedNorm, is(5.0));
+	}
+	
+	@Test
+	public void testNormNegativ() throws Exception{
+		Point testingPoint = new Point(-4.0, -3.0);
+		double computedNorm = testingPoint.norm();
+		assertThat(computedNorm, is(5.0));
+	}
+	
+	//Rotate-Tests
+	@Test(expected = IllegalArgumentException.class)
+	public void testRotateWithIllegalAgrumentNegativ() throws Exception{
+		defaultPoint.rotate(-275);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testRotateWithIllegalAgrumentPositiv() throws Exception{
+		defaultPoint.rotate(311);
+	}
+	
+	@Test
+	public void testRotateOrigin() throws Exception{
+		Point testingPoint = new Point();
+		defaultPoint.rotate(90);
+		assertThat(defaultPoint, is(testingPoint));
+	
+		testingPoint = new Point(1.0, 0.0);
+		testingPoint.rotate(-180);
+		assertThat(testingPoint, is(new Point(-1.0, 0.0)));
+	}
+	
+	@Test
+	public void testRotateCounterClockwise() throws Exception{
+		Point testingPoint = new Point(1.0, 0.0);
+		testingPoint.rotate(90);
+		assertThat(testingPoint, is(new Point(0.0, 1.0)));
+		
+		testingPoint = new Point(1.0, 0.0);
+		testingPoint.rotate(180);
+		assertThat(testingPoint, is(new Point(-1.0, 0.0)));
+	}
+	
+	@Test
+	public void testRotateClockwise() throws Exception{
+		Point testingPoint = new Point(0.0,1.0);
+		testingPoint.rotate(-90);
+		assertThat(testingPoint, is(new Point(1.0, 0.0)));
+		
+		testingPoint.rotate(0);
+		assertThat(testingPoint, is(new Point(1.0, 0.0)));
+	}
+	
+	@Test
+	public void testRotateWithThetaZero() throws Exception{
+		Point testingPoint = new Point(1.0, 0.0);
+		testingPoint.rotate(0);
+		assertThat(testingPoint, is(new Point(1.0, 0.0)));
+	}
+	
+	//Displace-Tests
+	@Test
+	public void testDisplaceWithOrigin() throws Exception{
+		Point testingPoint = new Point();
+		testingPoint.displace(defaultPoint);
+		assertThat(testingPoint, is(new Point()));
+	}
+	
+	@Test
+	public void testDisplaceWithOriginAndAnotherPoint() throws Exception{
+		Point testingPoint = new Point(COORD_1,COORD_2);
+		testingPoint.displace(defaultPoint);
+		assertThat(testingPoint, is(new Point(COORD_1,COORD_2)));
+	}
+	
+	@Test
+	public void testDisplaceWithDifferentPointNotOrigin() throws Exception{
+		Point testingPoint2 = new Point(-1.0, 5.5);
+		Point testingPoint = new Point(COORD_1,COORD_2);
+		testingPoint.displace(testingPoint2);
+		assertThat(testingPoint, is(new Point(COORD_1+testingPoint2.getX(), COORD_2+testingPoint2.getY())));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+		public void testDisplaceNull() throws Exception{
+		defaultPoint.displace(null);
+	}
+}
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+\subsection{Line class listing}
+\label{subsec: line-class-listing}
+
+\begin{lstlisting}
+package de.workshop.testdriven.linearregression;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
+
+/**
+* 
+* @author Mateusz Szlek
+*/
+public class Line {
+	
+	private Point[] points;
+	private double slope;
+	private double intercept;
+	private boolean pointsChangedSlope = false;
+	private boolean pointsChangedIntercept = false;
+	
+	/**
+	* Default-Constructor
+	* Gives Line empty Array.
+	*/
+	public Line() {
+		points = new Point[0];
+	}
+	
+	/**
+	* Constructor with Point[]-Parameter
+	* @param plist the Array of Points.
+	*/
+	public Line(Point[] plist) {
+		if (plist == null)
+		throw new IllegalArgumentException("Parameter is NULL!");
+		
+		for (Point point : plist) {
+			if (point == null)
+			throw new IllegalArgumentException("A point in array is null!");
+		}
+		
+		this.points = plist;
+	}
+	
+	/**
+	* Method for adding a Point to the Line.
+	* If point is added to the array, the pointsChangedSlope and pointsChangedIntercept are set back.
+	* @param p the point to add.
+	*/
+	public void add(Point p) {
+		if (p == null) {
+			throw new IllegalArgumentException("Null cant be added to Line");
+		}
+		
+		Point[] container = new Point[this.length() + 1];
+		for (int i = 0; i < this.length(); i++) {
+			container[i] = points[i];
+		}
+		container[this.length()] = p;
+		points = container;
+		pointsChangedSlope = false;
+		pointsChangedIntercept = false;
+		
+	}
+	
+	/**
+	* Gives the number of Points defining the Line.
+	* @return the number of Points.
+	*/
+	public int length() {
+		return points.length;
+	}
+	
+	/**
+	* Checks the validity of the Line.
+	* False if length of line is 0 (zero) or 1 (one)
+	* or slope or intercept cannot be determined.
+	* @return the validity of the line.
+	*/
+	public boolean isValid() {
+		if (this.points == null)
+		return false;
+		if (this.length() == 0 || this.length() == 1)
+		return false;
+		
+		try {
+			this.slope();
+			this.intercept();
+			return true;
+		} catch (CalculationException e) {
+		return false;
+		}
+	}
+
+	/**
+	* Calculates the slope of the Line.
+	* @return the slope of the Line
+	* @throws CalculationException when slope cannot be determined.
+	*/
+	public double slope() throws CalculationException {
+		
+		if (pointsChangedSlope)
+		return slope;
+		
+		if (this.length() == 0 || this.length() == 1)
+		throw new CalculationException("Line is not valid!");
+		
+		if ((this.countMultiplePoints() == this.length()))
+		throw new CalculationException("Only same points in Line!");
+		
+		List<Double> xList = new ArrayList<>();
+		List<Double> yList = new ArrayList<>();
+		List<Double> xSquareList = new ArrayList<>();
+		List<Double> xyList = new ArrayList<>();
+		
+		for (Point point : points) {
+			xList.add(point.getX());
+			yList.add(point.getY());
+			xSquareList.add(Math.pow(point.getX(), 2));
+			xyList.add(point.getX() * point.getY());
+		}
+		
+		double xMean = calcMean(xList);
+		double yMean = calcMean(yList);
+		double xSquareMean = calcMean(xSquareList);
+		double xyMean = calcMean(xyList);
+		
+		double counter = xyMean - xMean * yMean;
+		double denominator = xSquareMean - Math.pow(xMean, 2);
+		
+		slope = counter / denominator;
+		
+		if (Double.isNaN(slope))
+		throw new CalculationException("Cant calculate slope!");
+		
+		pointsChangedSlope = true;
+		return slope;
+	}
+	
+	/**
+	* Helper-Method for calculating the slope.
+	* Counts multiple same points in the Points-Array of the Line.
+	* @return number of multiple same points.
+	*/
+	private int countMultiplePoints() {
+		
+		HashMap<Point, Integer> countedPoints=new HashMap<>();
+		
+		for (int i = 0; i < points.length; i++) {
+			if(countedPoints.containsKey(points[i])){
+				int val= countedPoints.get(points[i])+1;
+				countedPoints.put(points[i], val);
+			}else{
+			countedPoints.put(points[i], 1);
+		}
+		
+	}
+	
+	int gratestVal=0;
+	for (Entry<Point, Integer> point : countedPoints.entrySet()) {
+		if(gratestVal<point.getValue()){
+			gratestVal=point.getValue();
+		}
+	}
+	return gratestVal;
+	}
+	
+	/**
+	* Helper-Method for calculating the slope and intercept of the line.
+	* calculates the mean arithmetic medium/mean of doubles you provide as
+	* list in the parameter.
+	* @param list of doubles you want to calculate the mean.
+	* @return the arithmetic medium/mean.
+	* @throws CalculationException if mean cannot be calculated.
+	*/
+	private double calcMean(List<Double> list) throws CalculationException {
+		double sum = list.stream().reduce(0d, (c1, c2) -> c1 + c2);
+		double counter = list.stream().count();
+		
+		double mean;
+		mean = sum / counter;
+		
+		if (Double.isNaN(mean))
+		throw new CalculationException("Cant calculate mean!");
+		
+		return mean;
+		
+	}
+	
+	/**
+	* Calculates the intercept of the Line.
+	* @return the intercept of the Line
+	* @throws CalculationException when intercept cannot be determined.
+	*/
+	public double intercept() throws CalculationException {
+		if (pointsChangedIntercept)
+		return intercept;
+		
+		if (this.length() == 0 || this.length() == 1)
+		throw new CalculationException("Line is not valid!");
+		
+		List<Double> xList = new ArrayList<>();
+		List<Double> yList = new ArrayList<>();
+		
+		for (Point point : points) {
+			xList.add(point.getX());
+			yList.add(point.getY());
+		}
+		
+		intercept = calcMean(yList) - this.slope() * calcMean(xList);
+		
+		if (Double.isNaN(intercept))
+		throw new CalculationException("Cant calculate intercept!");
+		
+		pointsChangedIntercept = true;
+		return intercept;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(points);
+		return result;
+	}
+	
+	/**
+	* For equality Points dont have to be in the same order
+	* in the array!
+	*/
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+		return true;
+		if (obj == null)
+		return false;
+		if (getClass() != obj.getClass())
+		return false;
+		
+		Line other = (Line) obj;
+		if (other.length() != this.length())
+		return false;
+		
+		if (Arrays.asList(this.points).containsAll(Arrays.asList(other.points)))
+		return true;
+		
+		return true;
+		
+	}
+
+	@Override
+	public String toString() {
+		String output = "(";
+		
+		for (Iterator<Point> iterator = Arrays.asList(points).iterator(); iterator.hasNext();) {
+			Point point = (Point) iterator.next();
+			output += point.toString();
+			if (iterator.hasNext()) {
+				output += ",\n";
+			}
+		}
+		output += ")";
+		return output;
+	}
+}
+\end{lstlisting}
+
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{DataAnalyser class listing}
+\label{subsec: analyser-class-listing}
+
+\begin{lstlisting}
+package de.workshop.testdriven.linearregression;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.ac.brunel.ee.RereadException;
+import uk.ac.brunel.ee.UnreadException;
+import uk.ac.brunel.ee.lineRead;
+
+/**
+* 
+* @author Mateusz Szlek
+*/
+public class DataAnalyser {
+	
+	private static List<Line> lines = new ArrayList<>();
+	private static final String SOURCE_LONG = "res/data_long.dat";
+	private static final String SOURCE_SHORT = "res/data_short.dat";
+	
+	/**
+	* The main method
+	* @param args
+	* @throws CalculationException
+	*/
+	public static void main(String[] args) throws CalculationException {
+		
+		double start = System.currentTimeMillis();
+		lineRead reader = new lineRead(SOURCE_LONG);
+		readLinesFromDataAndFillList(reader);
+		double end = System.currentTimeMillis();
+		System.out.println("Reading time: " + (end-start)+"ms");
+		
+		start = System.currentTimeMillis();
+		List<Line> validList = checkValidLines();
+		List<Line> invalidList = checkInvalidLines();
+		printNeededResults(validList, invalidList);
+		end = System.currentTimeMillis();
+		System.out.println("Computinig time: " + (end-start)+"ms");
+		
+	}
+	
+	/**
+	* Prints the results of the analysis.
+	* @param validList the list of valid points
+	* @param invalidList the list of invalid points
+	* @throws CalculationException
+	*/
+	private static void printNeededResults(List<Line> validList, List<Line> invalidList) throws CalculationException {
+		System.out.println("Avarage number of points per valid Line: " +computeAvarageNumberOfPoints(validList));
+		
+		double avarageSlope = avarageSlopeForValidLines(validList);
+		System.out.println("Standard deviation of slopes for valid Lines: "+ standardDeviationSlope(avarageSlope, validList));
+		
+		double avarageIntercept = avarageInterceptForValidLines(validList);
+		System.out.println("Standard deviation of interceptes for valid Lines: "+ standardDeviationIntercept(avarageIntercept, validList));
+	}
+	
+	/**
+	* Mechanism to read in the data_long or data_short files.
+	* It's completely from the exampleerReadback.java example. 
+	* @param reader lineRead
+	*/
+	private static void readLinesFromDataAndFillList(lineRead reader) {
+		
+		// Loop over all the lines in the data set
+		while (reader.nextLine()) {
+			Line line = new Line();
+			boolean np = true;
+			// Loop over all the points associated with the current line
+			while (np) {
+				try {
+					np = reader.nextPoint();
+				} catch (UnreadException UE) {
+				System.out.println(UE);
+				System.exit(0);
+				}
+			
+				// If there is another point read it.
+				if (np) {
+					try {
+						line.add(new Point(reader.getX(), reader.getY()));
+					
+					} catch (RereadException RE) {
+						System.out.println(RE);
+						System.exit(0);
+						}
+					}
+				}
+				lines.add(line);
+			}
+		System.out.println("Amount of lines in data: "+ lines.size());
+	}
+
+	/**
+	* Checks if the lines are valid and adds them to a list.
+	* @return the list with valid lines
+	*/
+	private static  List<Line> checkValidLines() {
+		List<Line> validLines = new ArrayList<>();
+		int numberValidLines = 0;
+		
+		for (Line line : lines) {
+			if(line.isValid()){
+				validLines.add(line);
+				numberValidLines++;
+			}
+			
+		}
+		System.out.println("Amount of valid lines in data: "+ numberValidLines);
+		
+		return validLines;
+	}
+	
+	/**
+	* Checks if the lines are invalid and adds them to a list.
+	* @return the list with invalid lines
+	*/
+	private static List<Line> checkInvalidLines() {
+		List<Line> invalidLines = new ArrayList<>();
+		int numberInvalidLines = 0;
+		
+		for (Line line : lines) {
+			if(!line.isValid()){
+				invalidLines.add(line);
+				numberInvalidLines++;
+			}
+			
+		}
+		System.out.println("Amount of invalid lines in data: "+ numberInvalidLines);
+		
+		return invalidLines;
+	}
+	
+	/**
+	* Computes the average number of points in lines.
+	* @param list of lines.
+	* @return the average of points in lines
+	*/
+	private static double computeAvarageNumberOfPoints(List<Line> list) {
+		double numberOfPoints = 0;
+		
+		if(list.size()==0)
+		return 0;
+		
+		for (Line line : list) {
+			numberOfPoints+=line.length();
+		}
+		
+		return numberOfPoints/list.size();
+	}
+	
+	/**
+	* Computes the average slope of lines.
+	* @param list of lines.
+	* @return the average slope of lines.
+	*/
+	private static double avarageSlopeForValidLines(List<Line> list) throws CalculationException {
+		double slope = 0;
+		
+		for (Line line : list) {
+			slope += line.slope();
+		}
+		
+		double avarageSlope = slope/list.size();
+		System.out.println("Avarage slope of valid lines: "+ avarageSlope);
+		return avarageSlope;
+	}
+	
+	/**
+	* Calculates the standard deviation of slopes.
+	* @param avarage the average slope of lines
+	* @param validList the list of valid lines.
+	* @return the standard deviation of slopes.
+	* @throws CalculationException if standard deviation cannot be determined.
+	*/
+	private static double standardDeviationSlope(double avarage, List<Line> validList) throws CalculationException {
+		
+		double variance = 0;
+		for (Line line : validList) {
+			variance+= Math.pow(line.slope()-avarage,2);
+		}
+		
+		variance = variance/validList.size();
+		double standardDeviation = Math.sqrt(variance);
+		
+		
+		return standardDeviation;
+	}
+	
+	/**
+	* Computes the intercept slope of lines.
+	* @param list of lines.
+	* @return the average intercept of lines.
+	*/
+	private static double avarageInterceptForValidLines(List<Line> validList) throws CalculationException {
+		double intercept = 0;
+		
+		for (Line line : validList) {
+			intercept += line.intercept();
+		}
+		
+		double avarageIntercept = intercept/validList.size();
+		System.out.println("Avarage intercept of valid lines: "+ avarageIntercept);
+		return avarageIntercept;
+	}
+	
+	/**
+	* Calculates the standard deviation of intercept.
+	* @param avarage the average intercept of lines
+	* @param validList the list of valid lines.
+	* @return the standard deviation of intercept.
+	* @throws CalculationException if standard deviation cannot be determined.
+	*/
+	private static double standardDeviationIntercept(double avarage, List<Line> validList) throws CalculationException {
+		
+		double variance = 0;
+		for (Line line : validList) {
+			variance+= Math.pow(line.intercept()-avarage,2);
+		}
+		
+		variance = variance/validList.size();
+		double standardDeviation = Math.sqrt(variance);
+		
+		
+		return standardDeviation;
+	}
+}
+\end{lstlisting}
