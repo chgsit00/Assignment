@@ -8,10 +8,14 @@ This workshop introduces the programming model \textbf{MapReduce} and a simulati
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{High Performance Computing With MapReduce and Hadoop}
-\label{mapreduce}
+\label{high}
 As already mentioned in the introduction, MapReduce was introduced as a programming model to process large amounts of data (Big Data) in parallel on several machines. This reduces processing time, since the load can be distributed over multiple machines.\\
 The following chapters briefly explain the basics of this workshop. First, MapReduce and its functionality are described. This is followed by a short introduction to Hadoop.
-\subsection{MapReduce}
+\section{MapReduce}
+\label{mapreduce}
+Mapreduce is a programming model that addresses the processing and analysis of large amounts of data using a distributed, parallelized approach \cite[][]{DG04}. The data to be processed is divided into several data blocks of the same size. These data blocks are processed in parallel and independently of each other. These different blocks are the inputs for a \textbf{mapping} function that performs filtering and sorting \cite[][]{BI01}. Each block receives a unique key. The resulting key value pairs now enter a process called \textbf{"shuffling"}. Therefore, the key value pairs are assigned to the correct nodes that are defined by the key. In other words, the shuffling process sorts the data from the separate mapping blocks into new blocks according to the key. Each block contains pairs with the same key but different values. These are required for the next to last step of the MapReduce process: \textbf{reducing}. The reduction phase cannot begin until the mapping phase is complete. In this phase, each value of a block is combined to its key so that you get a new key value pair, where the new value is a list of the old values. The last step is to combine all the pairs in a data block. This is the final result of the MapReduce process \cite[][]{TW15}. Large amounts of data are thus divided into much smaller blocks, which are processed in parallel and independently from each other and finally reassembled. MapReduce simplifies and accelerates parallel processing and analysis of large amounts of data and is therefore very popular in the big data area. Figure \ref{mapreducepic} shows an example with all required steps for the MapReduce programming model with simple datasets
+\\
+There are several implementations of the MapReduce programming model. One of these is described in the next chapter.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\linewidth]{mapreduce.PNG}
@@ -20,20 +24,94 @@ The following chapters briefly explain the basics of this workshop. First, MapRe
 \end{figure}
 \footnotetext{image-source: https://cs.calvin.edu/courses/cs/374/exercises/12/lab}
 
-\subsection{Hadoop}
-\cite[see][]{AP1}
+\section{Hadoop}
+\label{hadoop}
+Apache Hadoop is a framework that allows distributed processing of large amounts of data across clusters of computers with simple programming models. It supports scalability from individual servers to thousands of computers, each with local calculations and storage \cite[][]{AP02}. Hadoop is based on Java and consists of four main components:
+\begin{itemize}
+	\item Hadoop Common
+	\item Hadoop Distributed File System (HDFS)
+	\item Google's MapReduce-algorithm
+	\item Yet Another Resource Negotiator (YARN)
+\end{itemize}
+Hadoop Common provides the basic functions and tools for the other modules of the software. The HDFS will be described in the next sub-section. The MapReduce-algorithm is based on the MapReduce programming Model (s. Chapter \ref{mapreduce}) and offers the same functionality. The Yet Another Resource Negotiator (YARN) can manage the resources in a computer cluster and dynamically allocate the resources of a cluster to different jobs. YARN uses queues to determine the capacities of the systems for the individual tasks \cite[][]{NL01}. 
+\\
+Hadoop uses a master-slave architecture to distribute the data to be processed on several machines inside a cluster. A client transfers a job to the master node that is connected to the slaves in the cluster. The JobTracker of the master node controls the MapReduce job and reports it to a TaskTracker of a slave node. Within a slave node there are one or more data nodes as well as one or more Mappers and Reducers, which execute the MapReduce algorithm. In the event of an error, the JobTracker of the master node will reschedule the task to the same or a different slave node, depending on what is most efficient. This makes Hadoop very fault-tolerant and ensures that the entire process does not have to be aborted and restarted in the event of an error. \cite[][]{RO01}
+\\
+However, this alone is not enough to prevent the process from being terminated. If a master-node fails, all MapReduce processes that are processed by its associated slaves are also affected. Therefore, the master defines checkpoints after completion of single processing steps. In the event of an error, another master node can then continue where the failed master stopped and the process does not have to be rolled back completely. Figure \ref{master-slave} shows the Hadoop's Master-Slave architecture:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{master-slave.jpg}
+	\caption[Caption for LOF]{The Hadoop Master-Slave Architecture\footnotemark}
+	\label{master-slave}
+\end{figure}
+\footnotetext{image-source: http://www.rosebt.com/blog/hadooparchitecture-and-deployment}
+\subsection{Hadoop Distributed File System (HDFS)}
+The Hadoop Distributed File System (HDFS) is the primary data storage system used by Hadoop applications \cite[see][]{MR01}. It is a distributed file system that handles large data sets running on commodity hardware. HDFS splits the input data into data blocks and distributes them to independent nodes so that the data can be processed in parallel. For fault tolerance reasons, HDFS copies each piece of data several times and sends these copies to different racks (\textbf{replication}). This ensures the accessibility to the required data elsewhere in this cluster if a job node fails.\\
+The structure consists of a name node and several data nodes according to the master-slave principle. The name node thus assumes the role of the master and is responsible for managing and coordinating the data in the clusters. The name-node contains metadata including the data replicas, checkpoints (s. Chapter \ref{hadoop}) and other important information, while the data nodes contain the actual data to be processed. Figure \ref{hdfs} shows the Hadoop Distributed File System Architecture and the ongoing read and write processes to the file system. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{hdfs.PNG}
+	\caption[Caption for LOF]{The Hadoop Distributed File System Architecture\footnotemark}
+	\label{hdfs}
+\end{figure}
+\footnotetext{image-source: https://hadoop.apache.org/docs/r1.2.1/hdfs\_design.html}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Hadoop's Parameters}
 \label{params}
+Before starting the simulation of Hadoop in the next chapter, a closer look is taken at the parameters of Hadoop, which can be manipulated in the simulation to get different results. Table \ref{parameters} shows an overview over the most important Hadoop parameter:
+\begin{table}[H]
+	\centering
+	\label{parameters}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Configuration Parameters}             & \textbf{Default Values} \\ \hline
+		io.sort.factor                                & 10                      \\ \hline
+		io.sort.mb                                    & 100                     \\ \hline
+		io.sort.spill.percent                         & 0.8                     \\ \hline
+		mapred.reduce.tasks                           & 1                       \\ \hline
+		mapreduce.tasktracker.map.tasks.maximum       & 2                       \\ \hline
+		mapreduce.tasktracker.reduce.tasks.maximum    & 2                       \\ \hline
+		mapred.child.java.opts                        & 200                     \\ \hline
+		mapreduce.reduce.shuffle.input.buffer.percent & 0.7                     \\ \hline
+		mapred.reduceparallel.copies                  & 5                       \\ \hline
+		mapred.compress.map.output                    & False                   \\ \hline
+		mapred.output.compress                        & False                   \\ \hline
+	\end{tabular}
+	\caption{Most important Hadoop parameters}
+\end{table}
 
+Each of these parameter can be changed to change the way Hadoop is working on large datasets. The following decriptions for each parameter are directly taken from Appache's offical documentation\footnote{https://hadoop.apache.org/docs/r1.0.4/mapred-default.html}:
+\\\\
+\textbf{io.sort.factor:} This is the number of streams Hadoop uses to sort the files in parallel. Keep note that this determines the number of open files that have to be handled.
+\\\\
+\textbf{io.sort.mb:} This is the total amount of buffer memory Hadoop sorts the files in MB. The default value per merge stream accounts for 1MB, which should minimize seeks.
+io.sort.spill.percent: The soft limit in either the buffer or record collection buffers. Once reached, a thread will begin to spill the contents to disk in the background. Note that this does not imply any chunking of data to the spill. A value less than 0.5 is not recommended.
+\\\\
+\textbf{mapred.reduce.tasks:} The default number of reduce tasks per job. Typically set to 99\% of the cluster's reduce capacity, so that if a node fails the reduces can still be executed in a single wave. Ignored when mapred.job.tracker is "local".
+\\\\
+\textbf{mapreduce.tasktracker.map.tasks.maximum:} The maximum number of map tasks that will be run simultaneously by a task tracker.
+\\\\
+\textbf{mapreduce.tasktracker.reduce.tasks.maximum:} The maximum number of reduce tasks that will be run simultaneously by a task tracker.
+\\\\
+\textbf{mapred.child.java.opts:} Java opts for the task tracker child processes. The following symbol, if present, will be interpolated: @taskid@ is replaced by current TaskID. Any other occurrences of '@' will go unchanged. For example, to enable verbose gc logging to a file named for the taskid in /tmp and to set the heap maximum to be a gigabyte, pass a 'value' of: -Xmx1024m-verbose:gc -Xloggc:/tmp/@taskid@.gc The configuration variable mapred.child.ulimit can be used to control the maximum virtual memory of the child processes.
+\\\\
+\textbf{mapreduce.reduce.shuffle.input.buffer.percent:} The percentage of memory to be allocated from the maximum heap size to storing map outputs during the shuffle.
+\\\\
+\textbf{mapred.reduceparallel.copies:} The default number of parallel transfers run by reduce during the copy(shuffle) phase.
+\\\\
+\textbf{mapred.compress.map.output:} Should the outputs of the maps be compressed before being sent across the network. Uses SequenceFile compression.
+\\\\
+\textbf{mapred.output.compress:} Should the job outputs be compressed?
+
+These are just a few selected parameters that can be changed to influence Hadoop's runtime behavior. The complete list can be found here: \cite[see][]{AP03}. Now that the theoretical basics have been sufficiently explained and the parameters for the simulation described, it is time to move on to the actual topic of this assignment. The next chapter will introduce HSim and show how to change the parameters listed above to achieve different results in the simulation.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{HSim}
 \label{hsim}
-As already mentioned in the introduction, no complete cluster is being set up for this workshop, as the effort would have been far too much. Instead the provided software \textit{HSim} was used, which provides a simulated Hadoop environment with several machines, routers and nodes. HSim and is based on Java and Hadoop v2 and it offers the possibility to adjust different Hadoop parameters and to display the effects on the simulation realistically.
+As already mentioned in the introduction, no complete cluster is being set up for this workshop, as the effort would have been far too much. Instead the provided software \textit{HSim} was used, which provides a simulated Hadoop environment with several machines, routers and nodes. HSim is based on Java and Hadoop v2 and it offers the possibility to adjust different Hadoop parameters and to display the effects on the simulation realistically.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
