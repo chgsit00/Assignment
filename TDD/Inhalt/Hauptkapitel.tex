@@ -111,16 +111,74 @@ These are just a few selected parameters that can be changed to influence Hadoop
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{HSim}
 \label{hsim}
-As already mentioned in the introduction, no complete cluster is being set up for this workshop, as the effort would have been far too much. Instead the provided software \textit{HSim} was used, which provides a simulated Hadoop environment with several machines, routers and nodes. HSim is based on Java and Hadoop v2 and it offers the possibility to adjust different Hadoop parameters and to display the effects on the simulation realistically.
+As already mentioned in the introduction, no complete cluster is being set up for this workshop, as the effort would have been far too much. Instead the provided software \textit{HSim} was used, which provides a simulated Hadoop environment with several machines, routers and nodes. HSim is based on Java and Hadoop v2 and it offers the possibility to adjust different Hadoop parameters and to display the effects on the simulation realistically. Figure \ref{hsim} shows HSim's main user interface while running a simulation.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{hsim.png}
+	\caption[Caption for LOF]{Screenshot of HSim's User Interface during a running Simulation}
+	\label{hsim-pic}
+\end{figure}
+The rectangles in different colors represent the individual racks of the simulated Hadoop cluster. Each rack has multiple machines that are displayed as green dots. The red dots, of which each rack has one, are the routers. The red dot at the top edge is the master node, which splits the input data and distributes it to the routers of the racks. On the right hand side there is a list of all machines. The next figure \ref{machine-state} shows the machine state window that appears when double clicking on one of the machines.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{machine-state.png}
+	\caption[Caption for LOF]{Screenshot of the first machine's state window during a running Simulation}
+	\label{machine-state}
+\end{figure}
+The performance of the individual machines can be observed here at the runtime of the simulation. The next figure \ref{hsim-console} shows the console that can be opened from HSim's main UI (see Figure \ref{hsim-pic}).
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{hsim-console.png}
+	\caption[Caption for LOF]{Screenshot of HSim's Console during a running Simulation}
+	\label{hsim-console}
+\end{figure}
+From here, the individual processes for the individual jobs running on the various machines can be tracked at runtime. The runtimes required by the individual machines for a job are measured and displayed.
+\\\\
+The different Hadoop parameters (see chapter \ref{params}) can be set using a configuration file. For the following simulation, the presetting with a Hadoop cluster of 49 individual machines was used. In the next chapter, the influence of four different Hadoop parameters on the runtime of the simulation will be investigated.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Evaluation}
 \label{eval}
-\subsection{Changing the dataSize}
-\subsection{Changing the sortFactor}
-\subsection{Changing the requiredMappers and requiredReducers}
-
+\section{Changing the dataSize}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{datasize-table.PNG}
+	\caption[Caption for LOF]{DataSize/RunTime table}
+	\label{datasize-table}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{datasize-chart.PNG}
+	\caption[Caption for LOF]{DataSize/RunTime chart}
+	\label{datasize-chart}
+\end{figure}
+\section{Changing the sortFactor}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{sortfactor-table.PNG}
+	\caption[Caption for LOF]{Sortfactor/RunTime table}
+	\label{sortfactor-table}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{sort-factor-chart.PNG}
+	\caption[Caption for LOF]{Sortfactor/RunTime chart}
+	\label{sort-factor-chart}
+\end{figure}
+\section{Changing the requiredMappers and requiredReducers}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{mapper-reducer-table.PNG}
+	\caption[Caption for LOF]{Number of Mappers and number of Reducers/RunTime table}
+	\label{mapper-reducer-table}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{mappers-reducers-chart.PNG}
+	\caption[Caption for LOF]{Number of Mappers and number of Reducers/RunTime chart}
+	\label{mappers-reducers-chart}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

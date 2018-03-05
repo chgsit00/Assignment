@@ -6,8 +6,8 @@
 \BOOKMARK [0][]{chapter.3}{Hadoop's Parameters}{}% 6
 \BOOKMARK [0][]{chapter.4}{HSim}{}% 7
 \BOOKMARK [0][]{chapter.5}{Evaluation}{}% 8
-\BOOKMARK [1][]{subsection.5.0.1}{Changing the dataSize}{chapter.5}% 9
-\BOOKMARK [2][]{subsection.5.0.2}{Changing the sortFactor}{subsection.5.0.1}% 10
-\BOOKMARK [2][]{subsection.5.0.3}{Changing the requiredMappers and requiredReducers}{subsection.5.0.1}% 11
+\BOOKMARK [1][]{section.5.1}{Changing the dataSize}{chapter.5}% 9
+\BOOKMARK [1][]{section.5.2}{Changing the sortFactor}{chapter.5}% 10
+\BOOKMARK [1][]{section.5.3}{Changing the requiredMappers and requiredReducers}{chapter.5}% 11
 \BOOKMARK [0][]{chapter.6}{Conclusion}{}% 12
-\BOOKMARK [0][]{chapter*.6}{Bibliography}{}% 13
+\BOOKMARK [0][]{chapter*.15}{Bibliography}{}% 13
