@@ -60,7 +60,7 @@ The structure consists of a name node and several data nodes according to the ma
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Hadoop's Parameters}
 \label{params}
-Before starting the simulation of Hadoop in the next chapter, a closer look is taken at the parameters of Hadoop, which can be manipulated in the simulation to get different results. Table \ref{parameters} shows an overview over the most important Hadoop parameter:
+Before starting the simulation of Hadoop in the next chapter, a closer look is taken at the parameters of Hadoop, which can be manipulated in the simulation to get different results. Table 3.1 shows an overview over the most important Hadoop parameter:
 \begin{table}[H]
 	\centering
 	\label{parameters}
@@ -111,7 +111,7 @@ These are just a few selected parameters that can be changed to influence Hadoop
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{HSim}
 \label{hsim}
-As already mentioned in the introduction, no complete cluster is being set up for this workshop, as the effort would have been far too much. Instead the provided software \textit{HSim} was used, which provides a simulated Hadoop environment with several machines, routers and nodes. HSim is based on Java and Hadoop v2 and it offers the possibility to adjust different Hadoop parameters and to display the effects on the simulation realistically. Figure \ref{hsim} shows HSim's main user interface while running a simulation.
+As already mentioned in the introduction, no complete cluster is being set up for this workshop, as the effort would have been far too much. Instead the provided software \textit{HSim} was used, which provides a simulated Hadoop environment with several machines, routers and nodes. HSim is based on Java and Hadoop and it offers the possibility to adjust different Hadoop parameters and to display the effects on the simulation realistically. Figure \ref{hsim} shows HSim's main user interface while running a simulation.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\linewidth]{hsim.png}
@@ -140,49 +140,65 @@ The different Hadoop parameters (see chapter \ref{params}) can be set using a co
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Evaluation}
 \label{eval}
+To get an impression of how changes to different parameters affect the runtime behavior of a real Hadoop cluster, the parameters' dataSize',' sortFactor' as well as' requiredMappers' and' requiredReducers' were assigned different values and then the simulation was started with these values. For every value the simulation ran 10 times. For each value change the simulation ran ten times and from each run the runtime was measured and afterwards an average value was calculated.
+\\
+Three different measurements have been made for the runtime. The \textbf{upload} time specifies the time that the Hadoop cluster would need under normal conditions to upload a job with the configured amount of data. The \textbf{mapping} time includes the time, which the simulated Hadoop cluster needs for the mapping step of the MapReduce algorithm and the already measured upload time. Finally, the \textbf{job} time indicates how long the simulated Hadoop cluster takes to process the configured job. This includes the mapping time as well as the time required by the cluster for the shuffling and reducing (see chapter \ref{mapreduce}).
 \section{Changing the dataSize}
+The first parameter that has been changed for the simulation is the amount of data for the job to be processed by the cluster. Figure \ref{datasize-table} shows a table with the individual amounts of data in megabytes as well as the respective average value for the different time measurements in seconds. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\linewidth]{datasize-table.PNG}
 	\caption[Caption for LOF]{DataSize/RunTime table}
 	\label{datasize-table}
 \end{figure}
+The graph in the figure \ref{datasize-chart} shows the dependency between the data size and the run time:
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.85\linewidth]{datasize-chart.PNG}
 	\caption[Caption for LOF]{DataSize/RunTime chart}
 	\label{datasize-chart}
 \end{figure}
+It becomes clear that especially the time required by the cluster to upload the data increases almost linearly in relation to the data volume. Meanwhile, the amount of data seems to have less influence on the time required for mapping and reducing than I expected.
 \section{Changing the sortFactor}
+The next parameter that has been changed is the sort factor. Figure \ref{sortfactor-table} shows a table with different settings for the sort factor parameter and the resulting average values of the individual time measurements.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\linewidth]{sortfactor-table.PNG}
 	\caption[Caption for LOF]{Sortfactor/RunTime table}
 	\label{sortfactor-table}
 \end{figure}
+The graph in the figure \ref{sort-factor-chart} shows the dependency between the sort factor and the run time:
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\linewidth]{sort-factor-chart.PNG}
 	\caption[Caption for LOF]{Sortfactor/RunTime chart}
 	\label{sort-factor-chart}
 \end{figure}
+Since the sort factor specifies how many parallel streams are used by the simulated cluster to sort the data, it is clear that starting from a certain amount of streams, the performance suffers from this. Figure shows that from a sort factor of 6, the time for shuffling and reducing increases because of this, while the time for the upload and mapping processes stays static.
 \section{Changing the requiredMappers and requiredReducers}
+The last two parameters to be examined are the \textit{requiredMappers} and \textit{requiredReducers}. The table in figure \ref{mapper-reducer-table} shows the individual value pairs for these two parameters as well as the resulting run times for the simulation.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\linewidth]{mapper-reducer-table.PNG}
 	\caption[Caption for LOF]{Number of Mappers and number of Reducers/RunTime table}
 	\label{mapper-reducer-table}
 \end{figure}
+The graph in the figure \ref{mappers-reducers-chart} shows the dependency between the amount of mappers and reducers to the run time:
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.85\linewidth]{mappers-reducers-chart.PNG}
+	\includegraphics[width=1.0\linewidth]{mappers-reducers-chart.PNG}
 	\caption[Caption for LOF]{Number of Mappers and number of Reducers/RunTime chart}
 	\label{mappers-reducers-chart}
 \end{figure}
+As was to be expected, the time required for mapping and reducing decreases exponentially with the increasing number of mappers and reducers processing the data blocks in parallel. With a value of 7 reducers and 14 mappers, the time required is balanced and runs statically with a further increase in the number of mappers and reducers. This is because each MapReduce task involves a certain overhead and requires resources and time for communication and data traffic between mappers and reducers. Therefore, from a certain stage on, there is no point in increasing the number of mappers and reducers. It can even turn out to be a disadvantage, since too many parallel running mappers and reducers have an impact on performance. The time required for the data upload however stays static.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Conclusion}
 \label{conlusion}
-
+The aim of this workshop was to develop a basic understanding of the programming model \textbf{MapReduce} and its Java implementation \textbf{Hadoop}. Changing individual parameters in the Hadoop simulation \textbf{HSim} showed interesting insights into the runtime behavior of the MapReduce algorithm and strengthens theoretical knowledge by observing a simulated Hadoop environment.
+\\
+All in all, it can be said that MapReduce is a very powerful technology to process large amounts of data quickly and efficiently. This is particularly true in today's times where the data volumes created by worldwide Internet use are constantly increasing, while at the same time the computing power of individual systems is no longer increasing so quickly and these are therefore overwhelmed by such data volumes.
+\\
+However, the user must also know what he is doing when configuring Hadoop, as certain changes to the parameters can also affect the performance negatively. This was demonstrated by the changes to the parameters in the evaluation.
 

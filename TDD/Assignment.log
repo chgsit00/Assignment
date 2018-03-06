@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.22)  5 MAR 2018 16:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.22)  6 MAR 2018 17:33
 entering extended mode
 **./Assignment.tex
 (Assignment.tex
@@ -1719,6 +1719,11 @@ Package biblatex Warning: Biber reported the following issues
 (biblatex)                with 'MR01':
 (biblatex)                - Invalid format of field 'month'.
 
+
+Package biblatex Warning: Biber reported the following issues
+(biblatex)                with 'AP03':
+(biblatex)                - Invalid format of field 'month'.
+
 )
 Package biblatex Info: Reference section=0 on input line 59.
 Package biblatex Info: Reference segment=0 on input line 59.
@@ -2042,13 +2047,6 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 [5 <./Bilder/hdfs.PNG>]
 chapter 3.
 
-Package caption Warning: \label without proper reference on input line 66.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `parameters' on page 6 undefined on input line 63.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 85--107
 
  []
@@ -2110,11 +2108,8 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 [6
 
 ]
-
-LaTeX Warning: Citation 'AP03' on page 7 undefined on input line 108.
-
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
-<use Bilder/Brunel_University_Logo.png>
+ <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
 12.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
@@ -2124,13 +2119,13 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 [7]
 chapter 4.
-<Bilder/hsim.png, id=224, 1285.80376pt x 784.9325pt>
+<Bilder/hsim.png, id=225, 1285.80376pt x 784.9325pt>
 File: Bilder/hsim.png Graphic file (type png)
  <use Bilder/hsim.png>
 Package pdftex.def Info: Bilder/hsim.png used on input line 117.
 (pdftex.def)             Requested size: 483.69687pt x 295.2712pt.
 
-<Bilder/machine-state.png, id=226, 543.02875pt x 618.31pt>
+<Bilder/machine-state.png, id=227, 543.02875pt x 618.31pt>
 File: Bilder/machine-state.png Graphic file (type png)
 
 <use Bilder/machine-state.png>
@@ -2148,7 +2143,7 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 [8
 
  <./Bilder/hsim.png>]
-<Bilder/hsim-console.png, id=236, 745.78625pt x 514.92375pt>
+<Bilder/hsim-console.png, id=237, 745.78625pt x 514.92375pt>
 File: Bilder/hsim-console.png Graphic file (type png)
 
 <use Bilder/hsim-console.png>
@@ -2179,37 +2174,23 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 [10 <./Bilder/hsim-console.png>]
 chapter 5.
-<Bilder/datasize-table.PNG, id=250, 897.3525pt x 211.54031pt>
+<Bilder/datasize-table.PNG, id=253, 575.14874pt x 162.6075pt>
 File: Bilder/datasize-table.PNG Graphic file (type png)
 
 <use Bilder/datasize-table.PNG>
-Package pdftex.def Info: Bilder/datasize-table.PNG used on input line 146.
-(pdftex.def)             Requested size: 483.69687pt x 114.02347pt.
+Package pdftex.def Info: Bilder/datasize-table.PNG used on input line 150.
+(pdftex.def)             Requested size: 483.69687pt x 136.7556pt.
 
-<Bilder/datasize-chart.PNG, id=251, 625.58719pt x 416.30531pt>
+<Bilder/datasize-chart.PNG, id=255, 514.17094pt x 305.64188pt>
 File: Bilder/datasize-chart.PNG Graphic file (type png)
 
 <use Bilder/datasize-chart.PNG>
-Package pdftex.def Info: Bilder/datasize-chart.PNG used on input line 152.
-(pdftex.def)             Requested size: 411.14528pt x 273.60623pt.
-
-<Bilder/sortfactor-table.PNG, id=252, 964.35281pt x 174.6525pt>
-File: Bilder/sortfactor-table.PNG Graphic file (type png)
-
-<use Bilder/sortfactor-table.PNG>
-Package pdftex.def Info: Bilder/sortfactor-table.PNG used on input line 159.
-(pdftex.def)             Requested size: 483.69687pt x 87.60052pt.
-
-<Bilder/sort-factor-chart.PNG, id=253, 523.20468pt x 312.41719pt>
-File: Bilder/sort-factor-chart.PNG Graphic file (type png)
-
-<use Bilder/sort-factor-chart.PNG>
-Package pdftex.def Info: Bilder/sort-factor-chart.PNG used on input line 165.
-(pdftex.def)             Requested size: 362.77264pt x 216.62161pt.
+Package pdftex.def Info: Bilder/datasize-chart.PNG used on input line 157.
+(pdftex.def)             Requested size: 411.14528pt x 244.40189pt.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-68.
+61.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -2217,44 +2198,67 @@ Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 [11
 
- <./Bilder/datasize-table.PNG> <./Bilder/datasize-chart.PNG>]
-<Bilder/mapper-reducer-table.PNG, id=262, 966.61125pt x 288.3272pt>
+ <./Bilder/datasize-table.PNG>]
+<Bilder/sortfactor-table.PNG, id=264, 623.32875pt x 133.24782pt>
+File: Bilder/sortfactor-table.PNG Graphic file (type png)
+
+<use Bilder/sortfactor-table.PNG>
+Package pdftex.def Info: Bilder/sortfactor-table.PNG used on input line 166.
+(pdftex.def)             Requested size: 483.69687pt x 103.40016pt.
+
+<Bilder/sort-factor-chart.PNG, id=266, 520.94624pt x 310.15875pt>
+File: Bilder/sort-factor-chart.PNG Graphic file (type png)
+
+<use Bilder/sort-factor-chart.PNG>
+Package pdftex.def Info: Bilder/sort-factor-chart.PNG used on input line 173.
+(pdftex.def)             Requested size: 362.77264pt x 215.988pt.
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+77.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[12 <./Bilder/datasize-chart.PNG> <./Bilder/sortfactor-table.PNG>]
+<Bilder/mapper-reducer-table.PNG, id=276, 619.56468pt x 217.5628pt>
 File: Bilder/mapper-reducer-table.PNG Graphic file (type png)
 
 <use Bilder/mapper-reducer-table.PNG>
-Package pdftex.def Info: Bilder/mapper-reducer-table.PNG used on input line 172
+Package pdftex.def Info: Bilder/mapper-reducer-table.PNG used on input line 182
 .
-(pdftex.def)             Requested size: 483.69687pt x 144.28201pt.
+(pdftex.def)             Requested size: 483.69687pt x 169.85101pt.
 
-<Bilder/mappers-reducers-chart.PNG, id=263, 609.02531pt x 471.26062pt>
+<Bilder/mappers-reducers-chart.PNG, id=278, 523.9575pt x 365.86688pt>
 File: Bilder/mappers-reducers-chart.PNG Graphic file (type png)
 
 <use Bilder/mappers-reducers-chart.PNG>
 Package pdftex.def Info: Bilder/mappers-reducers-chart.PNG used on input line 1
-78.
-(pdftex.def)             Requested size: 411.14528pt x 318.15192pt.
+89.
+(pdftex.def)             Requested size: 483.69687pt x 337.7628pt.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-85.
+92.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[12 <./Bilder/sortfactor-table.PNG> <./Bilder/sort-factor-chart.PNG> <./Bilder/
-mapper-reducer-table.PNG>]
+[13 <./Bilder/sort-factor-chart.PNG> <./Bilder/mapper-reducer-table.PNG>]
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
- <use Bilder/Brunel_University_Logo.png>
+
+<use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-85.
+97.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[13 <./Bilder/mappers-reducers-chart.PNG>]
+[14 <./Bilder/mappers-reducers-chart.PNG>]
 chapter 6.
 ))
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
@@ -2266,7 +2270,7 @@ Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[14
+[15
 
 ])
 chapter without number
@@ -2289,7 +2293,7 @@ Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[15
+[16
 
 
 ]
@@ -2300,24 +2304,15 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 145.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 145.
 Package rerunfilecheck Info: File `Assignment.out' has not changed.
 (rerunfilecheck)             Checksum: E82D0478D62A885BCA17D0BC005A93F6;800.
-
-
-LaTeX Warning: There were undefined references.
-
-
-Package biblatex Warning: Please (re)run BibTeX on the file(s):
-(biblatex)                Assignment
-(biblatex)                and rerun LaTeX afterwards.
-
 Package logreq Info: Writing requests to 'Assignment.run.xml'.
 \openout1 = `Assignment.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 37228 strings out of 493323
- 684154 string characters out of 3139069
+ 37235 strings out of 493323
+ 684269 string characters out of 3139069
  1246691 words of memory out of 3000000
- 39931 multiletter control sequences out of 15000+200000
+ 39936 multiletter control sequences out of 15000+200000
  65570 words of font info for 61 fonts, out of 3000000 for 9000
  1145 hyphenation exceptions out of 8191
  67i,18n,79p,8823b,1735s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2330,9 +2325,9 @@ fonts/type1/public/lm/lmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 lm/lmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/P
 rogram Files/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Program Files/Mi
 KTeX 2.9/fonts/type1/public/lm/lmtt12.pfb>
-Output written on Assignment.pdf (18 pages, 1713196 bytes).
+Output written on Assignment.pdf (19 pages, 1589959 bytes).
 PDF statistics:
- 360 PDF objects out of 1000 (max. 8388607)
- 55 named destinations out of 1000 (max. 500000)
+ 376 PDF objects out of 1000 (max. 8388607)
+ 57 named destinations out of 1000 (max. 500000)
  222 words of extra memory for PDF output out of 10000 (max. 10000000)
 

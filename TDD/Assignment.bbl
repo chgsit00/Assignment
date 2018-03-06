@@ -185,5 +185,28 @@
     \field{urlyear}{2018}
     \warn{\item Invalid format of field 'month'}
   \endentry
+
+  \entry{AP03}{inproceedings}{}
+    \name{author}{1}{}{%
+      {{hash=A}{%
+         family={Appache},
+         familyi={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{A2}
+    \strng{fullhash}{A2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{App17}
+    \field{title}{Hadoop Parameters}
+    \verb{url}
+    \verb https://hadoop.apache.org/docs/r1.0.4/mapred-default.html
+    \endverb
+    \field{year}{2017}
+    \field{urlday}{04}
+    \field{urlmonth}{03}
+    \field{urlyear}{2018}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
 \endsortlist
 \endinput
