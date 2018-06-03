@@ -17,196 +17,26 @@
 \endgroup
 
 \sortlist[entry]{none/global/}
-  \entry{DG04}{online}{}
+  \entry{DK01}{online}{}
     \field{labeltitlesource}{title}
-    \field{labelalpha}{Dg0}
-    \field{title}{MapReduce: Simplifed Data Processing on Large Clusters.}
+    \field{labelalpha}{Dk0}
+    \field{title}{A small overview of neural networks}
     \verb{url}
-    \verb http://static.googleusercontent.com/media/research.google.com/es/us/a
-    \verb rchive/mapreduce-osdi04.pdf
-    \endverb
-    \field{year}{2004}
-  \endentry
-
-  \entry{BI01}{online}{}
-    \field{labeltitlesource}{title}
-    \field{labelalpha}{Bi0}
-    \field{title}{Big-Data-Technologien - Wissen for Entscheider}
-    \verb{url}
-    \verb https://www.bitkom.org/noindex/Publikationen/2014/Leitfaden/Big-Data-
-    \verb Technologien-Wissen-fuer-Entscheider/140228-Big-Data-Technologien-Wis
-    \verb sen-fuer-Entscheider.pdf
+    \verb http://www.dkriesel.com/science/neural_networks
     \endverb
     \warn{\item Invalid format of field 'date' \item Invalid format of field
   'date'}
   \endentry
 
-  \entry{TW15}{inproceedings}{}
-    \name{author}{1}{}{%
-      {{hash=WT}{%
-         family={White},
-         familyi={W\bibinitperiod},
-         given={Tom},
-         giveni={T\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {O´Reilly}%
-    }
-    \strng{namehash}{WT1}
-    \strng{fullhash}{WT1}
-    \field{labelnamesource}{author}
+  \entry{LB01}{online}{}
     \field{labeltitlesource}{title}
-    \field{labelalpha}{Whi15}
-    \field{booktitle}{Hadoop: The Definitive Guide}
-    \field{title}{Hadoop: The Definitive Guide}
+    \field{labelalpha}{Lb0}
+    \field{title}{What is Fuzzy Logic ?}
     \verb{url}
-    \verb http://javaarm.com/file/apache/Hadoop/books/Hadoop-The.Definitive.Gui
-    \verb de_4.edition_a_Tom.White_April-2015.pdf
+    \verb http://www.phyx.at/was-versteht-man-unter-fuzzy-logic/
     \endverb
-    \list{location}{1}{%
-      {Cambridge}%
-    }
-    \field{year}{2015}
-    \field{urlday}{03}
-    \field{urlmonth}{03}
-    \field{urlyear}{2018}
-    \warn{\item Invalid format of field 'month'}
-  \endentry
-
-  \entry{AP02}{inproceedings}{}
-    \name{author}{1}{}{%
-      {{hash=A}{%
-         family={Apache},
-         familyi={A\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {The Apache Software Foundation}%
-    }
-    \strng{namehash}{A1}
-    \strng{fullhash}{A1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{labelalpha}{Apa17}
-    \field{booktitle}{Hadoop Official Documentation}
-    \field{title}{Hadoop Official Documentation}
-    \verb{url}
-    \verb http://hadoop.apache.org/
-    \endverb
-    \field{year}{2017}
-    \field{urlday}{03}
-    \field{urlmonth}{03}
-    \field{urlyear}{2018}
-    \warn{\item Invalid format of field 'month'}
-  \endentry
-
-  \entry{NL01}{inproceedings}{}
-    \name{author}{1}{}{%
-      {{hash=LN}{%
-         family={Litzel},
-         familyi={L\bibinitperiod},
-         given={Nico},
-         giveni={N\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {Vogel Business Media}%
-    }
-    \strng{namehash}{LN1}
-    \strng{fullhash}{LN1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{labelalpha}{Lit16}
-    \field{booktitle}{Big Data Insider}
-    \field{title}{Definition: What is Hadoop?}
-    \verb{url}
-    \verb https://www.bigdata-insider.de/was-ist-hadoop-a-587448/
-    \endverb
-    \field{year}{2016}
-    \field{urlday}{03}
-    \field{urlmonth}{03}
-    \field{urlyear}{2018}
-    \warn{\item Invalid format of field 'month'}
-  \endentry
-
-  \entry{RO01}{inproceedings}{}
-    \name{author}{1}{}{%
-      {{hash=TRB}{%
-         family={Technologies},
-         familyi={T\bibinitperiod},
-         given={Rose\bibnamedelima Business},
-         giveni={R\bibinitperiod\bibinitdelim B\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {Rose Business Technologies}%
-    }
-    \strng{namehash}{TRB1}
-    \strng{fullhash}{TRB1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{labelalpha}{Tec12}
-    \field{title}{Hadoop Architecture and Deployment}
-    \verb{url}
-    \verb http://www.rosebt.com/blog/hadooparchitecture-and-deployment
-    \endverb
-    \list{location}{1}{%
-      {New York, NY, 10020}%
-    }
-    \field{year}{2012}
-    \field{urlday}{03}
-    \field{urlmonth}{03}
-    \field{urlyear}{2018}
-    \warn{\item Invalid format of field 'month'}
-  \endentry
-
-  \entry{MR01}{inproceedings}{}
-    \name{author}{1}{}{%
-      {{hash=RM}{%
-         family={Rouse},
-         familyi={R\bibinitperiod},
-         given={Margaret},
-         giveni={M\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{RM1}
-    \strng{fullhash}{RM1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{labelalpha}{Rou18}
-    \field{title}{Hadoop Distributed File System (HDFS)}
-    \verb{url}
-    \verb http://www.rosebt.com/blog/hadooparchitecture-and-deployment
-    \endverb
-    \field{year}{2018}
-    \field{urlday}{04}
-    \field{urlmonth}{03}
-    \field{urlyear}{2018}
-    \warn{\item Invalid format of field 'month'}
-  \endentry
-
-  \entry{AP03}{inproceedings}{}
-    \name{author}{1}{}{%
-      {{hash=A}{%
-         family={Appache},
-         familyi={A\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{A2}
-    \strng{fullhash}{A2}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{labelalpha}{App17}
-    \field{title}{Hadoop Parameters}
-    \verb{url}
-    \verb https://hadoop.apache.org/docs/r1.0.4/mapred-default.html
-    \endverb
-    \field{year}{2017}
-    \field{urlday}{04}
-    \field{urlmonth}{03}
-    \field{urlyear}{2018}
-    \warn{\item Invalid format of field 'month'}
+    \warn{\item Invalid format of field 'date' \item Invalid format of field
+  'date'}
   \endentry
 \endsortlist
 \endinput

@@ -1,13 +1,14 @@
 \BOOKMARK [0][]{chapter.1}{Introduction}{}% 1
-\BOOKMARK [0][]{chapter.2}{High Performance Computing With MapReduce and Hadoop}{}% 2
-\BOOKMARK [1][]{section.2.1}{MapReduce}{chapter.2}% 3
-\BOOKMARK [1][]{section.2.2}{Hadoop}{chapter.2}% 4
-\BOOKMARK [2][]{subsection.2.2.1}{Hadoop Distributed File System \(HDFS\)}{section.2.2}% 5
-\BOOKMARK [0][]{chapter.3}{Hadoop's Parameters}{}% 6
-\BOOKMARK [0][]{chapter.4}{HSim}{}% 7
-\BOOKMARK [0][]{chapter.5}{Evaluation}{}% 8
-\BOOKMARK [1][]{section.5.1}{Changing the dataSize}{chapter.5}% 9
-\BOOKMARK [1][]{section.5.2}{Changing the sortFactor}{chapter.5}% 10
-\BOOKMARK [1][]{section.5.3}{Changing the requiredMappers and requiredReducers}{chapter.5}% 11
-\BOOKMARK [0][]{chapter.6}{Conclusion}{}% 12
-\BOOKMARK [0][]{chapter*.15}{Bibliography}{}% 13
+\BOOKMARK [0][]{chapter.2}{Neural Network}{}% 2
+\BOOKMARK [1][]{section.2.1}{Thermal model}{chapter.2}% 3
+\BOOKMARK [1][]{section.2.2}{Generating training data}{chapter.2}% 4
+\BOOKMARK [1][]{section.2.3}{Configuration and Training}{chapter.2}% 5
+\BOOKMARK [1][]{section.2.4}{Analysis and Evaluation}{chapter.2}% 6
+\BOOKMARK [0][]{chapter.3}{Fuzzy Logic}{}% 7
+\BOOKMARK [1][]{section.3.1}{The original setup and problem}{chapter.3}% 8
+\BOOKMARK [1][]{section.3.2}{The fuzzy controller}{chapter.3}% 9
+\BOOKMARK [2][]{subsection.3.2.1}{Membership functions}{section.3.2}% 10
+\BOOKMARK [2][]{subsection.3.2.2}{Fuzzy Ruleset}{section.3.2}% 11
+\BOOKMARK [1][]{section.3.3}{Analysis and Evaluation}{chapter.3}% 12
+\BOOKMARK [0][]{chapter.4}{Conclusion}{}% 13
+\BOOKMARK [0][]{chapter*.17}{Bibliography}{}% 14

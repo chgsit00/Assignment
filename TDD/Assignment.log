@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.22)  12 MAR 2018 10:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.9.22)  3 JUN 2018 13:35
 entering extended mode
 **./Assignment.tex
 (Assignment.tex
@@ -636,8 +636,8 @@ Package: inputenc 2015/03/17 v1.2c Input encoding file
 \inpenc@prehook=\toks36
 \inpenc@posthook=\toks37
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\latin1.def"
-File: latin1.def 2015/03/17 v1.2c Input encoding file
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\latin9.def"
+File: latin9.def 2015/03/17 v1.2c Input encoding file
 ))
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\fontenc.sty"
 Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
@@ -1224,7 +1224,7 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \c@LT@chunks=\count350
 \LT@p@ftn=\toks41
 )
-Class scrreprt Info: longtable captions redefined on input line 162.
+Class scrreprt Info: longtable captions redefined on input line 163.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\tools\array.sty"
 Package: array 2016/10/06 v2.4d Tabular extension package (FMi)
@@ -1677,11 +1677,11 @@ Package caption Info: End \AtBeginDocument code.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \c@lstlisting=\count398
-Package biblatex Info: Input encoding 'latin1' detected.
+Package biblatex Info: Input encoding 'latin9' detected.
 Package biblatex Info: Automatic encoding selection.
-(biblatex)             Assuming data encoding 'latin1'.
-Package biblatex Info: Input encoding 'latin1' specified.
-Package biblatex Info: Data encoding 'latin1' specified.
+(biblatex)             Assuming data encoding 'latin9'.
+Package biblatex Info: Input encoding 'latin9' specified.
+Package biblatex Info: Data encoding 'latin9' specified.
 (biblatex)             No need to reencode data.
 \openout5 = `Assignment-blx.bib'.
 
@@ -1690,39 +1690,15 @@ Package biblatex Info: ... file 'Assignment.bbl' found.
 (Assignment.bbl
 
 Package biblatex Warning: Biber reported the following issues
-(biblatex)                with 'BI01':
+(biblatex)                with 'DK01':
 (biblatex)                - Invalid format of field 'date' 
 (biblatex)                - Invalid format of field 'date'.
 
 
 Package biblatex Warning: Biber reported the following issues
-(biblatex)                with 'TW15':
-(biblatex)                - Invalid format of field 'month'.
-
-
-Package biblatex Warning: Biber reported the following issues
-(biblatex)                with 'AP02':
-(biblatex)                - Invalid format of field 'month'.
-
-
-Package biblatex Warning: Biber reported the following issues
-(biblatex)                with 'NL01':
-(biblatex)                - Invalid format of field 'month'.
-
-
-Package biblatex Warning: Biber reported the following issues
-(biblatex)                with 'RO01':
-(biblatex)                - Invalid format of field 'month'.
-
-
-Package biblatex Warning: Biber reported the following issues
-(biblatex)                with 'MR01':
-(biblatex)                - Invalid format of field 'month'.
-
-
-Package biblatex Warning: Biber reported the following issues
-(biblatex)                with 'AP03':
-(biblatex)                - Invalid format of field 'month'.
+(biblatex)                with 'LB01':
+(biblatex)                - Invalid format of field 'date' 
+(biblatex)                - Invalid format of field 'date'.
 
 )
 Package biblatex Info: Reference section=0 on input line 59.
@@ -1758,7 +1734,7 @@ Dictionary: glossaries-dictionary, Language: German
 
 pdfTeX warning: pdflatex.exe (file ./Bilder/Deckblatt-Assignment.pdf): PDF incl
 usion: found PDF version <1.7>, but at most version <1.5> allowed
-<Bilder/Deckblatt-Assignment.pdf, id=58, 597.55246pt x 845.07724pt>
+<Bilder/Deckblatt-Assignment.pdf, id=62, 597.55246pt x 845.07724pt>
 File: Bilder/Deckblatt-Assignment.pdf Graphic file (type pdf)
 
 <use Bilder/Deckblatt-Assignment.pdf>
@@ -1782,7 +1758,7 @@ usion: found PDF version <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./Bilder/Deckblatt-Assignment.pdf): PDF incl
 usion: found PDF version <1.7>, but at most version <1.5> allowed
-<Bilder/Deckblatt-Assignment.pdf, id=61, page=1, 597.55246pt x 845.07724pt>
+<Bilder/Deckblatt-Assignment.pdf, id=65, page=1, 597.55246pt x 845.07724pt>
 File: Bilder/Deckblatt-Assignment.pdf Graphic file (type pdf)
 
 <use Bilder/Deckblatt-Assignment.pdf, page 1>
@@ -1820,59 +1796,8 @@ ine 68.
 
 
  <./Bilder/Deckblatt-Assignment.pdf>]
-
-pdfTeX warning: pdflatex.exe (file ./Bilder/submission.pdf): PDF inclusion: fou
-nd PDF version <1.7>, but at most version <1.5> allowed
-<Bilder/submission.pdf, id=93, 597.55246pt x 845.07724pt>
-File: Bilder/submission.pdf Graphic file (type pdf)
-
-<use Bilder/submission.pdf>
-Package pdftex.def Info: Bilder/submission.pdf used on input line 69.
-(pdftex.def)             Requested size: 597.551pt x 845.07518pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./Bilder/submission.pdf): PDF inclusion: fou
-nd PDF version <1.7>, but at most version <1.5> allowed
-File: Bilder/submission.pdf Graphic file (type pdf)
-<use Bilder/submission.pdf>
-Package pdftex.def Info: Bilder/submission.pdf used on input line 69.
-(pdftex.def)             Requested size: 597.551pt x 845.07518pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./Bilder/submission.pdf): PDF inclusion: fou
-nd PDF version <1.7>, but at most version <1.5> allowed
-
-
-pdfTeX warning: pdflatex.exe (file ./Bilder/submission.pdf): PDF inclusion: fou
-nd PDF version <1.7>, but at most version <1.5> allowed
-<Bilder/submission.pdf, id=96, page=1, 597.55246pt x 845.07724pt>
-File: Bilder/submission.pdf Graphic file (type pdf)
-
-<use Bilder/submission.pdf, page 1>
-Package pdftex.def Info: Bilder/submission.pdf, page1 used on input line 69.
-(pdftex.def)             Requested size: 597.551pt x 845.07518pt.
-File: Bilder/submission.pdf Graphic file (type pdf)
- <use Bilder/submission.pdf, page 1>
-Package pdftex.def Info: Bilder/submission.pdf, page1 used on input line 69.
-(pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
-File: Bilder/submission.pdf Graphic file (type pdf)
-
-<use Bilder/submission.pdf, page 1>
-Package pdftex.def Info: Bilder/submission.pdf, page1 used on input line 69.
-(pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
-File: Bilder/submission.pdf Graphic file (type pdf)
- <use Bilder/submission.pdf, page 1>
-Package pdftex.def Info: Bilder/submission.pdf, page1 used on input line 69.
-(pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
-File: Bilder/submission.pdf Graphic file (type pdf)
-
-<use Bilder/submission.pdf, page 1>
-Package pdftex.def Info: Bilder/submission.pdf, page1 used on input line 69.
-(pdftex.def)             Requested size: 597.57834pt x 845.11386pt.
- [2 <./Bilder/submission.pdf>]
 LaTeX Font Info:    Try loading font information for T1+lmss on input line 89.
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\lm\t1lmss.fd"
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\t1lmss.fd"
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) (Assignment.toc
 LaTeX Font Info:    Try loading font information for OT1+lmr on input line 9.
@@ -1915,7 +1840,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout7 = `Assignment.toc'.
 
 
-<Bilder/Brunel_University_Logo.png, id=140, 1467.4825pt x 580.1675pt>
+<Bilder/Brunel_University_Logo.png, id=111, 1467.4825pt x 580.1675pt>
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 
 <use Bilder/Brunel_University_Logo.png>
@@ -1951,10 +1876,16 @@ Class scrreprt Warning: \float@addtolists detected!
 (scrreprt)              a package that still implements the
 (scrreprt)              deprecated \float@addtolist interface .
 
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 4.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 4.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 4.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-0.
+7.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
@@ -1963,151 +1894,154 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.10 \chapter
-             {High Performance Computing With MapReduce and Hadoop} [1
+l.17 \chapter
+             {Neural Network} [1
 
 
 
 ]
 chapter 2.
-<Bilder/mapreduce.PNG, id=159, 735.49782pt x 271.0125pt>
-File: Bilder/mapreduce.PNG Graphic file (type png)
-
-<use Bilder/mapreduce.PNG>
-Package pdftex.def Info: Bilder/mapreduce.PNG used on input line 21.
-(pdftex.def)             Requested size: 483.69687pt x 178.23608pt.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 25.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 25.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 25.
-File: Bilder/Brunel_University_Logo.png Graphic file (type png)
- <use Bilder/Brunel_University_Logo.png>
-Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 2
-5.
-(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
-
-Overfull \vbox (9.1336pt too high) has occurred while \output is active []
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.25 ...alvin.edu/courses/cs/374/exercises/12/lab}
-                                                   [2
-
-]
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 31.
-
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 25.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\ts1lmr.fd"
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<Bilder/master-slave.jpg, id=174, 596.2275pt x 315.42844pt>
-File: Bilder/master-slave.jpg Graphic file (type jpg)
+<Bilder/1housesetup.png, id=134, 664.4825pt x 305.14pt>
+File: Bilder/1housesetup.png Graphic file (type png)
 
-<use Bilder/master-slave.jpg>
-Package pdftex.def Info: Bilder/master-slave.jpg used on input line 43.
-(pdftex.def)             Requested size: 483.69687pt x 255.89511pt.
+<use Bilder/1housesetup.png>
+Package pdftex.def Info: Bilder/1housesetup.png used on input line 32.
+(pdftex.def)             Requested size: 483.69687pt x 222.12177pt.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
-Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 4
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 3
 6.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[3 <./Bilder/mapreduce.PNG>]
-<Bilder/hdfs.PNG, id=192, 671.50874pt x 449.42906pt>
-File: Bilder/hdfs.PNG Graphic file (type png)
- <use Bilder/hdfs.PNG>
-Package pdftex.def Info: Bilder/hdfs.PNG used on input line 53.
-(pdftex.def)             Requested size: 483.69687pt x 323.73268pt.
+[2
+
+] <Bilder/1neural.png, id=144, 575.14874pt x 156.585pt>
+File: Bilder/1neural.png Graphic file (type png)
+
+<use Bilder/1neural.png>
+Package pdftex.def Info: Bilder/1neural.png used on input line 40.
+(pdftex.def)             Requested size: 483.69687pt x 131.69057pt.
+
+<Bilder/1trainingresult.png, id=146, 559.08875pt x 522.95375pt>
+File: Bilder/1trainingresult.png Graphic file (type png)
+
+<use Bilder/1trainingresult.png>
+Package pdftex.def Info: Bilder/1trainingresult.png used on input line 47.
+(pdftex.def)             Requested size: 483.69687pt x 452.4525pt.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
-
-<use Bilder/Brunel_University_Logo.png>
+ <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 5
-6.
+0.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[4 <./Bilder/master-slave.jpg>]
+[3 <./Bilder/1housesetup.png> <./Bilder/1neural.png>]
+<Bilder/1houseneural.png, id=155, 643.40375pt x 474.77374pt>
+File: Bilder/1houseneural.png Graphic file (type png)
+
+<use Bilder/1houseneural.png>
+Package pdftex.def Info: Bilder/1houseneural.png used on input line 55.
+(pdftex.def)             Requested size: 483.69687pt x 356.93428pt.
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 5
+9.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[4 <./Bilder/1trainingresult.png>]
+<Bilder/1origvsneural.png, id=164, 926.46124pt x 417.56pt>
+File: Bilder/1origvsneural.png Graphic file (type png)
+
+<use Bilder/1origvsneural.png>
+Package pdftex.def Info: Bilder/1origvsneural.png used on input line 62.
+(pdftex.def)             Requested size: 483.69687pt x 218.00533pt.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 6
-1.
+6.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[5 <./Bilder/hdfs.PNG>]
-chapter 3.
-
-Underfull \hbox (badness 10000) in paragraph at lines 85--107
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 85--107
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 85--107
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 85--107
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 85--107
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 85--107
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 85--107
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 85--107
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 85--107
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 85--107
-
- []
-
+[5 <./Bilder/1houseneural.png>]
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
-<use Bilder/Brunel_University_Logo.png>
-Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-07.
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 7
+0.
 (pdftex.def)             Requested size: 117.401pt x 46.41434pt.
 
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[6
+[6 <./Bilder/1origvsneural.png>]
+chapter 3.
+<Bilder/1housetermo.png, id=179, 851.18pt x 370.38374pt>
+File: Bilder/1housetermo.png Graphic file (type png)
 
-]
+<use Bilder/1housetermo.png>
+Package pdftex.def Info: Bilder/1housetermo.png used on input line 78.
+(pdftex.def)             Requested size: 483.69687pt x 210.47664pt.
+
+<Bilder/1origcost.png, id=181, 657.45625pt x 424.58624pt>
+File: Bilder/1origcost.png Graphic file (type png)
+
+<use Bilder/1origcost.png>
+Package pdftex.def Info: Bilder/1origcost.png used on input line 85.
+(pdftex.def)             Requested size: 483.69687pt x 312.37488pt.
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 8
+9.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[7
+
+ <./Bilder/1housetermo.png>]
+<Bilder/1fuzzycontroller.png, id=191, 651.43375pt x 239.89626pt>
+File: Bilder/1fuzzycontroller.png Graphic file (type png)
+
+<use Bilder/1fuzzycontroller.png>
+Package pdftex.def Info: Bilder/1fuzzycontroller.png used on input line 94.
+(pdftex.def)             Requested size: 483.69687pt x 178.13174pt.
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 9
+8.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[8 <./Bilder/1origcost.png>]
+<Bilder/1housefuzzy.png, id=199, 737.75626pt x 365.365pt>
+File: Bilder/1housefuzzy.png Graphic file (type png)
+
+<use Bilder/1housefuzzy.png>
+Package pdftex.def Info: Bilder/1housefuzzy.png used on input line 101.
+(pdftex.def)             Requested size: 483.69687pt x 239.54161pt.
+
+<Bilder/1errorinput.png, id=201, 697.60625pt x 271.0125pt>
+File: Bilder/1errorinput.png Graphic file (type png)
+
+<use Bilder/1errorinput.png>
+Package pdftex.def Info: Bilder/1errorinput.png used on input line 109.
+(pdftex.def)             Requested size: 483.69687pt x 187.91272pt.
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
@@ -2117,149 +2051,80 @@ Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[7]
+[9 <./Bilder/1fuzzycontroller.png> <./Bilder/1housefuzzy.png>]
+<Bilder/1tempinput.png, id=209, 633.36626pt x 263.98625pt>
+File: Bilder/1tempinput.png Graphic file (type png)
+
+<use Bilder/1tempinput.png>
+Package pdftex.def Info: Bilder/1tempinput.png used on input line 116.
+(pdftex.def)             Requested size: 483.69687pt x 201.61046pt.
+
+<Bilder/1fanspeedoutput.png, id=210, 632.3625pt x 260.975pt>
+File: Bilder/1fanspeedoutput.png Graphic file (type png)
+
+<use Bilder/1fanspeedoutput.png>
+Package pdftex.def Info: Bilder/1fanspeedoutput.png used on input line 123.
+(pdftex.def)             Requested size: 483.69687pt x 199.6253pt.
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+26.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[10 <./Bilder/1errorinput.png> <./Bilder/1tempinput.png>]
+<Bilder/1fuzzyrules.png, id=220, 526.96875pt x 124.465pt>
+File: Bilder/1fuzzyrules.png Graphic file (type png)
+
+<use Bilder/1fuzzyrules.png>
+Package pdftex.def Info: Bilder/1fuzzyrules.png used on input line 132.
+(pdftex.def)             Requested size: 483.69687pt x 114.25089pt.
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+37.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[11 <./Bilder/1fanspeedoutput.png> <./Bilder/1fuzzyrules.png>]
+<Bilder/1fuzzycost.png, id=231, 982.67125pt x 443.6575pt>
+File: Bilder/1fuzzycost.png Graphic file (type png)
+
+<use Bilder/1fuzzycost.png>
+Package pdftex.def Info: Bilder/1fuzzycost.png used on input line 141.
+(pdftex.def)             Requested size: 483.69687pt x 218.38243pt.
+
+<Bilder/1energy.png, id=233, 891.33pt x 318.18875pt>
+File: Bilder/1energy.png Graphic file (type png)
+ <use Bilder/1energy.png>
+Package pdftex.def Info: Bilder/1energy.png used on input line 148.
+(pdftex.def)             Requested size: 483.69687pt x 172.67386pt.
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+
+<use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+52.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[12 <./Bilder/1fuzzycost.png>]
+File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+ <use Bilder/Brunel_University_Logo.png>
+Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
+56.
+(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
+
+Overfull \vbox (9.1336pt too high) has occurred while \output is active []
+
+
+[13 <./Bilder/1energy.png>]
 chapter 4.
-<Bilder/hsim.png, id=225, 1285.80376pt x 784.9325pt>
-File: Bilder/hsim.png Graphic file (type png)
- <use Bilder/hsim.png>
-Package pdftex.def Info: Bilder/hsim.png used on input line 117.
-(pdftex.def)             Requested size: 483.69687pt x 295.2712pt.
-
-<Bilder/machine-state.png, id=227, 543.02875pt x 618.31pt>
-File: Bilder/machine-state.png Graphic file (type png)
-
-<use Bilder/machine-state.png>
-Package pdftex.def Info: Bilder/machine-state.png used on input line 124.
-(pdftex.def)             Requested size: 362.77264pt x 413.07678pt.
-File: Bilder/Brunel_University_Logo.png Graphic file (type png)
- <use Bilder/Brunel_University_Logo.png>
-Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-28.
-(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
-
-Overfull \vbox (9.1336pt too high) has occurred while \output is active []
-
-
-[8
-
- <./Bilder/hsim.png>]
-<Bilder/hsim-console.png, id=237, 745.78625pt x 514.92375pt>
-File: Bilder/hsim-console.png Graphic file (type png)
-
-<use Bilder/hsim-console.png>
-Package pdftex.def Info: Bilder/hsim-console.png used on input line 131.
-(pdftex.def)             Requested size: 411.14528pt x 283.86893pt.
-File: Bilder/Brunel_University_Logo.png Graphic file (type png)
- <use Bilder/Brunel_University_Logo.png>
-Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-35.
-(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
-
-Overfull \vbox (9.1336pt too high) has occurred while \output is active []
-
-
-[9 <./Bilder/machine-state.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 135--141
-
- []
-
-File: Bilder/Brunel_University_Logo.png Graphic file (type png)
-<use Bilder/Brunel_University_Logo.png>
-Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-41.
-(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
-
-Overfull \vbox (9.1336pt too high) has occurred while \output is active []
-
-
-[10 <./Bilder/hsim-console.png>]
-chapter 5.
-<Bilder/datasize-table.PNG, id=253, 575.14874pt x 162.6075pt>
-File: Bilder/datasize-table.PNG Graphic file (type png)
-
-<use Bilder/datasize-table.PNG>
-Package pdftex.def Info: Bilder/datasize-table.PNG used on input line 150.
-(pdftex.def)             Requested size: 483.69687pt x 136.7556pt.
-
-<Bilder/datasize-chart.PNG, id=255, 514.17094pt x 305.64188pt>
-File: Bilder/datasize-chart.PNG Graphic file (type png)
-
-<use Bilder/datasize-chart.PNG>
-Package pdftex.def Info: Bilder/datasize-chart.PNG used on input line 157.
-(pdftex.def)             Requested size: 411.14528pt x 244.40189pt.
-File: Bilder/Brunel_University_Logo.png Graphic file (type png)
- <use Bilder/Brunel_University_Logo.png>
-Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-61.
-(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
-
-Overfull \vbox (9.1336pt too high) has occurred while \output is active []
-
-
-[11
-
- <./Bilder/datasize-table.PNG>]
-<Bilder/sortfactor-table.PNG, id=264, 623.32875pt x 133.24782pt>
-File: Bilder/sortfactor-table.PNG Graphic file (type png)
-
-<use Bilder/sortfactor-table.PNG>
-Package pdftex.def Info: Bilder/sortfactor-table.PNG used on input line 166.
-(pdftex.def)             Requested size: 483.69687pt x 103.40016pt.
-
-<Bilder/sort-factor-chart.PNG, id=266, 520.94624pt x 310.15875pt>
-File: Bilder/sort-factor-chart.PNG Graphic file (type png)
-
-<use Bilder/sort-factor-chart.PNG>
-Package pdftex.def Info: Bilder/sort-factor-chart.PNG used on input line 173.
-(pdftex.def)             Requested size: 362.77264pt x 215.988pt.
-File: Bilder/Brunel_University_Logo.png Graphic file (type png)
- <use Bilder/Brunel_University_Logo.png>
-Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-77.
-(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
-
-Overfull \vbox (9.1336pt too high) has occurred while \output is active []
-
-
-[12 <./Bilder/datasize-chart.PNG> <./Bilder/sortfactor-table.PNG>]
-<Bilder/mapper-reducer-table.PNG, id=276, 619.56468pt x 217.5628pt>
-File: Bilder/mapper-reducer-table.PNG Graphic file (type png)
-
-<use Bilder/mapper-reducer-table.PNG>
-Package pdftex.def Info: Bilder/mapper-reducer-table.PNG used on input line 182
-.
-(pdftex.def)             Requested size: 483.69687pt x 169.85101pt.
-
-<Bilder/mappers-reducers-chart.PNG, id=278, 523.9575pt x 365.86688pt>
-File: Bilder/mappers-reducers-chart.PNG Graphic file (type png)
-
-<use Bilder/mappers-reducers-chart.PNG>
-Package pdftex.def Info: Bilder/mappers-reducers-chart.PNG used on input line 1
-89.
-(pdftex.def)             Requested size: 483.69687pt x 337.7628pt.
-File: Bilder/Brunel_University_Logo.png Graphic file (type png)
-
-<use Bilder/Brunel_University_Logo.png>
-Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-92.
-(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
-
-Overfull \vbox (9.1336pt too high) has occurred while \output is active []
-
-
-[13 <./Bilder/sort-factor-chart.PNG> <./Bilder/mapper-reducer-table.PNG>]
-File: Bilder/Brunel_University_Logo.png Graphic file (type png)
-
-<use Bilder/Brunel_University_Logo.png>
-Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
-97.
-(pdftex.def)             Requested size: 117.401pt x 46.41434pt.
-
-Overfull \vbox (9.1336pt too high) has occurred while \output is active []
-
-
-[14 <./Bilder/mappers-reducers-chart.PNG>]
-chapter 6.
 ))
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
  <use Bilder/Brunel_University_Logo.png>
@@ -2270,7 +2135,7 @@ Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[15
+[14
 
 ])
 chapter without number
@@ -2279,12 +2144,8 @@ LaTeX Font Info:    Try loading font information for T1+lmtt on input line 124.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Overfull \hbox (3.94516pt too wide) in paragraph at lines 125--125
-\T1/lmtt/m/n/12 fuer -[] Entscheider / 140228 -[] Big -[] Data -[] Technologien
- -[] Wissen -[] fuer -[] Entscheider .
- []
-
 File: Bilder/Brunel_University_Logo.png Graphic file (type png)
+
 <use Bilder/Brunel_University_Logo.png>
 Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
 45.
@@ -2293,7 +2154,7 @@ Package pdftex.def Info: Bilder/Brunel_University_Logo.png used on input line 1
 Overfull \vbox (9.1336pt too high) has occurred while \output is active []
 
 
-[16
+[15
 
 
 ]
@@ -2303,16 +2164,16 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 145.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 145.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 145.
 Package rerunfilecheck Info: File `Assignment.out' has not changed.
-(rerunfilecheck)             Checksum: E82D0478D62A885BCA17D0BC005A93F6;800.
+(rerunfilecheck)             Checksum: 05DA8090A2ECD41107ED2806AB482CE5;861.
 Package logreq Info: Writing requests to 'Assignment.run.xml'.
 \openout1 = `Assignment.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 37235 strings out of 493323
- 684269 string characters out of 3139069
- 1246691 words of memory out of 3000000
- 39936 multiletter control sequences out of 15000+200000
+ 37194 strings out of 493323
+ 683506 string characters out of 3139069
+ 1243681 words of memory out of 3000000
+ 39902 multiletter control sequences out of 15000+200000
  65570 words of font info for 61 fonts, out of 3000000 for 9000
  1145 hyphenation exceptions out of 8191
  67i,18n,79p,8823b,1735s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2325,9 +2186,9 @@ fonts/type1/public/lm/lmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 lm/lmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/P
 rogram Files/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Program Files/Mi
 KTeX 2.9/fonts/type1/public/lm/lmtt12.pfb>
-Output written on Assignment.pdf (19 pages, 1591072 bytes).
+Output written on Assignment.pdf (17 pages, 2552331 bytes).
 PDF statistics:
- 376 PDF objects out of 1000 (max. 8388607)
- 57 named destinations out of 1000 (max. 500000)
- 222 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 308 PDF objects out of 1000 (max. 8388607)
+ 51 named destinations out of 1000 (max. 500000)
+ 225 words of extra memory for PDF output out of 10000 (max. 10000000)
 
